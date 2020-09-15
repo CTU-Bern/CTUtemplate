@@ -1,0 +1,247 @@
+{smcl}
+{hline}
+help for {cmd:xvarlabel}{right:[ks]    22jan2008}
+{hline}
+
+{title:define variable labels based on table in extern Stata datafile}
+
+{title:Syntax}
+{marker syn1}{...}
+{p 8 12}{cmd:xvarlabel} [{it:varlist}], {cmdab:var:info(}{it:filename}{cmd:)}
+	[{cmdab:vfield:names(}{it:field1}{cmd:;}{it:field2}{cmd:)}]
+	[{cmdab:nomod:ify}] [{cmd:omit(}{it:varlist}{cmd:)}]
+	[{cmdab:maxlen:gth(}{it:#}{cmd:)}]
+
+{marker syn2}{...}
+{p 8 12}{cmd:xvarlabel}, {cmdab:var:info(}{it:filename}{cmd:)}
+	[{cmdab:vfield:names(}{it:field1}{cmd:;}{it:field2}{cmd:)}]
+	{cmd:savedo(}{it:filename}{cmd:)} [{cmd:replace}]
+	[{cmdab:maxlen:gth(}{it:#}{cmd:)}]
+
+{marker syn3}{...}
+{p 8 12}{cmd:xvarlabel} [{it:varlist}], {cmd:erase}
+
+
+
+{title:Overview}
+
+{p 2 2}For the current dataset {cmd:xvarlabel} defines variable labels ("label variable") based
+	on information
+	in a separate table (Stata datafile). The current dataset will be changed.
+	Existing variable labels will be overwritten.{p_end}
+{p 2 2}	See {ul:first example in the syntax section}.{p_end}
+
+{p 2 2}Alternatively one may leave the current dataset unchanged and just save the 
+	relevant Stata commands ("label variable") 
+	in a do-file for future use.{p_end}
+{p 2 2}	See {ul:second example in the syntax section}.{p_end}
+
+{p 2 2}A third possibility is to delete variable labels 
+	in the current dataset without doing anything else.{p_end}
+{p 2 2}	See {ul:third example in the syntax section}.{p_end}
+	
+
+{p 2 4}{it:example for extern table (Stata datafile):}{p_end}
+{marker file1}{...}
+{p 2 4}File 1 (option {cmdab:var:info(}{it:filename}{cmd:)}):{p_end}
+{p 2 4}Information for defining variable labels{p_end}
+
+{p 4 4}{it:fieldname}   {ul:var}            {ul:text}{p_end}
+{p 4 4}           {it:(string)}       {it:(string)}{p_end}
+
+{p 4 4}{it:obs}         regio          region of residence{p_end}
+{p 4 4}            age            age at study begin{p_end}
+{p 4 4}            edu            educational level{p_end}
+
+{p 2 2}For further details see options {help xvarlabel##var:varinfo()},
+	{help xvarlabel##vfield:vfieldnames()} and
+	section {hi:Description}.{p_end} 
+
+
+{title:Description}
+
+{p 2 4}The first possibility is to define variable labels with
+	immediate changes to the current dataset (see 
+	{help xvarlabel##syn1:first example} in the syntax section).{p_end}
+{p 4 4}Together, the current dataset variables, command parameters and command datafile
+	contents determine which variable labels are to be defined.{p_end}
+{p 4 4}Optionally one may specify a varlist (before the command options) which contains
+	the variables to be labeled. If no varlist is specified, "_all" (all variables)
+	will be assumed.{p_end}
+{p 4 4}The name of an external Stata datafile is required in order to provide information
+	on how to define the variable labels (see option 
+	{help xvarlabel##var:varinfo()}).{p_end}
+{p 4 4}Optionally one may specify alternative fieldnames that differ from the Stata datafile
+	defaults (see option {help xvarlabel##vfield:vfieldnames(;)}).{p_end}
+{p 4 4}Optionally one may specify a maximum string length for the new variable labels.
+	(see option {help xvarlabel##maxlen:maxlength(#)}).
+	If no maximum length is specified, 80 will be assumed (Stata limit for variable
+	labels).{p_end}
+{p 4 4}Optionally one may determine that already labeled variables in the current dataset 
+	shall not be relabeled and thus the labels not be modified 
+	(see option {help xvarlabel##nomod:nomodify}){p_end}
+{p 4 4}or that one or more variable should not be labeled independent of whether
+	the concerning variables in the current dataset are already labeled or not  
+	(see option {help xvarlabel##omit:omit}{it:(varlist)}).{p_end}
+
+{p 2 4}The second possibility is to generate relevant Stata commands ("label variable") 
+	in a Stata do-file without any immediate changes 
+	to the current dataset (see 
+	{help xvarlabel##syn2:second example} in the syntax section). The complete 
+	command datafile contents alone determine which variable label definitions and attachments
+	are to be generated.{p_end}
+{p 4 4}The name of an external Stata do-file is required (option
+	{cmd:savedo(}{it:do-file name}{cmd:)}).{p_end}
+{p 4 4}Optionally one may specify the {cmd:replace} option to indicate that an existing
+	do-file should be overwritten.{p_end}
+{p 4 4}The name of an external Stata datafile is required in order to provide
+	information on how to define the variable labels (see option 
+	{help xvarlabel##var:varinfo()}).{p_end}
+{p 4 4}Optionally one may specify alternative fieldnames that differ from the Stata
+	datafile defaults (see option {help xvarlabel##vfield:vfieldnames(;)}).{p_end}
+{p 4 4}Optionally one may specify a maximum string length for the new variable labels.
+	(see option {help xvarlabel##maxlen:maxlength(#)}).
+	If no maximum length is specified, 80 will be assumed (Stata limit for variable
+	labels).{p_end}
+{p 4 4}Neither the varlist specification (list of variables to be labeled 
+	nor the options {help xvarlabel##nomod:nomodify} or {help xvarlabel##omit:omit()}
+	are allowed together with 
+	option {cmd:savedo()}.{p_end}
+{p 4 4}NOTE:{p_end}
+{p 4 4}The resulting Stata do-file could be edited if required and used in future processing
+	of relevant datasets.{p_end}
+
+{p 2 4}The third possibility is to simply delete variable labels without other actions 
+	(see {help xvarlabel##syn3:third example} in the syntax section).{p_end}
+{p 4 4}A varlist may be specified containing the variables whose labels shall be deleted.
+	If no varlist is specified, all variables ("_all") will be assumed.{p_end}
+{p 4 4}The option {cmd:erase} is required.{p_end}
+{p 4 4}Further options are not allowed.{p_end}
+
+{marker opt}{...}
+{title:Options}
+
+{marker var}{...}
+{p 2 4} Option {cmdab:var:info(}{it:filename}{cmd:)} specifies the external Stata datafile
+	containing the table with information for defining variable labels
+	(for "label variable" commands).{p_end}
+{p 4 4}	There have to be 2 fields (see example for external tables 
+	{help xvarlabel##file1:File 1} in section Overview):{p_end}
+{p 4 4}	a first field (string variable) with default name {hi:"var"} that contains 
+	the variable
+	name and a second field (string variable) with default name {hi:"text"} containing 
+	the variable label.{p_end}
+{p 4 4}Alternative fieldnames that differ from the defaults can be specified using
+	option {cmd:vfieldnames(}{it:fieldname1;fieldname2}{cmd:)}.{p_end}
+{p 4 4}Option varinfo() may not be combined with option {cmd:erase}.{p_end}
+
+{marker vfield}{...}
+{p 2 4}Option {cmdab:vfield:names(}{it:fieldname1}{cmd:;}{it:fieldname2}{cmd:)} specifies
+	alternative fieldnames for the external Stata datafile specified in option 
+	{cmd:varinfo()} when the default fieldnames (field1 {hi:"var"}
+	and field2 {hi:"text"}) cannot be used. The two fieldnames must each be separated
+	by a semicolon {hi:";"} or a comma {hi:","}. The separator must always be present,
+	even when only one
+	alternative fieldname is specified (eg. vfieldnames(name;) or vfieldnames(;lab) etc.).{p_end}
+{p 4 4}Option vfieldnames(;) may not be combined with option {cmd:erase}.{p_end}
+
+{marker maxlen}{...}
+{p 2 4}Option {cmdab:maxlen:gth(}{it:#}{cmd:)} specifies the maximum string length for 
+	the new variable labels when being defined in the current dataset or when
+	commands being written into a do-file. The range of valid values is 1-80. 
+	If no maximum length is specified, 80 will be assumed (Stata limit for variable
+	labels).{p_end}
+
+{marker nomod}{...}
+{p 2 4}Option {cmdab:nomod:ify} specifies that already labeled variables in the current 
+	dataset shall not be relabeled and thus the labels not be modified. Relevant 
+	is the complete variable label set and not just 
+	individual variable labels.{p_end}
+{p 4 4}Option nomodify may not be combined with options {cmd:savedo()} or {cmd:erase}.{p_end}
+
+{marker omit}{...}
+{p 2 4}Option {cmd:omit(}{it:varlist}{cmd:)} specifies variables that shall be
+	omitted from being labeled or relabeled, independent 
+	of whether the concerning variables in the current dataset are already labeled or not.{p_end}
+{p 4 4}Option omit may not be combined with options {cmd:savedo()}, {cmd:replace} or 
+	{cmd:erase}.{p_end}
+
+{marker savedo}{...}
+{p 2 4}Option {cmd:savedo(}{it:do-filename}{cmd:)} specifies that generated Stata commands
+	("label variable") shall be saved in a Stata do-file
+	without any immediate changes to the dataset in memory. The Stata commands 
+	for the do-file are generated only according to the complete content of the 
+	{cmd:varinfo()} external datafile.{p_end}
+{p 4 4}The current dataset will not be changed in
+	any way. The Stata do-file can be used in future processing of relevant datasets{p_end}
+{p 4 4}Option savedo() may be combined with option {cmd:replace} when an existing do-file 
+	should be overwritten.{p_end}
+{p 4 4}Option savedo() may not be used with a varlist specification or combined with 
+	the options {cmd:momodify}, {cmd:omit()} or {cmd:erase}.{p_end}
+
+{marker erase}{...}
+{p 2 4}Option {cmd:erase} specifies that existing variable labels should be deleted without
+	further actions. The variables whose labels shall be deleted
+	are contained in the accompanying varlist. If no varlist is specified,
+	all variables ("_all") will be assumed.{p_end}
+{p 4 4}Apart from varlist, option erase may not be combined with any other options.{p_end}
+
+
+{title:Examples}
+
+{p 2 4}Change current dataset, define variable labels of variables present 
+	in the current dataset (all variables in the current dataset are relevant), 
+	get the information from the specified external file.{p_end}
+{p 6 9}{cmd:. xvarlabel, var($dd/varnames.dta)} {p_end}
+
+{p 2 4}As above, but only variables beginning with "age" are relevant.{p_end}
+{p 6 9}{cmd:. xvarlabel age*, var($dd/varnames.dta)} {p_end}
+
+{p 2 4}As above, but do not relabel already labeled variables.{p_end}
+{p 6 9}{cmd:. xvarlabel age*, var($dd/varnames.dta) nomodify} {p_end}
+
+{p 2 4}As above, but omit variables specified with option omit.{p_end}
+{p 6 9}{cmd:. xvarlabel age*, var($dd/varnames.dta) nomod omit(age_reeval)} {p_end}
+
+{p 2 4}Like first example, but limit length of new variable labels to 40 characters.{p_end}
+{p 6 9}{cmd:. xvarlabel, var($dd/varnames.dta) maxlen(40)} {p_end}
+
+{p 2 4}Like first example, but alternative fieldnames to replace the external file defaults.{p_end}
+{p 6 9}{cmd:. xvarlabel, var($dd/varnames.dta) vfield(vname;label)} {p_end}
+
+
+{p 2 4}Do not change current dataset, save generated Stata commands in a do-file, get 
+	all the information from the specified external file.{p_end}
+{p 6 9}{cmd:. xvarlabel, var($dd/varnames.dta) savedo($dod/labvar.do) replace} {p_end}
+
+{p 2 4}As above, but limit length of new variable labels to 40 characters when
+	being written into do-file.{p_end}
+{p 6 9}{cmd:. xvarlabel, var($dd/varnames.dta) savedo($dod/labvar.do) replace maxlen(40)} {p_end}
+
+
+{p 2 4}Delete variable labels of all variables beginning with "age". Do nothing else.{p_end}
+{p 6 9}{cmd:. xvarlabel age*, erase} {p_end}
+
+
+{title:Author}
+
+{p 2 4}K.Schmidlin{p_end}
+
+
+{title:Acknowledgement}
+
+{p 2 4}Malcolm Sturdy suggested and tested this command and provided external tables.{p_end}
+
+
+{title:Version info}
+
+{p 2 4}xvarlabel.ado Version 1.0.3 - 22Jan2008{p_end}
+
+
+
+
+
+
+
+
+
