@@ -4,7 +4,7 @@
 
 # installation
 
-`remotes::install_github("aghaynes/CTUtemplate")`
+`remotes::install_github("CTU-Bern/CTUtemplate")`
 
 This may require `Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")` if packages were built under a different R version to the one you are using.
 
