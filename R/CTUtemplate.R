@@ -74,243 +74,243 @@ CTUtemplate <- function(path, ...) {
   # header
 
 
+  if(dots$rFiles == "On"){
+    # R ----
+    # masterfile
+    paths <- mapply(function(x, y){
+      x <- function(...) file.path(path, y, ...)
+    }, names(folders), folders)
 
-  # R ----
-  # masterfile
-  paths <- mapply(function(x, y){
-    x <- function(...) file.path(path, y, ...)
-  }, names(folders), folders)
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "MASTERFILE",
+                             short = FALSE),
+                      'options(stringsAsFactors = FALSE)\n',
+                      glue('pp <- here::here() # change if necessary'),
+                      "setwd(pp)", "",
+                      paste0('paths <- mapply(function(x, y){
+                            x <- function(...) file.path(pp, y, ...)
+                            },
+                            c("', paste0(names(folders), collapse = '", "'),'"),\n',
+                      '     c("', paste0(folders, collapse = '", \n"'),
+                      '"))'),
+                      'source(paths$rs("01_packages_funs.R"))',
+                      'source(paths$rs("02_dataprep.R"))',
+                      'source(paths$rs("03_baseline.R"))',
+                      'source(paths$rs("04_analysis.R"))\n\n',
+                      '# package control through renv ----',
+                      '# initialize',
+                      '# renv::init() # just needed once',
+                      '# save a snapshot of packages and versions',
+                      '# renv::snapshot() # occasionally (e.g. when finalizing a report)',
+                      '# restore versions in current lockfile',
+                      '# renv::restore() # e.g. if something broke after updating package(s)',
+                      sep = "\n")
+    writeLines(contents, con = paths$rs("00_MASTERFILE.R"))
 
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "MASTERFILE",
-                           short = FALSE),
-                    'options(stringsAsFactors = FALSE)\n',
-                    glue('pp <- here::here() # change if necessary'),
-                    "setwd(pp)", "",
-                    paste0('paths <- mapply(function(x, y){
-                          x <- function(...) file.path(pp, y, ...)
-                          },
-                          c("', paste0(names(folders), collapse = '", "'),'"),\n',
-                    '     c("', paste0(folders, collapse = '", \n"'),
-                    '"))'),
-                    'source(paths$rs("01_packages_funs.R"))',
-                    'source(paths$rs("02_dataprep.R"))',
-                    'source(paths$rs("03_baseline.R"))',
-                    'source(paths$rs("04_analysis.R"))\n\n',
-                    '# package control through renv ----',
-                    '# initialize',
-                    '# renv::init() # just needed once',
-                    '# save a snapshot of packages and versions',
-                    '# renv::snapshot() # occasionally (e.g. when finalizing a report)',
-                    '# restore versions in current lockfile',
-                    '# renv::restore() # e.g. if something broke after updating package(s)',
-                    sep = "\n")
-  writeLines(contents, con = paths$rs("00_MASTERFILE.R"))
+    # packages
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "Load necessary packages",
+                             short = TRUE),
+                      "\n\n\n",
+                      "# Load packages",
+                      'library("atable")',
+                      'atable_options(format_to = "console", add_margins = TRUE)\n',
+                      'library("tidyverse")',
+                      'library("here")',
+                      'library("renv")',
+                      'library("Hmisc")',
+                      "\n\n",
+                      "# custom functions ----",
+                      "function to retain only named objects (+ 'paths', pp and functions)",
+                      'mykeep <- function(...){
+      lss <- ls(.GlobalEnv)
+      lss_fun <- sapply(lss, function(x) is.function(eval(parse(text = x))))
+       gdata::keep(paths, pp, mykeep, ..., list = unlist(lss)[unlist(lss_fun)],
+          sure = TRUE)
+    }',
+                      sep = "\n")
+    writeLines(contents, con = paths$rs("01_packages_functions.R"))
 
-  # packages
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "Load necessary packages",
-                           short = TRUE),
-                    "\n\n\n",
-                    "# Load packages",
-                    'library("atable")',
-                    'atable_options(format_to = "console", add_margins = TRUE)\n',
-                    'library("tidyverse")',
-                    'library("here")',
-                    'library("renv")',
-                    'library("Hmisc")',
-                    "\n\n",
-                    "# custom functions ----",
-                    "function to retain only named objects (+ 'paths', pp and functions)",
-                    'mykeep <- function(...){
-    lss <- ls(.GlobalEnv)
-    lss_fun <- sapply(lss, function(x) is.function(eval(parse(text = x))))
-     gdata::keep(paths, pp, mykeep, ..., list = unlist(lss)[unlist(lss_fun)],
-        sure = TRUE)
-  }',
-                    sep = "\n")
-  writeLines(contents, con = paths$rs("01_packages_functions.R"))
+    # data prep
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "Data preparation",
+                             short = TRUE),
+                      "\n\n\n",
+                      'mykeep()',
+                      '# Load data',
+                      'raw <- read.csv(paths$od("data.csv"))',
+                      '# apply labels (Hmisc::label is compatible with atable)',
+                      'label(raw$var1) <- "Label of var1"',
+                      '# save prepped data',
+                      'saveRDS(prepped_data, paths$pd("prepped_data"))',
+                      '# clear the working space\nmykeep()',
+                      sep = "\n")
+    writeLines(contents, con = paths$rs("02_dataprep.R"))
 
-  # data prep
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "Data preparation",
-                           short = TRUE),
-                    "\n\n\n",
-                    'mykeep()',
-                    '# Load data',
-                    'raw <- read.csv(paths$od("data.csv"))',
-                    '# apply labels (Hmisc::label is compatible with atable)',
-                    'label(raw$var1) <- "Label of var1"',
-                    '# save prepped data',
-                    'saveRDS(prepped_data, paths$pd("prepped_data"))',
-                    '# clear the working space\nmykeep()',
-                    sep = "\n")
-  writeLines(contents, con = paths$rs("02_dataprep.R"))
+    # baseline
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "Baseline Tables",
+                             short = TRUE),
+                      "\n\n\n",
+                      "mykeep()",
+                      '# Load data ----',
+                      'dat <- readRDS(paths$pd("prepped_data"))',
+                      '# make baseline table ----',
+                      'tab <- atable(dat, target_vars = c("var1", "var2"), group_col = "grp_var")',
+                      'write.csv(tab, paths$td("baselineTable.csv))',
+                      'mykeep()',
+                      sep = "\n")
+    writeLines(contents, con = paths$rs("03_baseline.R"))
 
-  # baseline
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "Baseline Tables",
-                           short = TRUE),
-                    "\n\n\n",
-                    "mykeep()",
-                    '# Load data ----',
-                    'dat <- readRDS(paths$pd("prepped_data"))',
-                    '# make baseline table ----',
-                    'tab <- atable(dat, target_vars = c("var1", "var2"), group_col = "grp_var")',
-                    'write.csv(tab, paths$td("baselineTable.csv))',
-                    'mykeep()',
-                    sep = "\n")
-  writeLines(contents, con = paths$rs("03_baseline.R"))
-
-  # analysis
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "Main analysis",
-                           short = TRUE),
-                    "\n\n\n",
-                    "mykeep()",
-                    '# Load data',
-                    'dat <- readRDS(paths$pd("prepped_data"))',
-                    'mod <- lm(var1 ~ grp_var, dat)',
-                    '# etc',
-                    'mykeep()',
-                    sep = "\n")
-  writeLines(contents, con = paths$rs("04_analysis.R"))
-
-
-
-  # blank
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "XXXXX",
-                           short = TRUE),
-                    "\n\n\n",
-
-                    sep = "\n")
-  writeLines(contents, con = paths$rs("xx_template.R"))
+    # analysis
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "Main analysis",
+                             short = TRUE),
+                      "\n\n\n",
+                      "mykeep()",
+                      '# Load data',
+                      'dat <- readRDS(paths$pd("prepped_data"))',
+                      'mod <- lm(var1 ~ grp_var, dat)',
+                      '# etc',
+                      'mykeep()',
+                      sep = "\n")
+    writeLines(contents, con = paths$rs("04_analysis.R"))
 
 
 
-  # stata ----
-  # masterfile
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "MASTERFILE",
-                           short = FALSE,
-                           R = FALSE),
-                    'clear all',
-                    'set more off, permanently',
-                    'set type double, permanently',
-                    'set scheme s2mono, permanently',
-                    'version 16.1', '', '',
-                    '**** paths ****',
-                    glue('global pp "{getwd()}"'),
-                    "cd $pp", "",
-                    glue('global od "$pp/{folders["od"]}"    // original data'),
-                    glue('global sa "$pp/{folders["sa"]}"      // stata ADO'),
-                    glue('global ss "$pp/{folders["ss"]}"  // stata do'),
-                    glue('global rs "$pp/{folders["rs"]}"        // R scripts'),
-                    glue('global pd "$pp/{folders["pd"]}"    // prepped data'),
-                    glue('global fd "$pp/{folders["fd"]}"          // figures'),
-                    glue('global td "$pp/{folders["td"]}"           // tables'),
-                    glue('global ld "$pp/{folders["ld"]}"        // log files'),
-                    glue('global rd "$pp/{folders["rd"]}"          // reports'),
-                    glue('global qc "$pp/{folders["qc"]}"   // Quality control'),
-                    'global tmp = "$pp/xx_temporary"        // temporary files',
-                    'cap mkdir "$tmp"',
+    # blank
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "XXXXX",
+                             short = TRUE),
+                      "\n\n\n",
 
-                    '', '', '',
-                    '**** ado path ****',
-                    'adopath ++ "$sa"',
-                    '', '', '',
-                    '**** run do files ****',
-                    'cap log close',
-                    'log using "$ld/01_data_prep", text, replace',
-                    'do "$ss/01_data_prep"',
-                    'cap log close',
-                    '',
-                    'cap log close',
-                    'log using "$ld/02_baseline", text, replace',
-                    'do "$ss/02_baseline"',
-                    'cap log close',
-                    '',
-                    'cap log close',
-                    'log using "$ld/03_analysis", text, replace',
-                    'do "$ss/03_analysis"',
-                    'cap log close',
+                      sep = "\n")
+    writeLines(contents, con = paths$rs("xx_template.R"))
 
+  }
+  if(dots$stataFiles == "On"){
+    # stata ----
+    # masterfile
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "MASTERFILE",
+                             short = FALSE,
+                             R = FALSE),
+                      'clear all',
+                      'set more off, permanently',
+                      'set type double, permanently',
+                      'set scheme s2mono, permanently',
+                      'version 16.1', '', '',
+                      '**** paths ****',
+                      glue('global pp "{getwd()}"'),
+                      "cd $pp", "",
+                      glue('global od "$pp/{folders["od"]}"    // original data'),
+                      glue('global sa "$pp/{folders["sa"]}"      // stata ADO'),
+                      glue('global ss "$pp/{folders["ss"]}"  // stata do'),
+                      glue('global rs "$pp/{folders["rs"]}"        // R scripts'),
+                      glue('global pd "$pp/{folders["pd"]}"    // prepped data'),
+                      glue('global fd "$pp/{folders["fd"]}"          // figures'),
+                      glue('global td "$pp/{folders["td"]}"           // tables'),
+                      glue('global ld "$pp/{folders["ld"]}"        // log files'),
+                      glue('global rd "$pp/{folders["rd"]}"          // reports'),
+                      glue('global qc "$pp/{folders["qc"]}"   // Quality control'),
+                      'global tmp = "$pp/xx_temporary"        // temporary files',
+                      'cap mkdir "$tmp"',
 
-                    sep = "\n")
-  writeLines(contents, con = paths$ss("00_MASTERFILE.do"))
-
-  lf <- list.files(system.file("extdata", package = "CTUtemplate"))
-
-  lapply(lf, function(x){
-    file.copy(
-      system.file("extdata", x, package = "CTUtemplate"),
-      paths$sa(x)
-      )
-     # print(file.path(folders["sa"], x))
-     })
-
-
-  # data prep
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "Data preparation",
-                           short = TRUE, R = FALSE),
-                    "\n\n\n",
-                    '**** Load data ****',
-                    'import delimited $od/raw_data.csv, replace',
-                    '** apply labels ',
-                    'label var var1 "Label of var1"',
-                    '** save prepped data',
-                    'save "$pd/prepped_data", replace',
-
-                    sep = "\n")
-  writeLines(contents, con = paths$ss("02_dataprep.do"))
+                      '', '', '',
+                      '**** ado path ****',
+                      'adopath ++ "$sa"',
+                      '', '', '',
+                      '**** run do files ****',
+                      'cap log close',
+                      'log using "$ld/01_data_prep", text, replace',
+                      'do "$ss/01_data_prep"',
+                      'cap log close',
+                      '',
+                      'cap log close',
+                      'log using "$ld/02_baseline", text, replace',
+                      'do "$ss/02_baseline"',
+                      'cap log close',
+                      '',
+                      'cap log close',
+                      'log using "$ld/03_analysis", text, replace',
+                      'do "$ss/03_analysis"',
+                      'cap log close',
 
 
-  # baseline
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "Baseline Tables",
-                           short = TRUE, R = FALSE),
-                    "\n\n\n",
-                    '**** Load data ****',
-                    'use "$pd/prepped_data", clear',
-                    '** make baseline table',
-                    'btable var1-var5, saving("$tmp/btab") ',
-                    'btable_format using "$tmp/btab", clear',
-                    'export delimited "$td/btab.csv"',
-                    sep = "\n")
-  writeLines(contents, con = paths$ss("03_baseline.do"))
+                      sep = "\n")
+    writeLines(contents, con = paths$ss("00_MASTERFILE.do"))
+
+    lf <- list.files(system.file("extdata", package = "CTUtemplate"))
+
+    lapply(lf, function(x){
+      file.copy(
+        system.file("extdata", x, package = "CTUtemplate"),
+        paths$sa(x)
+        )
+       # print(file.path(folders["sa"], x))
+       })
 
 
-  # blank
-  contents <- paste(header(dots$projNum,
-                           dots$projName,
-                           dots$au,
-                           "XXXXX",
-                           short = TRUE, R = FALSE),
-                    "\n\n\n",
+    # data prep
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "Data preparation",
+                             short = TRUE, R = FALSE),
+                      "\n\n\n",
+                      '**** Load data ****',
+                      'import delimited $od/raw_data.csv, replace',
+                      '** apply labels ',
+                      'label var var1 "Label of var1"',
+                      '** save prepped data',
+                      'save "$pd/prepped_data", replace',
 
-                    sep = "\n")
-  writeLines(contents, con = paths$ss("xx_template.do"))
+                      sep = "\n")
+    writeLines(contents, con = paths$ss("02_dataprep.do"))
 
+
+    # baseline
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "Baseline Tables",
+                             short = TRUE, R = FALSE),
+                      "\n\n\n",
+                      '**** Load data ****',
+                      'use "$pd/prepped_data", clear',
+                      '** make baseline table',
+                      'btable var1-var5, saving("$tmp/btab") ',
+                      'btable_format using "$tmp/btab", clear',
+                      'export delimited "$td/btab.csv"',
+                      sep = "\n")
+    writeLines(contents, con = paths$ss("03_baseline.do"))
+
+
+    # blank
+    contents <- paste(header(dots$projNum,
+                             dots$projName,
+                             dots$au,
+                             "XXXXX",
+                             short = TRUE, R = FALSE),
+                      "\n\n\n",
+
+                      sep = "\n")
+    writeLines(contents, con = paths$ss("xx_template.do"))
+  }
 }
 
 # funs <- mapply(function(x, y){
