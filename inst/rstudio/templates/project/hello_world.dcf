@@ -18,9 +18,21 @@ Default: 100
 Parameter: projName
 Widget: TextInput
 Label: Project name
-Default: foob
+Default: Insert project name
 
 Parameter: au
 Widget: TextInput
 Label: Author
-Default: ar
+Default: Insert name here
+
+Parameter: stataFiles
+Widget: CheckboxInput
+Label: Create Stata files?
+Default: On
+Position: left
+
+Parameter: rFiles
+Widget: CheckboxInput
+Label: Create R files?
+Default: On
+Position: right
