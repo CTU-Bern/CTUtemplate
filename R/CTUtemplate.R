@@ -84,6 +84,7 @@ CTUtemplate <- function(path, ...) {
       x <- function(...) file.path(path, y, ...)
     }, names(folders), folders)
 
+    lines <- readLines(system.file("extdata", "R", "master.R", package = "CTUtemplate"))
     contents <- paste(header(dots$projNum,
                              dots$projName,
                              dots$au,
@@ -98,94 +99,54 @@ CTUtemplate <- function(path, ...) {
                             c("', paste0(names(folders), collapse = '", "'),'"),\n',
                       '     c("', paste0(folders, collapse = '", \n"'),
                       '"))'),
-                      'source(paths$rs("01_packages_funs.R"))',
-                      'source(paths$rs("02_dataprep.R"))',
-                      'source(paths$rs("03_baseline.R"))',
-                      'source(paths$rs("04_analysis.R"))\n\n',
-                      '# package control through renv ----',
-                      '# initialize',
-                      '# renv::init() # just needed once',
-                      '# save a snapshot of packages and versions',
-                      '# renv::snapshot() # occasionally (e.g. when finalizing a report)',
-                      '# restore versions in current lockfile',
-                      '# renv::restore() # e.g. if something broke after updating package(s)',
+                      paste(lines, collapse = "\n"),
                       sep = "\n")
     writeLines(contents, con = paths$rs("00_MASTERFILE.R"))
 
     # packages
+    lines <- readLines(system.file("extdata", "R", "packages_funs.R", package = "CTUtemplate"))
     contents <- paste(header(dots$projNum,
                              dots$projName,
                              dots$au,
                              "Load necessary packages",
                              short = TRUE),
                       "\n\n\n",
-                      "# Load packages",
-                      'library("atable")',
-                      'atable_options(format_to = "console", add_margins = TRUE)\n',
-                      'library("tidyverse")',
-                      'library("here")',
-                      'library("renv")',
-                      'library("Hmisc")',
-                      "\n\n",
-                      "# custom functions ----",
-                      "function to retain only named objects (+ 'paths', pp and functions)",
-                      'mykeep <- function(...){
-      lss <- ls(.GlobalEnv)
-      lss_fun <- sapply(lss, function(x) is.function(eval(parse(text = x))))
-       gdata::keep(paths, pp, mykeep, ..., list = unlist(lss)[unlist(lss_fun)],
-          sure = TRUE)
-    }',
+                      paste(lines, collapse = "\n"),
                       sep = "\n")
     writeLines(contents, con = paths$rs("01_packages_functions.R"))
 
     # data prep
+    lines <- readLines(system.file("extdata", "R", "dataprep.R", package = "CTUtemplate"))
     contents <- paste(header(dots$projNum,
                              dots$projName,
                              dots$au,
                              "Data preparation",
                              short = TRUE),
                       "\n\n\n",
-                      'mykeep()',
-                      '# Load data',
-                      'raw <- read.csv(paths$od("data.csv"))',
-                      '# apply labels (Hmisc::label is compatible with atable)',
-                      'label(raw$var1) <- "Label of var1"',
-                      '# save prepped data',
-                      'saveRDS(prepped_data, paths$pd("prepped_data"))',
-                      '# clear the working space\nmykeep()',
+                      paste(lines, collapse = "\n"),
                       sep = "\n")
     writeLines(contents, con = paths$rs("02_dataprep.R"))
 
     # baseline
+    lines <- readLines(system.file("extdata", "R", "baseline.R", package = "CTUtemplate"))
     contents <- paste(header(dots$projNum,
                              dots$projName,
                              dots$au,
                              "Baseline Tables",
                              short = TRUE),
-                      "\n\n\n",
-                      "mykeep()",
-                      '# Load data ----',
-                      'dat <- readRDS(paths$pd("prepped_data"))',
-                      '# make baseline table ----',
-                      'tab <- atable(dat, target_vars = c("var1", "var2"), group_col = "grp_var")',
-                      'write.csv(tab, paths$td("baselineTable.csv))',
-                      'mykeep()',
+                      paste(lines, collapse = "\n"),
                       sep = "\n")
     writeLines(contents, con = paths$rs("03_baseline.R"))
 
     # analysis
+    lines <- readLines(system.file("extdata", "R", "analysis.R", package = "CTUtemplate"))
     contents <- paste(header(dots$projNum,
                              dots$projName,
                              dots$au,
                              "Main analysis",
                              short = TRUE),
                       "\n\n\n",
-                      "mykeep()",
-                      '# Load data',
-                      'dat <- readRDS(paths$pd("prepped_data"))',
-                      'mod <- lm(var1 ~ grp_var, dat)',
-                      '# etc',
-                      'mykeep()',
+                      paste(lines, collapse = "\n"),
                       sep = "\n")
     writeLines(contents, con = paths$rs("04_analysis.R"))
 
@@ -257,11 +218,11 @@ CTUtemplate <- function(path, ...) {
                       sep = "\n")
     writeLines(contents, con = paths$ss("00_MASTERFILE.do"))
 
-    lf <- list.files(system.file("extdata", package = "CTUtemplate"))
+    lf <- list.files(system.file("extdata", "Stata", package = "CTUtemplate"))
 
     lapply(lf, function(x){
       file.copy(
-        system.file("extdata", x, package = "CTUtemplate"),
+        system.file("extdata", "Stata", x, package = "CTUtemplate"),
         paths$sa(x)
         )
        # print(file.path(folders["sa"], x))
