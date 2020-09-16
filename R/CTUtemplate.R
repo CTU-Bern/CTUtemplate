@@ -37,19 +37,22 @@ CTUtemplate <- function(path, ...) {
 
 
   # create new folders
-  folderend <- ifelse(dots$folderEnd == "_xx", "_xx", paste0("_", dots$projNum))
+  folderend_r <- ifelse(dots$rFiles, dots$projNum, "xx")
+  folderend_s <- ifelse(dots$stataFiles, dots$projNum, "xx")
 
-  folders <- c(od =  glue("01_Original_data{folderend}"),
-               sa =  glue("02_1_Stata_ado{folderend}"),
-               ss =  glue("02_2_Stata_scripts{folderend}"),
-               rs =  glue("03_R_scripts{folderend}"),
-               pd =  glue("04_prepared_data{folderend}"),
-               fd =  glue("05_Figures{folderend}"),
-               td =  glue("06_Tables{folderend}"),
-               ld =  glue("07_Log_files{folderend}"),
-               rd =  glue("08_Reports{folderend}"),
-               qc =  glue("09_QualityControl{folderend}"),
-               pub = glue("10_Publication{folderend}"))
+  folders <- c(od =  glue("01_Original_data_{dots$projNum}"),
+               sa =  glue("02_1_Stata_ado_{folderend_s}"),
+               ss =  glue("02_2_Stata_scripts_{folderend_s}"),
+               rs =  glue("03_R_scripts_{folderend_r}"),
+               pd =  glue("04_prepared_data_{dots$projNum}"),
+               fd =  glue("05_Figures_{dots$projNum}"),
+               td =  glue("06_Tables_{dots$projNum}"),
+               ld =  glue("07_Log_files_{dots$projNum}"),
+               rd =  glue("08_Reports_{dots$projNum}"),
+               qc =  glue("09_QualityControl_xx"),
+               pub = glue("10_Publication_xx"),
+               doc = glue("11_Documents_{dots$projNum}"))
+
 
   lapply(file.path(path, folders), dir.create, showWarnings = FALSE)
 
@@ -74,7 +77,7 @@ CTUtemplate <- function(path, ...) {
   # header
 
 
-  if(dots$rFiles == "On"){
+  if(dots$rFiles){
     # R ----
     # masterfile
     paths <- mapply(function(x, y){
@@ -200,7 +203,7 @@ CTUtemplate <- function(path, ...) {
     writeLines(contents, con = paths$rs("xx_template.R"))
 
   }
-  if(dots$stataFiles == "On"){
+  if(dots$stataFiles){
     # stata ----
     # masterfile
     contents <- paste(header(dots$projNum,

@@ -4,12 +4,6 @@ OpenFiles:
   INDEX
   03_*/00_MASTERFILE.R
 
-Parameter: folderEnd
-Widget: SelectInput
-Label: Append project number to folder names with
-Fields: _xx, Project number
-Default: _xx
-
 Parameter: projNum
 Widget: TextInput
 Label: Project number
@@ -29,10 +23,9 @@ Parameter: stataFiles
 Widget: CheckboxInput
 Label: Create Stata files?
 Default: On
-Position: left
 
 Parameter: rFiles
 Widget: CheckboxInput
 Label: Create R files?
 Default: On
-Position: right
+
