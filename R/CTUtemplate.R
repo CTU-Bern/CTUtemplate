@@ -11,8 +11,19 @@ CTUtemplate <- function(path, ...) {
 
   require(glue)
 
+
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
+
+  lf <- list.files(path, include.dirs = TRUE)
+    if(length(lf) > 2){
+    msgBox <- svDialogs::ok_cancel_box(message = "WARNING! There are already folders here!\nCheck that you aren't overwriting anything before proceeding\n\n OK to proceed\ncancel to stop (RStudio will give an error - that's expected)")
+    if(!msgBox) {
+      opt <- options(show.error.messages = FALSE)
+      on.exit(options(opt))
+      stop()
+    }
+  }
 
 
   # collect inputs
