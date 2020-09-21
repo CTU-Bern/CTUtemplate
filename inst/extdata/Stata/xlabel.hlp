@@ -1,0 +1,280 @@
+{smcl}
+{hline}
+help for {cmd:xlabel}{right:[ks]    21.01.2008}
+{hline}
+
+{title:define value labels and attach them to variables}
+{title:based on tables in extern Stata datafiles}
+
+{title:Syntax}
+{marker syn1}{...}
+{p 8 12}{cmd:xlabel} [{it:varlist}], {cmdab:var:info(}{it:filename}{cmd:)}
+	{cmdab:lab:info(}{it:filename}{cmd:)} 
+	[{cmdab:vfield:names(}{it:field1}{cmd:;}{it:field2}{cmd:)}]
+	[{cmdab:lfield:names(}{it:field1}{cmd:;}{it:field2}{cmd:;}{it:field3}{cmd:)}]
+	[{cmdab:nomod:ify}] [{cmd:omit(}{it:label namelist}{cmd:)}]
+
+{marker syn2}{...}
+{p 8 12}{cmd:xlabel}, {cmdab:var:info(}{it:filename}{cmd:)}
+	{cmdab:lab:info(}{it:filename}{cmd:)} 
+	[{cmdab:vfield:names(}{it:field1}{cmd:;}{it:field2}{cmd:)}]
+	[{cmdab:lfield:names(}{it:field1}{cmd:;}{it:field2}{cmd:;}{it:field3}{cmd:)}]
+	{cmd:savedo(}{it:filename}{cmd:)} [{cmd:replace}]
+
+{marker syn3}{...}
+{p 8 12}{cmd:xlabel} [{it:varlist}], {cmdab:unass:ign}
+
+
+
+{title:Overview}
+
+{p 2 2}For the current dataset {cmd:xlabel} defines value labels ("label define") and attaches them
+	to variables ("label values") based on information
+	in separate tables (Stata datafiles). The current dataset will be changed.
+	Existing identically named value labels will be dropped before being redefined.{p_end}
+{p 2 2}	See {ul:first example in the syntax section}.{p_end}
+
+{p 2 2}Alternatively one may leave the current dataset unchanged and just save the 
+	relevant Stata commands ("label drop", "label define" and "label values") 
+	in a do-file for future use.{p_end}
+{p 2 2}	See {ul:second example in the syntax section}.{p_end}
+
+{p 2 2}A third possibility is to detach value labels from variables 
+	in the current dataset without doing anything else.{p_end}
+{p 2 2}	See {ul:third example in the syntax section}.{p_end}
+	
+
+{p 2 4}{it:example for extern tables (Stata datafiles):}{p_end}
+{marker file1}{...}
+{p 2 4}File 1 (option {cmdab:var:info(}{it:filename}{cmd:)}):{p_end}
+{p 2 4}Information for assigning value labels to variables{p_end}
+
+{p 4 4}{it:fieldname}   {ul:var}            {ul:cat}{p_end}
+{p 4 4}           {it:(string)}       {it:(string)}{p_end}
+
+{p 4 4}{it:obs}         gender         gender_l{p_end}
+{p 4 4}            age            age10grp_l{p_end}
+
+{marker file2}{...}
+{p 2 4}File 2 (option {cmdab:lab:info(}{it:filename}{cmd:)}):{p_end}
+{p 2 4}Information for defining value labels{p_end}
+
+{p 4 4}{it:fieldname}   {ul:cat}            {ul:keynr}          {ul:keytext}{p_end}
+{p 4 4}           {it:(string)}       {it:(numeric)}      {it:(string)}{p_end}
+
+{p 4 4}{it:obs}         gender_l       0              male{p_end}
+{p 4 4}            gender_l       1              female{p_end}
+{p 4 4}            age10grp_l     1              <15{p_end}
+{p 4 4}            age10grp_l     2              15-24{p_end}
+{p 4 4}            age10grp_l     3              25-34{p_end}
+{p 4 4}            .....{p_end}
+
+{p 2 2}For further details see options {help xlabel##var:varinfo()},
+	{help xlabel##lab:labinfo()},
+	{help xlabel##vfield:vfieldnames()} and {help xlabel##lfield:lfieldnames()} as well 
+	as section {hi:Description}.{p_end} 
+
+
+{title:Description}
+
+{p 2 4}The first possibility is to define value labels and attach them to variables with
+	immediate changes to the current dataset (see 
+	{help xlabel##syn1:first example} in the syntax section).{p_end}
+{p 4 4}Together, the current dataset variables, command parameters and command datafile
+	contents determine which value labels are to be defined and attached to variables.
+	No unnecessary label value definitions and attachments are made:{p_end}
+{p 4 4}ie. label value definitions and attachments are made only when variables{p_end}
+{p 8 10}- are in the current dataset and are needed after command parameter processing
+	and are attached to value labels in the command {cmd:varinfo()} file{p_end}
+{p 8 8}AND the resulting 'required-by-variable' value labels{p_end}
+{p 8 10}- are needed after command parameter processing and are defined in the 
+	command {cmd:labinfo()} file.{p_end}
+{p 4 4}Optionally one may specify a varlist (before the command options) which contains
+	the variables to be attached to value labels (and thereby also indicating which
+	value labels should be defined). If no varlist is specified, "_all" (all variables)
+	will be assumed.{p_end}
+{p 4 4}The names of two external Stata datafiles are required in order to provide information
+	on how to define and attach the value labels (see options 
+	{help xlabel##var:varinfo()} and	{help xlabel##lab:labinfo()}).{p_end}
+{p 4 4}Optionally one may specify alternative fieldnames that differ from the Stata datafile
+	defaults (see options {help xlabel##vfield:vfieldnames(;)} and 
+	{help xlabel##lfield:lfieldnames(;;)}).{p_end}
+{p 4 4}Optionally one may determine that value labels which already exist for the current
+	dataset shall not be modified (see option {help xlabel##nomod:nomodify}){p_end}
+{p 4 4}or that one or more value labels should not be defined and attached to 
+	variables independent of whether the labels already exist in the current dataset 
+	or not (see option {help xlabel##omit:omit}{it:(label namelist)}).{p_end}
+{p 4 4}NOTE:{p_end}
+{p 4 4}A value label can be attached to several variables. So please be aware that a 
+	previously defined value label may be modified despite not being attached to a 
+	variable on the varlist.{p_end}
+{p 4 4}This is because the value label is attached to another variable that is on the 
+	varlist. In that case the value label will be defined (created or modified) but there 
+	will be no attach to the variable not on the varlist.{p_end}
+
+{p 2 4}The second possibility is to generate relevant Stata commands ("label drop", 
+	"label define" and "label values") in a Stata do-file without any immediate changes 
+	to the current dataset (see 
+	{help xlabel##syn2:second example} in the syntax section). The complete 
+	command datafile contents alone determine which value label definitions and attachments
+	are to be generated.{p_end}
+{p 4 4}The name of an external Stata do-file is required (option
+	{cmd:savedo(}{it:do-file name}{cmd:)}).{p_end}
+{p 4 4}Optionally one may specify the {cmd:replace} option to indicate that an existing
+	do-file should be overwritten.{p_end}
+{p 4 4}The names of two external Stata datafiles are required in order to provide
+	information on how to define and attach the value labels (see options 
+	{help xlabel##var:varinfo()} and {help xlabel##lab:labinfo()}).{p_end}
+{p 4 4}Optionally one may specify alternative fieldnames that differ from the Stata
+	datafile defaults (see options {help xlabel##vfield:vfieldnames(;)} and 
+	{help xlabel##lfield:lfieldnames(;;)}).{p_end}
+{p 4 4}Neither the varlist specification (list of variables to be attached to value 
+	labels) nor the options {help xlabel##nomod:nomodify} or {help xlabel##omit:omit()}
+	are allowed together with 
+	option {cmd:savedo()}.{p_end}
+{p 4 4}NOTE:{p_end}
+{p 4 4}The resulting Stata do-file could be edited if required and used in future processing
+	of relevant datasets.{p_end}
+
+{p 2 4}The third possibility is to simply detach value labels from variables without 
+	dropping, defining, modifying or attaching (see
+	{help xlabel##syn3:third example} in the syntax section).{p_end}
+{p 4 4}A varlist may be specified containing the variables to be detached from value labels.
+	If no varlist is specified, all variables ("_all") will be assumed.{p_end}
+{p 4 4}The option {cmd:unassign} is required.{p_end}
+{p 4 4}Further options are not allowed.{p_end}
+
+{marker opt}{...}
+{title:Options}
+
+{marker var}{...}
+{p 2 4} Option {cmdab:var:info(}{it:filename}{cmd:)} specifies the external Stata datafile
+	containing the table with information for attaching value labels to variables
+	(for "label values" commands).{p_end}
+{p 4 4}	There have to be 2 fields (see example for external tables 
+	{help xlabel##file1:File 1} in section Overview):{p_end}
+{p 4 4}	a first field (string variable) with default name {hi:"var"} that contains 
+	the variable
+	name and a second field (string variable) with default name {hi:"cat"} containing the name
+	of the value label to be attached to the variable in field {hi:"var"}.{p_end}
+{p 4 4}Alternative fieldnames that differ from the defaults can be specified using
+	option {cmd:vfieldnames(}{it:fieldname1;fieldname2}{cmd:)}.{p_end}
+{p 4 4}Option varinfo() may not be combined with option {cmd:unassign}.{p_end}
+
+{marker lab}{...}
+{p 2 4} Option {cmdab:lab:info(}{it:filename}{cmd:)} specifies the external Stata datafile
+	containing the table with information for defining value labels (for "label define"
+	commands).{p_end}
+{p 4 4}	There have to be 3 fields (see example for external tables 
+	{help xlabel##file2:File 2} in section Overview):{p_end}
+{p 4 4}	a first field (string variable) with default name {hi:"cat"} that contains 
+	the name of the value label, a second field (integer numeric variable: byte, int or long)
+	with default name {hi:"keynr"} containing a value number and
+	a third field (string variable) with default name {hi:"keytext"} containing the value 
+	label text associated with the value label number.{p_end}
+{p 4 4}Alternative fieldnames that differ from the defaults can be specified using option
+	{cmdab:lfield:names(}{it:fieldname1}{cmd:;}{it:fieldname2}{cmd:;}
+	{it:fieldname3}{cmd:)}.{p_end}
+{p 4 4}Option labinfo() may not be combined with option {cmd:unassign}.{p_end}
+
+{marker vfield}{...}
+{p 2 4}Option {cmdab:vfield:names(}{it:fieldname1}{cmd:;}{it:fieldname2}{cmd:)} specifies
+	alternative fieldnames for the external Stata datafile specified in option 
+	{cmd:varinfo()} when the default fieldnames (field1 {hi:"var"}
+	and field2 {hi:"cat"}) cannot be used. The two fieldnames must each be separated
+	by a semicolon {hi:";"} or a comma {hi:","}. The separator must always be present,
+	even when only one
+	alternative fieldname is specified (eg. vfieldnames(name;) or vfieldnames(;lab) etc.).{p_end}
+{p 4 4}Option vfieldnames(;) may not be combined with option {cmd:unassign}.{p_end}
+
+{marker lfield}{...}
+{p 2 4}Option {cmdab:lfield:names(}{it:fieldname1}{cmd:;}{it:fieldname2}{cmd:;}
+	{it:fieldname3}{cmd:)} specifies alternative fieldnames for the external Stata
+	datafile specified in option {cmd:labinfo()} when the default fieldnames
+	(field1 {hi:"cat"}, field2 {hi:"keynr"} and field3 {hi:"keytext"}) cannot be used.
+	The three fieldnames must each be separated by a semicolon {hi:";"} or a comma {hi:","}. 
+	The separators must always be present, even when only one or two alternative fieldnames
+	are specified (eg. lfieldnames(kat;;), lfieldnames(;value;), lfieldnames(kat;;text), 
+	lfieldnames(;;text) etc.).{p_end}
+{p 4 4}Option lfieldnames(;;) may not be combined with option {cmd:unassign}.{p_end}
+
+{marker nomod}{...}
+{p 2 4}Option {cmdab:nomod:ify} specifies that no value labels already existing in the current
+	dataset shall be modified. Relevant is the complete value label set and not just 
+	individual value labels.{p_end}
+{p 4 4}Option nomodify may not be combined with options {cmd:savedo()} or {cmd:unassign}.{p_end}
+
+{marker omit}{...}
+{p 2 4}Option {cmd:omit(}{it:label namelist}{cmd:)} specifies value labels that shall be
+	omitted from both label value definiton and attachment to variables independent 
+	of whether the labels already exist in the current dataset or not.{p_end}
+{p 4 4}Option omit may not be combined with options {cmd:savedo()}, {cmd:replace} or 
+	{cmd:unassign}.{p_end}
+
+{marker savedo}{...}
+{p 2 4}Option {cmd:savedo(}{it:do-filename}{cmd:)} specifies that generated Stata commands
+	("label drop", "label define" and "label values") shall be saved in a Stata do-file
+	without any immediate changes to the dataset in memory. The Stata commands 
+	for the do-file are generated only according to the complete contents of the 
+	{cmd:varinfo()} and {cmd:labinfo()} external datafiles.{p_end}
+{p 4 4}Neither the current dataset nor any existing value labels are checked or changed in
+	any way. The Stata do-file can be used in future processing of relevant datasets{p_end}
+{p 4 4}Option savedo() may be combined with option {cmd:replace} when an existing do-file 
+	should be overwritten.{p_end}
+{p 4 4}Option savedo() may not be used with a varlist specification or combined with 
+	the options {cmd:momodify}, {cmd:omit()} or {cmd:unassign}.{p_end}
+
+{marker unass}{...}
+{p 2 4}Option {cmdab:unass:ign} specifies that value labels should be detached from 
+	variables without any dropping, defining, modifying or attaching. The variables
+	to be detached are contained in the accompanying varlist. If no varlist is specified,
+	all variables ("_all") will be assumed.{p_end}
+{p 4 4}Apart from varlist, option unassign may not be combined with any other options.{p_end}
+
+
+{title:Examples}
+
+{p 2 4}Change current dataset, define value labels and attach them to variables present 
+	in the current dataset (all variables in the current dataset are relevant), 
+	get the information from the two specified external files.{p_end}
+{p 6 9}{cmd:. xlabel, var($dd/varnames.dta) lab($dd/labelinfo.dta)} {p_end}
+
+{p 2 4}As above, but only variables beginning with "age" are relevant.{p_end}
+{p 6 9}{cmd:. xlabel age*, var($dd/varnames.dta) lab($dd/labelinfo.dta)} {p_end}
+
+{p 2 4}As above, but do not modify value labels that already exist.{p_end}
+{p 6 9}{cmd:. xlabel age*, var($dd/varnames.dta) lab($dd/labelinfo.dta) nomodify} {p_end}
+
+{p 2 4}As above, but omit value labels specified with option omit.{p_end}
+{p 6 9}{cmd:. xlabel age*, var($dd/varnames.dta) lab($dd/labelinfo.dta) nomod omit(age5grp_l)} {p_end}
+
+{p 2 4}Like first example, but alternative fieldnames to replace the external file defaults.{p_end}
+{p 6 9}{cmd:. xlabel, var($dd/varnames.dta) lab($dd/labelinfo.dta) vfield(vname;labname) lfield(labname;;)} {p_end}
+
+
+{p 2 4}Do not change current dataset, save generated Stata commands in a do-file, get 
+	all the information from the two specified external files.{p_end}
+{p 6 9}{cmd:. xlabel, var($dd/varnames.dta) lab($dd/labelinfo.dta) savedo($dod/labels.do) replace} {p_end}
+
+
+{p 2 4}Detach all variables beginning with "age" from corresponding value labels{p_end}
+{p 6 9}{cmd:. xlabel age*, unassign} {p_end}
+
+
+{title:Authors}
+
+{p 2 4}K.Schmidlin, M.Sturdy{p_end}
+
+
+{title:Version info}
+
+{p 2 4}xlabel.ado Version 1.1.4 - 22Jan2008{p_end}
+
+
+
+
+
+
+
+
+
