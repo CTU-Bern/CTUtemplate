@@ -2,15 +2,19 @@ Package: CTUtemplate
 Title: Example RStudio Project Templates
 Author: Alan Haynes
 Maintainer: Alan Haynes <alan.haynes@ctu.unibe.ch>
-Version: 0.0.1
+Version: 0.0.2
 Description: Example package showcasing how RStudio project templates are defined.
 Depends: 
   R (>= 3.3.2),
+  flextable,
   glue,
   here, 
+  officer,
   stringr,
   svDialogs
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
+Imports: 
+    magrittr
