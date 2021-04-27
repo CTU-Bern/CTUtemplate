@@ -38,6 +38,7 @@ Once installed, in RStudio, open a "new project in a new directory" and select "
 
 The `asr` function is used to fill out the Swiss Ethics Annual Safety Report template. It is intended that by passing a dataframe with the relevant information, plus a few other values, filling the template can be automated.
 
+Assuming that all data variables are consistent with the defaults, the following might be used to fill out the report.
 
 ```{r, eval=FALSE}
 asr(dataframe,
@@ -50,15 +51,15 @@ asr(dataframe,
     product_name = "Drug name",
     sponsor_contact = "Mr Foo, University of Foo, Bar", 
     inst_name_address = "Mr Bar, University of Foo, Bar",
-    n_centers_t = 10, # total number of sites
-    n_centers_p = 15, # number of planned sites
-    n_centers_c = 0,  # number of closed sites
-    n_centers_o = 10, # number of open sites
-    n_pat_t = 1000,   # total number of participants
-    n_pat_e = 800,    # enrolled participants
-    n_pat_c = 100,    # complete participants
-    n_pat_p = 2,      # prematurely terminated participants
-    period_from = min(dataframe$ic_date), # assuming that the variable exists!
+    n_centers_t = length(unique(alldata$site)),      # total number of sites
+    n_centers_p = 15,                                # number of planned sites
+    n_centers_c = length(unique(closedsites$site)),  # number of closed sites
+    n_centers_o = length(unique(alldata$site)),      # number of open sites
+    n_pat_t = 1000,                                  # total number of participants
+    n_pat_e = length(unique(alldata$record_id)),     # enrolled participants
+    n_pat_c = sum(all_data$eos_complete),            # complete participants
+    n_pat_p = sum(all_data$eos_terminated),          # prematurely terminated participants
+    period_from = min(dataframe$ic_date),            # assuming that the variable exists!
     period_to = Sys.Date()
     )
 ```
