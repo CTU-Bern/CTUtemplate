@@ -146,28 +146,32 @@ check_log <- function(x){
 #'
 #' msample <- function(x, ...) sample(x, n, TRUE, ...)
 #' sae_data <- data.frame(sae_date = last_report + msample(-20:20),
-#'                        record_id = msample(1:300),
-#'                        age = round(runif(n, 45, 75)),
-#'                        sex = factor(msample(c(c("M", "F")))),
-#'                        country = factor(msample("CH")),
-#'                        site = factor(msample(letters[1:15])),
-#'                        sae = factor(msample(c("headache", "diarhea", "spontaneous unconsciousness", "death", "poor sleep"))),
-#'                        intervention = factor(msample(c("grp1", "grp2"))),
-#'                        outcome = factor(msample(c("resolved", "fatal", "improved", "sequel", "unknown"))),
-#'                        comment = msample(c("", "fribble", "foo", "bar", "foobar")),
-#'                        trt = msample(c("", "trt1", "trt2", "trt3", "trt4")),
-#'                        class = msample(c("SAE", "SUSAR", "SADR")),
-#'                        expected = msample(c(TRUE, FALSE)),
-#'                        devdef = msample(c(TRUE, FALSE)),
-#'                        devattr = msample(c(TRUE, FALSE)),
-#'                        devdef = msample(c(TRUE, FALSE)),
-#'                        devint = msample(c(TRUE, FALSE)),
-#'                        safetymeasure = msample(c(TRUE, FALSE))
+#'      record_id = msample(1:300),
+#'      age = round(runif(n, 45, 75)),
+#'      sex = factor(msample(c(c("M", "F")))),
+#'      country = factor(msample("CH")),
+#'      site = factor(msample(letters[1:15])),
+#'      sae = factor(msample(c("headache", "diarhea",
+#'      "spontaneous unconsciousness", "death", "poor sleep"))),
+#'      intervention = factor(msample(c("grp1", "grp2"))),
+#'      outcome = factor(msample(c("resolved", "fatal", "improved",
+#'      "sequel", "unknown"))),
+#'      comment = msample(c("", "fribble", "foo", "bar", "foobar")),
+#'      trt = msample(c("", "trt1", "trt2", "trt3", "trt4")),
+#'      class = msample(c("SAE", "SUSAR", "SADR")),
+#'      expected = msample(c(TRUE, FALSE)),
+#'      devdef = msample(c(TRUE, FALSE)),
+#'      devattr = msample(c(TRUE, FALSE)),
+#'      devdef = msample(c(TRUE, FALSE)),
+#'      devint = msample(c(TRUE, FALSE)),
+#'      safetymeasure = msample(c(TRUE, FALSE))
 #' )
 #' sae_data <- sae_data[order(sae_data$sae_date), ]
 #' sae_data$sae_n <- 1:nrow(sae_data)
-#' sae_data$sae_trtstop <- as.Date(ifelse(sae_data$outcome %in% c("resolved", "fatal") & sae_data$trt != "", sae_data$sae_date + runif(2:10, 1), NA), origin = "1970-01-01")
-#' sae_data$sae_trtstart <- as.Date(ifelse(sae_data$trt != "", sae_data$sae_date + 1, NA), origin = "1970-01-01")
+#' sae_data$sae_trtstop <- as.Date(ifelse(sae_data$outcome %in% c("resolved", "fatal") &
+#'    sae_data$trt != "", sae_data$sae_date + runif(2:10, 1), NA), origin = "1970-01-01")
+#' sae_data$sae_trtstart <- as.Date(ifelse(sae_data$trt != "", sae_data$sae_date + 1, NA),
+#'    origin = "1970-01-01")
 #' sae_data$related <- rbinom(n, 1, .25)
 #'
 #' sae_data$sae_date
@@ -420,7 +424,7 @@ asr <- function(data,
     doc <- doc %>%
       cursor_bookmark("partsafety_text") %>%
       body_add_par(glue::glue("During the reporting period, {length(unique(period_data$record_id))} of {n_pat_e} participants ({sprintf('%1.1f', length(unique(period_data$record_id))/n_pat_e*100)} %) reported a total of {nrow(period_data)} serious adverse events (SAEs)."), style = "Text") %>%
-      body_add_par(glue::glue("{sum(data$related)} of {nrow(data)} SAEs ({sprintf('%1.1f', sum(data$related)/nrow(data)*100)} %) were classified “related” to the IMP. The most frequent related SAEs documented were {most_freq}."), style = "Text") %>%
+      body_add_par(glue::glue("{sum(data$related)} of {nrow(data)} SAEs ({sprintf('%1.1f', sum(data$related)/nrow(data)*100)} %) were classified 'related' to the IMP. The most frequent related SAEs documented were {most_freq}."), style = "Text") %>%
       body_add_par(glue::glue("{sum(data$class == 'SUSAR')} Suspected Unexpected Serious Adverse Reactions (SUSARs) occurred during the reporting period, which have been notified to the Swiss competent authorities."), style = "Text")
 
     tab <- tibble::tribble(

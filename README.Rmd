@@ -29,6 +29,11 @@ This may require `Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")` if packa
 
 ## Usage
 
+```{r}
+library(CTUtemplate)
+```
+
+
 ### Template director structure
 
 Once installed, in RStudio, open a "new project in a new directory" and select "CTU project template". Options in the following window are used to create the folders and headers of R (and eventually STATA) files.
@@ -64,9 +69,24 @@ asr(dataframe,
     )
 ```
 
- 
+
+### UNIBE Red
+
+There is also a function for the UNIBEs shade of red:
+```{r, echo = FALSE}
+```
 
 
+```{r, fig.height=1, fig.width=4, fig.align='center'}
+par(mai = c(.5, .1, .1, .1), tck = -.01, mgp = c(1,.2,0))
+plot(
+  # main point:
+  col = unibeRed(alpha = seq(.2, 1, .2)), 
+  # other stuff for the figure
+  x = seq(.2, 1, .2), y = rep(1,5), 
+  pch = 15, cex = 5, xlab = "alpha", ylab = "", 
+  yaxt = "n")
+```
 
 
 

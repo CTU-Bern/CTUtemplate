@@ -3,7 +3,7 @@ Title: Example RStudio Project Templates
 Author: Alan Haynes
 Maintainer: Alan Haynes <alan.haynes@ctu.unibe.ch>
 Version: 0.0.2
-Description: Example package showcasing how RStudio project templates are defined.
+Description: Templates and functions for use in CTU Bern.
 Depends: 
   R (>= 3.3.2),
   flextable,
