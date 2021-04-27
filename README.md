@@ -18,6 +18,16 @@ using.
 Usage
 -----
 
+    library(CTUtemplate)
+    #> Loading required package: flextable
+    #> Loading required package: glue
+    #> Loading required package: here
+    #> here() starts at /Users/runner/work/CTUtemplate/CTUtemplate
+    #> Loading required package: officer
+    #> Loading required package: stringr
+    #> Loading required package: svDialogs
+    #> Loading required package: tibble
+
 ### Template director structure
 
 Once installed, in RStudio, open a “new project in a new directory” and
@@ -55,3 +65,18 @@ following might be used to fill out the report.
         period_from = min(dataframe$ic_date),            # assuming that the variable exists!
         period_to = Sys.Date()
         )
+
+### UNIBE Red
+
+There is also a function for the UNIBEs shade of red:
+
+    par(mai = c(.5, .1, .1, .1), tck = -.01, mgp = c(1,.2,0))
+    plot(
+      # main point:
+      col = unibeRed(alpha = seq(.2, 1, .2)), 
+      # other stuff for the figure
+      x = seq(.2, 1, .2), y = rep(1,5), 
+      pch = 15, cex = 5, xlab = "alpha", ylab = "", 
+      yaxt = "n")
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
