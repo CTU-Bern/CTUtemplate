@@ -1,12 +1,19 @@
 
 
+# install.packages("presize")
+# remotes::install_github("CTU-bern/presize")
+# remotes::install_github("CTU-bern/accrualPlot")
+# remotes::install_github("CTU-bern/kpitools")
+
+
+
 # Load packages
-library("atable")
+library(atable)
 atable_options(format_to = "console", add_margins = TRUE)
-library("tidyverse")
-library("here")
-library("renv")
-library("Hmisc")
+library(tidyverse)
+library(here)
+library(renv)
+library(Hmisc)
 library(broom)
 
 

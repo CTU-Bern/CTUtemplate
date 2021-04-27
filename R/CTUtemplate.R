@@ -198,6 +198,10 @@ CTUtemplate <- function(path, ...) {
                       '**** ado path ****',
                       'adopath ++ "$sa"',
                       '', '', '',
+                      '**** install btable ****',
+                      'net install github, from("https://haghish.github.io/github/")',
+                      'github install CTU-Bern/btable',
+                      '', '', '',
                       '**** run do files ****',
                       'cap log close',
                       'log using "$ld/01_data_prep", text, replace',
@@ -244,7 +248,7 @@ CTUtemplate <- function(path, ...) {
                       'save "$pd/prepped_data", replace',
 
                       sep = "\n")
-    writeLines(contents, con = paths$ss("02_dataprep.do"))
+    writeLines(contents, con = paths$ss("01_data_prep.do"))
 
 
     # baseline
@@ -261,7 +265,7 @@ CTUtemplate <- function(path, ...) {
                       'btable_format using "$tmp/btab", clear',
                       'export delimited "$td/btab.csv"',
                       sep = "\n")
-    writeLines(contents, con = paths$ss("03_baseline.do"))
+    writeLines(contents, con = paths$ss("02_baseline.do"))
 
 
     # blank
