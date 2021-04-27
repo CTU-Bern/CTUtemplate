@@ -3,6 +3,7 @@
 # install.packages("presize")
 # remotes::install_github("CTU-bern/presize")
 # remotes::install_github("CTU-bern/accrualPlot")
+# remotes::install_github("CTU-bern/kpitools")
 
 
 
