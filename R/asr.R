@@ -1,29 +1,27 @@
 
 
-
-
+#
+#
 # wdfile <- system.file("extdata/clino_annual_safety_report_bm.docx", package = "CTUtemplate")
 #
 #
-# def <- "defaut"
-#
-# trial_title <- def
-# protocol_number <- def
-# basec_number <- def
-# snctp_number <- def
-# swissmedic_number <- def
-# ec_name <- def
-# product_name <- def
-# sponsor_contact <- "default name, default number, default email"
-# inst_name_address <- "default name, default address"
-# n_centers_t <- def # total
-# n_centers_p <- def #planned
-# n_centers_c <- def #closed
-# n_centers_o <- def #open
-# n_pat_t <- def #target
-# n_pat_e <- def #enrolled
-# n_pat_c <- def #complete
-# n_pat_p <- def #prematurely terminated
+# trial_title <- "My trial name"
+# protocol_number <- "v1399"
+# basec_number <- "whatever it is"
+# snctp_number <- "SNCTP"
+# swissmedic_number <- "SM number"
+# ec_name <- "KEK Bern"
+# product_name <- "my drug"
+# sponsor_contact <- "Me, My number, me@email.com"
+# inst_name_address <- "me, my address"
+# n_centers_t <- 20 # total
+# n_centers_p <- 30 #planned
+# n_centers_c <- 0 #closed
+# n_centers_o <- 20 #open
+# n_pat_t <- 16000 #target
+# n_pat_e <- 4956 #enrolled
+# n_pat_c <- 3678 #complete
+# n_pat_p <- 21 #prematurely terminated
 #
 #
 # last_report <- as.Date("2020-11-01")
@@ -46,14 +44,14 @@
 # report_date <- format(Sys.Date(), format = "%d/%m/%Y")
 # period_from <- "start_date"
 # period_to <- "to_date"
-
-
-
-
-
-# prepare table specific variables
-
-
+#
+#
+#
+#
+#
+# # prepare table specific variables
+#
+#
 # asr(sae_data)
 # asr(sae_data, var_class = "sae_type")
 #
@@ -79,6 +77,11 @@ check_fac <- function(x){
   var <- as.character(sys.call())[2]
   var <- sub("data$", "", var, fixed = TRUE)
   if(!any(c("factor") %in% class(x))) stop("'", var, "' should be factor")
+}
+check_log <- function(x){
+  var <- as.character(sys.call())[2]
+  var <- sub("data$", "", var, fixed = TRUE)
+  if(!any(c("logical") %in% class(x))) stop("'", var, "' should be logical")
 }
 
 #' Title
@@ -126,6 +129,8 @@ check_fac <- function(x){
 #' @param var_expected variable saying whether the SAE was expected
 #' @param var_devdef variable containing whether the SAE is a device deficiency
 #' @param var_devattr variable containing whether the SAE is attributable to the device
+#' @param var_devint variable containing whether the SAE is attributable to an intervention in the trial
+#' @param var_safetymeasure variable containing whether the SAE required safety related measures
 #'
 #' @return
 #' @export
@@ -156,7 +161,8 @@ check_fac <- function(x){
 #'                        devdef = msample(c(TRUE, FALSE)),
 #'                        devattr = msample(c(TRUE, FALSE)),
 #'                        devdef = msample(c(TRUE, FALSE)),
-#'                        devint = msample(c(TRUE, FALSE))
+#'                        devint = msample(c(TRUE, FALSE)),
+#'                        safetymeasure = msample(c(TRUE, FALSE))
 #' )
 #' sae_data <- sae_data[order(sae_data$sae_date), ]
 #' sae_data$sae_n <- 1:nrow(sae_data)
@@ -222,7 +228,7 @@ asr <- function(data,
                 , var_devdef = "devdef"
                 , var_devattr = "devattr"
                 , var_devint = "devint"
-                , var_safteymeasure = "safetymeasure"
+                , var_safetymeasure = "safetymeasure"
 ){
 
   # general housekeeping ----
@@ -271,12 +277,17 @@ asr <- function(data,
   if(trial_type == "medical device"){
     names(data)[names(data) == var_expected] <- "expected"
     names(data)[names(data) == var_devdef] <- "devdef"
-    names(data)[names(data) == var_devattr] <- "dev_attr"
-    names(data)[names(data) == var_devint] <- "dev_int"
-    names(data)[names(data) == var_safteymeasure] <- "safetymeasure"
+    names(data)[names(data) == var_devattr] <- "devattr"
+    names(data)[names(data) == var_devint] <- "devint"
+    names(data)[names(data) == var_safetymeasure] <- "safetymeasure"
+
+    vars <- c("expected", "devdef", "devattr", "devint", "safetymeasure")
+    if(!all(vars %in% names(data))){
+      stop(paste(vars[!vars %in% names(data)], collapse = ", "), " not found in data")
+    }
 
     ## safetymeasure ----
-    check_fac(data$safetymeasure)
+    check_log(data$safetymeasure)
   }
   if(trial_type == "other"){
 
