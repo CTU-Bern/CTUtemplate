@@ -173,8 +173,8 @@ check_log <- function(x){
 #' sae_data$sae_date
 #' # data <- sae_data
 #'
-#' asr(sae_data)
-#' asr(sae_data, trial_type = "med")
+#' asr(sae_data) # using defaults
+#' # asr(sae_data, trial_type = "med")
 #'
 #'
 #'
