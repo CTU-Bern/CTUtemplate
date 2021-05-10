@@ -19,14 +19,6 @@ Usage
 -----
 
     library(CTUtemplate)
-    #> Loading required package: flextable
-    #> Loading required package: glue
-    #> Loading required package: here
-    #> here() starts at /Users/runner/work/CTUtemplate/CTUtemplate
-    #> Loading required package: officer
-    #> Loading required package: stringr
-    #> Loading required package: svDialogs
-    #> Loading required package: tibble
 
 ### Template director structure
 
@@ -79,4 +71,4 @@ There is also a function for the UNIBEs shade of red:
       pch = 15, cex = 5, xlab = "alpha", ylab = "", 
       yaxt = "n")
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />

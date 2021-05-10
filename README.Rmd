@@ -29,7 +29,7 @@ This may require `Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")` if packa
 
 ## Usage
 
-```{r}
+```{r, message=FALSE}
 library(CTUtemplate)
 ```
 
@@ -73,9 +73,6 @@ asr(dataframe,
 ### UNIBE Red
 
 There is also a function for the UNIBEs shade of red:
-```{r, echo = FALSE}
-```
-
 
 ```{r, fig.height=1, fig.width=4, fig.align='center'}
 par(mai = c(.5, .1, .1, .1), tck = -.01, mgp = c(1,.2,0))

@@ -349,8 +349,8 @@ asr <- function(data,
   check_fac_char(data$outcome)
   data$outcome <- as.character(data$outcome)
   data$outcome <- stringr::str_to_sentence(data$outcome)
-  if(!all(data$outcome %in% c("Resolved", "Fatal", "Improved", "Sequel", "Unknown")))
-    stop("unexpected outcomes encountered (Resolved, Fatal, Improved, Sequel and Unknown are allowed)")
+  # if(!all(data$outcome %in% c("Resolved", "Fatal", "Improved", "Sequel", "Unknown")))
+  #   stop("unexpected outcomes encountered (Resolved, Fatal, Improved, Sequel and Unknown are allowed)")
 
 
 
