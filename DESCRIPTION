@@ -2,7 +2,7 @@ Package: CTUtemplate
 Title: Example RStudio Project Templates
 Author: Alan Haynes
 Maintainer: Alan Haynes <alan.haynes@ctu.unibe.ch>
-Version: 0.0.3
+Version: 0.0.4
 Description: Templates and functions for use in CTU Bern.
 Depends: 
   R (>= 3.3.2),

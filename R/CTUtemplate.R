@@ -51,7 +51,8 @@ CTUtemplate <- function(path, ...) {
                rd =  glue("08_Reports_{dots$projNum}"),
                qc =  glue("09_QualityControl_xx"),
                pub = glue("10_Publication_xx"),
-               doc = glue("11_Documents_{dots$projNum}"))
+               doc = glue("11_Documents_{dots$projNum}"),
+               tmp = "xx_temporary")
 
 
   lapply(file.path(path, folders), dir.create, showWarnings = FALSE)
@@ -191,8 +192,7 @@ CTUtemplate <- function(path, ...) {
                       glue('global ld "$pp/{folders["ld"]}"        // log files'),
                       glue('global rd "$pp/{folders["rd"]}"          // reports'),
                       glue('global qc "$pp/{folders["qc"]}"   // Quality control'),
-                      'global tmp = "$pp/xx_temporary"        // temporary files',
-                      'cap mkdir "$tmp"',
+                      glue('global tmp = "$pp/{folders["tmp"]}        // temporary files'),
 
                       '', '', '',
                       '**** ado path ****',
@@ -207,6 +207,8 @@ CTUtemplate <- function(path, ...) {
                       'log using "$ld/01_data_prep", text, replace',
                       'do "$ss/01_data_prep"',
                       'cap log close',
+                      '* see also $ss/01_REDCap_export for REDCap import via the API',
+                      '* see also https://github.com/CTU-Bern/stata_secutrial for secuTrial import code',
                       '',
                       'cap log close',
                       'log using "$ld/02_baseline", text, replace',
@@ -222,15 +224,26 @@ CTUtemplate <- function(path, ...) {
                       sep = "\n")
     writeLines(contents, con = paths$ss("00_MASTERFILE.do"))
 
-    lf <- list.files(system.file("extdata", "Stata", package = "CTUtemplate"))
+    lf <- list.files(system.file("extdata", "Stata", package = "CTUtemplate"),
+                     pattern = "\\.(ado|hlp)$")
 
     lapply(lf, function(x){
       file.copy(
         system.file("extdata", "Stata", x, package = "CTUtemplate"),
         paths$sa(x)
         )
-       # print(file.path(folders["sa"], x))
-       })
+    })
+
+    lf <- list.files(system.file("extdata", "Stata", package = "CTUtemplate"),
+                     pattern = "\\.(do)$")
+
+    lapply(lf, function(x){
+      file.copy(
+        system.file("extdata", "Stata", x, package = "CTUtemplate"),
+        paths$ss(x)
+        )
+    })
+
 
 
     # data prep
