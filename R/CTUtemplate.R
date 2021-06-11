@@ -225,7 +225,7 @@ CTUtemplate <- function(path, ...) {
     writeLines(contents, con = paths$ss("00_MASTERFILE.do"))
 
     lf <- list.files(system.file("extdata", "Stata", package = "CTUtemplate"),
-                     pattern = "\.(ado|hlp)$")
+                     pattern = "\\.(ado|hlp)$")
 
     lapply(lf, function(x){
       file.copy(
@@ -235,7 +235,7 @@ CTUtemplate <- function(path, ...) {
     })
 
     lf <- list.files(system.file("extdata", "Stata", package = "CTUtemplate"),
-                     pattern = "\.(do)$")
+                     pattern = "\\.(do)$")
 
     lapply(lf, function(x){
       file.copy(
