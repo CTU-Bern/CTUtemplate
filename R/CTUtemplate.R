@@ -207,6 +207,8 @@ CTUtemplate <- function(path, ...) {
                       'log using "$ld/01_data_prep", text, replace',
                       'do "$ss/01_data_prep"',
                       'cap log close',
+                      '* see also $ss/01_REDCap_export for REDCap import via the API',
+                      '* see also https://github.com/CTU-Bern/stata_secutrial for secuTrial import code',
                       '',
                       'cap log close',
                       'log using "$ld/02_baseline", text, replace',
