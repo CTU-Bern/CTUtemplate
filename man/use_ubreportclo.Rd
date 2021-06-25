@@ -43,19 +43,21 @@ the Rmd to be knit)}
 
 }
 \description{
-Generate the CLO file for use with the UNIBE tex template
+The CLO file contains the information identifying the author, project and
+institution (although we do not modify that). It is used by the UNIBE CLS
+file to create the parts of the template.
 }
 \examples{
-use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
-                # Personal info
-                sign = "Alan",
-                email = "alan.haynes@ctu.unibe.ch",
-                job = "Senior Statistician",
-                # Project info
-                projnum = "1234",
-                projname = "Project X",
-                # Report info
-                version = Sys.Date(),
-                reporttype = "Recruitment report"
-                )
+# use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
+#                 # Personal info
+#                 sign = "Alan",
+#                 email = "alan.haynes@ctu.unibe.ch",
+#                 job = "Senior Statistician",
+#                 # Project info
+#                 projnum = "1234",
+#                 projname = "Project X",
+#                 # Report info
+#                 version = Sys.Date(),
+#                 reporttype = "Recruitment report"
+#                 )
 }

@@ -4,6 +4,7 @@
 #'
 #' @return colour code
 #' @export
+#' @importFrom grDevices rgb
 #'
 #' @examples
 #' plot(1:5, col = unibeRed())

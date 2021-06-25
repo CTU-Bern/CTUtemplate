@@ -12,7 +12,6 @@
 #' # use_report_template("foo.Rmd")
 use_report_template <- function(save_as, open = TRUE, ...){
 
-
   use_template(template = "report.Rmd",
                save_as = save_as,
                package = "CTUtemplate",
@@ -25,6 +24,10 @@ use_report_template <- function(save_as, open = TRUE, ...){
 
 
 #' Generate the CLO file for use with the UNIBE tex template
+#'
+#' The CLO file contains the information identifying the author, project and
+#' institution (although we do not modify that). It is used by the UNIBE CLS
+#' file to create the parts of the template.
 #'
 #' @param dir Directory in which to create the clo file (should be the same as
 #' the Rmd to be knit)
@@ -42,18 +45,18 @@ use_report_template <- function(save_as, open = TRUE, ...){
 #' @export
 #'
 #' @examples
-#' use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
-#'                 # Personal info
-#'                 sign = "Alan",
-#'                 email = "alan.haynes@ctu.unibe.ch",
-#'                 job = "Senior Statistician",
-#'                 # Project info
-#'                 projnum = "1234",
-#'                 projname = "Project X",
-#'                 # Report info
-#'                 version = Sys.Date(),
-#'                 reporttype = "Recruitment report"
-#'                 )
+#' # use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
+#' #                 # Personal info
+#' #                 sign = "Alan",
+#' #                 email = "alan.haynes@ctu.unibe.ch",
+#' #                 job = "Senior Statistician",
+#' #                 # Project info
+#' #                 projnum = "1234",
+#' #                 projname = "Project X",
+#' #                 # Report info
+#' #                 version = Sys.Date(),
+#' #                 reporttype = "Recruitment report"
+#' #                 )
 use_ubreportclo <- function(dir,
                           projnum = "xxx",
                           projname = "Project YYY",
