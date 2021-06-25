@@ -1,0 +1,50 @@
+---
+knit: 
+  bookdown::render_book:
+    output_dir: .
+output: CTUtemplate:::report_pdf
+toc: true
+lot: false
+lof: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+# Run this ONCE MANUALLY to generate files required by the UNIBE latex template
+use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
+              # Personal info
+              sign = "Alan",
+              email = "alan.haynes@ctu.unibe.ch",
+              job = "Senior Statistician",
+              # Project info
+              projnum = "1234",
+              projname = "Project X",
+              # Report info
+              version = Sys.Date(),
+              reporttype = "Recruitment report"
+              )
+```
+
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+# Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
