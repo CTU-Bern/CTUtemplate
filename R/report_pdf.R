@@ -1,6 +1,10 @@
-
-
-
+#' Generate PDF report
+#'
+#' This is not intended to be run manually... rather via knitting a document
+#'
+#' @param ... options passed to bookdown
+#' @importFrom bookdown pdf_document2
+#' @export
 report_pdf <- function(...) {
   template_name <- "report.tex"
 

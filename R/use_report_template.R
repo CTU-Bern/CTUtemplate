@@ -42,6 +42,18 @@ use_report_template <- function(save_as, open = TRUE, ...){
 #' @export
 #'
 #' @examples
+#' use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
+#'                 # Personal info
+#'                 sign = "Alan",
+#'                 email = "alan.haynes@ctu.unibe.ch",
+#'                 job = "Senior Statistician",
+#'                 # Project info
+#'                 projnum = "1234",
+#'                 projname = "Project X",
+#'                 # Report info
+#'                 version = Sys.Date(),
+#'                 reporttype = "Recruitment report"
+#'                 )
 use_ubreportclo <- function(dir,
                           projnum = "xxx",
                           projname = "Project YYY",
