@@ -2,7 +2,7 @@
 knit: 
   bookdown::render_book:
     output_dir: .
-output: CTUtemplate:::report_pdf
+output: CTUtemplate::report_pdf
 toc: true
 lot: false
 lof: false
