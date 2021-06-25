@@ -2,7 +2,7 @@
 % Please edit documentation in R/use_report_template.R
 \name{use_ubreportclo}
 \alias{use_ubreportclo}
-\title{Title}
+\title{Generate the CLO file for use with the UNIBE tex template}
 \usage{
 use_ubreportclo(
   dir,
@@ -10,7 +10,7 @@ use_ubreportclo(
   projname = "Project YYY",
   reporttype = "Type of report",
   version = "Version",
-  sign = "Signature",
+  sign = "Author name",
   email = "author.name@ctu.unibe.ch",
   job = "Senior Statistician",
   open = FALSE,
@@ -25,11 +25,37 @@ the Rmd to be knit)}
 
 \item{projname}{Project name to appear in report}
 
-\item{...}{}
+\item{reporttype}{The main title of the report}
+
+\item{version}{Version number or similar}
+
+\item{sign}{Your name as it should appear}
+
+\item{email}{your email address}
+
+\item{job}{your job title}
+
+\item{open}{open the file or not}
+
+\item{...}{other options passed to \code{use_template}}
 }
 \value{
 
 }
 \description{
-Title
+Generate the CLO file for use with the UNIBE tex template
+}
+\examples{
+use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
+                # Personal info
+                sign = "Alan",
+                email = "alan.haynes@ctu.unibe.ch",
+                job = "Senior Statistician",
+                # Project info
+                projnum = "1234",
+                projname = "Project X",
+                # Report info
+                version = Sys.Date(),
+                reporttype = "Recruitment report"
+                )
 }
