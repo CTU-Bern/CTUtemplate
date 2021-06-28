@@ -17,8 +17,6 @@ use_report_template <- function(save_as, open = TRUE, ...){
                package = "CTUtemplate",
                ...)
 
-
-
 }
 
 #' Open a new sample size report
@@ -37,8 +35,6 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
                save_as = save_as,
                package = "CTUtemplate",
                ...)
-
-
 
 }
 
