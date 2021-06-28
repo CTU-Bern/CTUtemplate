@@ -1,6 +1,8 @@
 CTUtemplate 0.1.0
 ---------------------
 Addition of LaTeX template that can be used with Rmd
+* use_report_template for examples
+* use_ssreport_template for sample size reports (based on the word template)
 
 CTUtemplate 0.0.4
 ---------------------
