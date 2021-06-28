@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Purpose: Latex main file, loads packages and sets document up, to be pdflatexed
+% Author: Lukas Buetikofer
+% Date created: June 2017
+% Last update: Ocotober 2020
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%
+%class
+%%%%%%%%%%%%%%%%%%
+
+\documentclass[english,personal,color,a4paper,hidelinks]{ubreport}
+
+
+%%%%%%%%%%%%%%%%%%
+%use packages
+%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{german}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+
+
+%mypackages
+%%%%%%%%%%%%%
+
+\usepackage[numbers]{natbib}
+%numbers option to include references as numbers
+\usepackage{mathtools}
+\usepackage{booktabs}
+\setlength\heavyrulewidth{1pt}
+\setlength\lightrulewidth{0.5pt}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{longtable}
+\usepackage{xcolor,colortbl}
+\usepackage{setspace}
+
+\usepackage{array}
+%to make multicolumns: \multicolumn{4}{L{12cm}}{}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+%vertical centering with size M{10cm}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%horizontal centering with size P{10cm}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\usepackage{multirow}
+\usepackage{enumerate}
+
+%loops
+\usepackage{pgffor}
+\usepackage{forloop}
+\usepackage{pgfplots}
+
+%to read from file and get rid of the blanks at the end of the line
+\newcommand\noblankfileline{\expandafter\noblankaux\fileline\relax}
+\def\noblankaux#1 \relax{#1}
+
+%fix hypperref for biblio
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+
+\makeatletter
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+\futurelet\reserved@a\@xhline}
+\makeatother
+%hline with width in pt: \hlinewd{1pt}
+
+\usepackage{caption} \captionsetup[table]{skip=10pt}
+\usepackage{subcaption}
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+\usepackage{fancyhdr}
+
+\usepackage{Sweave}
+
+
+%%%%%%%%%%%%%%%%%%
+%Setup of title page, header and TOC (if applicable)
+%%%%%%%%%%%%%%%%%%%
+
+%no double spacing between sentences
+\frenchspacing
+
+%TOC
+\usepackage{tocloft}
+\setlength{\cftbeforetoctitleskip}{-2cm}   %modify space before toc title
+\setlength{\cftaftertoctitleskip}{1cm}   %modify space after toc title
+\setlength{\cftparskip}{1.5ex}   %modify space between entries
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{tocheadings}}}
+
+
+
+%%%%%%%%%%%%%%%%
+%% SPECIFIC FOR RMD
+%%%%%%%%%%%%%%%%
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Begin Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\addtocounter{page}{1}
+\clearpage
+$if(toc)$
+  \pagestyle{tocheadings}
+  \tableofcontents
+  \clearpage
+$endif$
+\pagestyle{headings}
+
+
+%include sweaved Rnw files
+%%%%%%%%%%%%%%%%%%%
+
+$body$
+
+
+
+\clearpage
+$if(lot)$
+  \listoftables
+$endif$
+
+\clearpage
+$if(lof)$
+  \listoffigures
+$endif$
+
+
+%Bibliography
+%%%%%%%%%%%%%
+
+\newpage
+\bibliography{bibtex_proj}{}
+\bibliographystyle{unsrtnat}
+
+\end{document}
+

@@ -1,0 +1,120 @@
+---
+knit: 
+  bookdown::render_book:
+    output_dir: ""
+output: CTUtemplate::report_pdf
+toc: true
+lot: false
+lof: false
+params:
+  author: "FirstName LastName"
+  email: "FirstName.LastName@ctu.unibe.ch"
+  job: "Senior Statistician"
+  projnum: 1234
+  projname: "Project X"
+  version: "xx"
+  reportname: "Examples"
+  dir: ""
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+# Run this ONCE MANUALLY to generate files required by the UNIBE latex template
+CTUtemplate::use_ubreportclo(
+  # THE SAME DIR AS THE Rmd FILE
+  dir = params$dir, 
+  # Personal info
+  sign = params$author,
+  email = params$email,
+  job = params$job,
+  # Project info
+  projnum = params$projnum,
+  projname = params$projname,
+  # Report info
+  version = params$version,
+  reporttype = params$reportname
+)
+# 'ordinary' Rmd files would have this specified in the yaml header, but that 
+#   doesnt work with the LaTeX template... hence, an additional file needs to be 
+#   defined.
+```
+
+\chapter{Latex syntax can be used}
+
+It is in fact the easiest (only?) way to get chapters...
+
+Otherwise, document sections, subsections etc can be created using Rmd syntax
+
+```{r, eval = FALSE}
+# section
+## subsection
+### subsubsection
+```
+
+# section
+
+## subsection
+
+### subsubsection
+
+# Unnumbered Sections {-}
+
+Use '{-}' to signify that a section should not be numbered.
+
+\chapter{Tables}
+
+Tables can be created via multiple approaches. Short tables that can be edited by hand can be written in Markdown
+
+```{r, eval = FALSE}
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+```
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+
+btabler is another option. Here, you should use 'results='asis'' in the chunk option
+
+```{r, results='asis'}
+# remotes::install_github("CTU-Bern/btabler")
+library(btabler)
+df <- data.frame(name = c("", "Row 1", "Row2"),
+                 out_t = c("Total", "t1", "t1"),
+                 out_1 = c("Group 1", "g11", "g12"), 
+                 out_2 = c("Group 2", "g21", "g22"))
+btable(df, nhead = 1, nfoot = 0, caption = "Table1")
+```
+
+other popular options are `xtable` and `knitr::kable`.
+
+# R Markdown {-}
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+# Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

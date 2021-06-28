@@ -7,10 +7,8 @@
 #
 # The function itself just echos its inputs and outputs to a file called INDEX,
 # which is then opened by RStudio when the new project is opened.
+#' @importFrom glue glue
 CTUtemplate <- function(path, ...) {
-
-  require(glue)
-
 
   # ensure path exists
   dir.create(path, recursive = TRUE, showWarnings = FALSE)

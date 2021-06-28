@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Purpose: Provides information about author, institute and project, to be adapted by user
+% Author: Lukas Buetikofer based on a template from Roger Schuerch
+% Date: 12.10.2020
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%
+%Project
+%%%%%%%%%%%%%
+   
+\newcommand{\project}{
+  \def\projectnumber{xxx}
+  \def\projectname{Project name}
+  \def\reporttype{Type of report}
+  \def\version{Version 1.0}
+  \def\versiondate{\version---\today}
+}
+
+
+%%%%%%%%%%%%%%%%%
+%Author
+%%%%%%%%%%%%%%%%%%
+
+\newcommand{\personalreport}{			
+  \def\sign{Dr. Lukas B{\"u}tikofer}
+  \def\mystreet{Mittelstrasse 43}					
+  \def\telnum{+41 31 631 35 10}                                   
+  \def\faxnum{}			            
+  \def\email{lukas.buetikofer@ctu.unibe.ch}				
+  \def\web{www.ctu.unibe.ch}						
+  \def\job{Senior statistician}	
+}
+
+
+%%%%%%%%%%%%%%%%
+%Institute
+%%%%%%%%%%%%%
+
+\newcommand{\reportenglish}{
+   \selectlanguage{USenglish}
+   \def\uni{University of Bern}						
+   \def\faculty{Faculty of Medicine}					
+   \def\dept{}				
+   \def\institute{CTU Bern}					
+   \def\addressline{CTU Bern, Mittelstrasse 43, CH-3012 Bern} 	
+   \def\zip{CH-3012}							
+   \def\location{Bern}						
+   \def\phone{Phone~}							
+   \def\fax{Fax~}							
+   \def\subjectname{\textsl{}}
+}
+   
+   
