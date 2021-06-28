@@ -308,4 +308,5 @@
 \titleformat{\subsubsection}{\normalfont\normalsize}{\thesubsubsection}{1em}{}
 \titlespacing*{\subsubsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
 
-
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
