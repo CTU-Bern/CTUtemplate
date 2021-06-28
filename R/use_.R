@@ -21,6 +21,27 @@ use_report_template <- function(save_as, open = TRUE, ...){
 
 }
 
+#' Open a new sample size report
+#'
+#' @param save_as filename to save the Rmd as
+#' @param open logical indicating whether to open the file
+#' @param ... other arguments passed to \code{use_template}
+#'
+#' @return
+#' @export
+#' @examples
+#' # use_ssreport_template("ss.Rmd")
+use_ssreport_template <- function(save_as, open = TRUE, ...){
+
+  use_template(template = "ssreport.Rmd",
+               save_as = save_as,
+               package = "CTUtemplate",
+               ...)
+
+
+
+}
+
 
 
 #' Generate the CLO file for use with the UNIBE tex template
@@ -58,18 +79,20 @@ use_report_template <- function(save_as, open = TRUE, ...){
 #' #                 reporttype = "Recruitment report"
 #' #                 )
 use_ubreportclo <- function(dir,
-                          projnum = "xxx",
-                          projname = "Project YYY",
-                          reporttype = "Type of report",
-                          version = "Version",
-                          sign = "Author name",
-                          email = "author.name@ctu.unibe.ch",
-                          job = "Senior Statistician",
-                          open = FALSE,
-                          ...){
+                            projnum = "xxx",
+                            projname = "Project YYY",
+                            reporttype = "Type of report",
+                            version = "Version",
+                            sign = "Author name",
+                            email = "author.name@ctu.unibe.ch",
+                            job = "Senior Statistician",
+                            open = FALSE,
+                            ...){
+
+  file <- file.path(dir, "ubreport.clo")
 
   use_template(template = "ubreport.clo",
-               save_as = file.path(dir, "ubreport.clo"),
+               save_as = file,
                data = list(projnum = paste0("{", projnum, "}"),
                            projname = paste0("{", projname, "}"),
                            reporttype = paste0("{", reporttype, "}"),
