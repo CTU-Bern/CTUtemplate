@@ -1,0 +1,92 @@
+---
+knit: 
+  bookdown::render_book:
+    output_dir: ""
+output: CTUtemplate::report_pdf
+toc: true
+lot: false
+lof: false
+params:
+  author: "FirstName LastName"
+  email: "FirstName.LastName@ctu.unibe.ch"
+  job: "Senior Statistician"
+  projnum: 1234
+  projname: "Project X"
+  version: "xx"
+  reportname: "Report on Sample Size Calculation"
+  dir: ""
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+# Run this ONCE MANUALLY to generate files required by the UNIBE latex template
+CTUtemplate::use_ubreportclo(dir = params$dir, # THE SAME DIR AS THE Rmd FILE
+              # Personal info
+              sign = params$author,
+              email = params$email,
+              job = params$job,
+              # Project info
+              projnum = params$projnum,
+              projname = params$projname,
+              # Report info
+              version = params$version,
+              reporttype = params$reportname
+              )
+# 'ordinary' Rmd files would have this specified in the yaml header, but that 
+#   doesnt work with the LaTeX template... hence, an additional file needs to be 
+#   defined.
+```
+
+# Administrative Information {-}
+
+----------------  -----------------
+Project number    `r params$projnum`
+Protocol version  V1
+----------------  -----------------
+
+
+\chapter{Study objective}
+
+# Primary objective 
+
+Describe study objective. The study objective will usually be defined according to:
+* Patients: Which patients are included in the study?
+* Interventions: Which are the intervention groups?
+* Comparisons: Which are the control groups?
+* Outcome: Which is the primary outcome?
+
+# Primary outcome
+
+Description of primary outcome, including:
+*	Type of data (binary, ordinal, continuous, count, time-to-event)
+*	Time point of assessment
+*	In case of continuous outcomes, the measurement scale/units of measurements
+
+# Hypothesis (if applicable)
+*	Description of null and alternative hypothesis
+*	Testing framework (e.g. superiority)
+
+
+\chapter{Methods and assumptions}
+
+*	Allocation ratio,
+*	Type I and II error rate,
+*	Effect measure, e.g. relative risk, difference in means
+*	Minimal clinically relevant difference between the groups (or non-inferiority margin),
+*	Assumptions about any further parameter that is used, e.g. standard deviation for continuous outcomes, baseline proportion/rate for binary/survival outcomes.
+*	Any corrections for dropouts or withdrawals (if applicable),
+*	Method or test used for the sample size calculation,
+*	Statistics software used (unless standard test/method is used)
+
+```{r, include=FALSE}
+# do calculations here...
+```
+
+
+\chapter{Result of sample size calculation}
+*	Result, e.g. a table
+*	Wording of sample size calculation for the study proposal/protocol
+
