@@ -21,20 +21,22 @@ params:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = FALSE, echo = FALSE}
 # Run this ONCE MANUALLY to generate files required by the UNIBE latex template
-CTUtemplate::use_ubreportclo(dir = params$dir, # THE SAME DIR AS THE Rmd FILE
-              # Personal info
-              sign = params$author,
-              email = params$email,
-              job = params$job,
-              # Project info
-              projnum = params$projnum,
-              projname = params$projname,
-              # Report info
-              version = params$version,
-              reporttype = params$reportname
-              )
+CTUtemplate::use_ubreportclo(
+  # THE SAME DIR AS THE Rmd FILE
+  dir = params$dir, 
+  # Personal info
+  sign = params$author,
+  email = params$email,
+  job = params$job,
+  # Project info
+  projnum = params$projnum,
+  projname = params$projname,
+  # Report info
+  version = params$version,
+  reporttype = params$reportname
+)
 # 'ordinary' Rmd files would have this specified in the yaml header, but that 
 #   doesnt work with the LaTeX template... hence, an additional file needs to be 
 #   defined.
