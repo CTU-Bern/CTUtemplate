@@ -1,11 +1,19 @@
 ---
 knit: 
   bookdown::render_book:
-    output_dir: .
+    output_dir: ""
 output: CTUtemplate::report_pdf
 toc: true
 lot: false
 lof: false
+params:
+  author: "FirstName LastName"
+  email: "FirstName.LastName@ctu.unibe.ch"
+  job: "Senior Statistician"
+  projnum: 1234
+  projname: "Project X"
+  version: "xx"
+  reportname: "Report Name"
 ---
 
 ```{r setup, include=FALSE}
@@ -14,22 +22,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r, eval = FALSE, echo = FALSE}
 # Run this ONCE MANUALLY to generate files required by the UNIBE latex template
-use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
+CTUtemplate::use_ubreportclo(dir = dirname(rstudioapi::getActiveDocumentContext()), # THE SAME DIR AS THE Rmd FILE
               # Personal info
-              sign = "Alan",
-              email = "alan.haynes@ctu.unibe.ch",
-              job = "Senior Statistician",
+              sign = params$author,
+              email = params$email,
+              job = params$job,
               # Project info
-              projnum = "1234",
-              projname = "Project X",
+              projnum = params$projnum,
+              projname = params$projname,
               # Report info
-              version = Sys.Date(),
-              reporttype = "Recruitment report"
+              version = params$version,
+              reporttype = params$reportname
               )
+# 'ordinary' Rmd files would have this specified in the yaml header, but that 
+#   doesnt work with the LaTeX template... hence, an additional file needs to be 
+#   defined.
 ```
 
+# Sections {-}
 
-# R Markdown
+Use '{-}' to signify that a section should not be numbered.
+
+
+# R Markdown {-}
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
