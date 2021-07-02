@@ -72,3 +72,24 @@ There is also a function for the UNIBEs shade of red:
       yaxt = "n")
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+### Report templates
+
+`CTUtemplate` has an Rmd template for sample size reports and a more
+generic template with some examples of how to do things.
+
+The `use_ssreport_template`, `use_report_template`, and
+`use_param_report_template` are used to open a new template in the
+location designated (the recommended location would probably be
+`08_Reports_projnum`).
+
+    # for a sample size report
+    use_ssreport_template("folder/ssreport.Rmd")
+    # for the examples
+    use_report_template("folder/report.Rmd")
+    # for an example of a parameterized report (note the lack of file extension here)
+    use_param_report_template("folder/param_report")
+
+In contrast to a normal Rmd, here you have to generate a CLO file which
+is needed by the UNIBE Latex template. The second chunk in each template
+shows how to do this.
