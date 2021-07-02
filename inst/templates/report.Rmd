@@ -14,15 +14,21 @@ params:
   projname: "Project X"
   version: "xx"
   reportname: "Examples"
-  dir: ""
+  dir: "{{dir}}"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, eval = FALSE, echo = FALSE}
-# Run this ONCE MANUALLY to generate files required by the UNIBE latex template
+```{r clo_chunk, eval = FALSE, echo = FALSE}
+# The Latex template requires a CLO file. This chunk (clo_chunk), together with 
+#   the params above, can create it.
+#   click the 'run all chunks above' button on the right hand side of clo_chunk 
+#   (this loads the params from the YAML header), then run clo_chunk with the 
+#   arrow pointing to the right.
+# You need to do this before compiling for the first time and any time that one 
+#   of the params mentioned below changes
 CTUtemplate::use_ubreportclo(
   # THE SAME DIR AS THE Rmd FILE
   dir = params$dir, 
@@ -44,6 +50,14 @@ CTUtemplate::use_ubreportclo(
 
 \chapter{Latex syntax can be used}
 
+A chapter is created like this...
+
+```{r, eval = FALSE}
+\chapter{Latex syntax can be used}
+```
+
+
+
 It is in fact the easiest (only?) way to get chapters...
 
 Otherwise, document sections, subsections etc can be created using Rmd syntax
@@ -63,6 +77,13 @@ Otherwise, document sections, subsections etc can be created using Rmd syntax
 # Unnumbered Sections {-}
 
 Use '{-}' to signify that a section should not be numbered.
+
+For chapters, place an asterisk after 'chapter' to use an unnumbered chapter.
+
+```{r, eval = FALSE}
+\chapter*{Latex syntax can be used}
+```
+
 
 \chapter{Tables}
 
@@ -99,6 +120,59 @@ btable(df, nhead = 1, nfoot = 0, caption = "Table1")
 
 other popular options are `xtable` and `knitr::kable`.
 
+Flextable should also be possible to use (there seems to be some issue with the latex template - undefined control sequence...). Captions are/can be defined in the chunk header (see the [flextable site for more info](https://davidgohel.github.io/flextable/reference/knit_print.flextable.html)). Cell colours are, however, not supported.
+
+```{r, tab.cap = "some caption text", eval=FALSE}
+library(flextable)
+flextable(head(mtcars))
+```
+
+# Referring to other locations
+
+When compiled, Rmd files assume that any paths mentioned are relative to the location of the Rmd. In contrast, when running individual chunks, it paths relative to the current working directory. What that means is that if your working directory is `.` and your Rmd is stored in `./report` with data in `./data` and you use `data/file.csv` in your Rmd, it'll work fine when you run in interactive mode (one chunk at a time), but it will not compile when knit - then it'll be looking for `.report/data/file.csv`, which doesnt exist.
+
+The solution is the `here` package. `here` contains the function `here` which is a drop in replacement for `file.path` with the difference that it always looks for a `.Rproj` file and uses that location as the reference point. `here::here('data', 'file.csv')` will always point to the same location.
+
+
+# One file or many files?
+
+Markdown is great for literate programming. It can, however result in very lengthy documents, which doesn't make things easier to work with. One solution to this is to use child documents, which are secondary Rmd files, which should be included in the main document. Child Rmds do not need the YAML header. 
+
+Were the following to be saved into a file (e.g. foo.Rmd), it could be included into this document via the `child` argument to an R chunk (e.g. uncomment the following code)
+
+<!-- ```{r, child=foo.Rmd} -->
+<!-- ``` -->
+
+
+start `foo.Rmd`:
+
+# foo
+
+whatver prose you want
+
+```{r}
+# do stuff
+
+```
+
+end `foo.Rmd`
+
+Another solution would be using normal R scripts, which can be sourced:
+
+```{r, eval = FALSE}
+source(here::here("rscript", "file.R"))
+```
+
+As mentioned in the previous section, the `here` package can be used to make paths that are robust to changes in the working directory.
+
+# Landscape pages
+
+Markdown itself doesnt seem to be able to be able to rotate pages, but Latex can. Surround the part that should be rotated with `\begin{landscape}` and `\end{landscape}`. 
+
+\begin{landscape}
+stuff that should be in landscape (probably tables...)
+\end{landscape}
+
 # R Markdown {-}
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
@@ -118,3 +192,41 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Stata
+
+Stata code can also be used in Rmd files.
+
+If stata doesn't exist in the PATH variable, set the path via `knitr::opts_chunk$set`.
+
+```{r}
+knitr::opts_chunk$set(engine.path = list(stata = "C:/Program Files/Stata17/StataBE-64.exe"))
+```
+
+The `Statamarkdown` package adds extra capabilities (like collecting code as each chunk is ran in a fresh Stata session).
+```{r}
+# remotes::install_github("Hemken/Statamarkdown")
+library(Statamarkdown)
+
+```
+
+Then, rather than using `{r}`, use `{stata}` as the header of the chunk. 
+
+```{stata}
+sysuse auto
+summ *
+```
+
+Use the `collectcode=TRUE` chunk option to use code from previous chunks (e.g. loading data).
+
+```{stata, collectcode = TRUE}
+sysuse auto
+summ *
+```
+
+```{stata}
+regress mpg weight
+```
+
+
+
