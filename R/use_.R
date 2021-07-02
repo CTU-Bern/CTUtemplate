@@ -114,3 +114,48 @@ use_ubreportclo <- function(dir,
   #              ...)
 
 }
+
+
+#' Template files for a parameterized report
+#'
+#' Parameterized reports allow to create reports in a loop. Examples might be
+#' site specific quality reports or recruitment reports.
+#'
+#' This function creates 2 files as a barebones template for such parameterized
+#' reports. An Rmd file is created (based on the UNIBE template) and an R file
+#' containing a small loop. Currently, the you have to supervise this loop, as
+#' \code{use_ubreportclo} (which relies on \code{usethis::use_template}) will
+#' not overwrite files without being given explicit permission.
+#'
+#' @param save_as filename to save the files as (do not include extension as multiple files are created)
+#' @param open logical indicating whether to open the file
+#' @param ... other arguments passed to \code{use_template}
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' # use_param_report_template("param")
+use_param_report_template <- function(save_as, open = TRUE, ...){
+
+  if(grepl(".", save_as, fixed = TRUE))
+    warning("file extensions not required for this function",
+            "multiple files with different extentions are created")
+
+
+  use_template(template = "paramreport.Rmd",
+               save_as = paste0(save_as, ".Rmd"),
+               package = "CTUtemplate",
+               data = list(dir = dirname(save_as)),
+               open = open,
+               ...)
+  use_template(template = "paramcode.R",
+               save_as = paste0(save_as, ".R"),
+               package = "CTUtemplate",
+               data = list(dir = dirname(save_as),
+                           Rmd = paste0(save_as, ".Rmd")),
+               open = open,
+               ...)
+
+
+}
