@@ -131,7 +131,7 @@ flextable(head(mtcars))
 
 When compiled, Rmd files assume that any paths mentioned are relative to the location of the Rmd. In contrast, when running individual chunks, it paths relative to the current working directory. What that means is that if your working directory is `.` and your Rmd is stored in `./report` with data in `./data` and you use `data/file.csv` in your Rmd, it'll work fine when you run in interactive mode (one chunk at a time), but it will not compile when knit - then it'll be looking for `.report/data/file.csv`, which doesnt exist.
 
-The solution is the `here` package. `here` contains the function `here` which is a drop in replacement for `file.path` with the difference that it always looks for a `.Rproj` file and uses that location as the reference point. `here::here("data", "file.csv")` will always point to the same location.
+The solution is the `here` package. `here` contains the function `here` which is a drop in replacement for `file.path` with the difference that it always looks for a `.Rproj` file and uses that location as the reference point. `here::here('data', 'file.csv')` will always point to the same location.
 
 
 # One file or many files?
@@ -192,3 +192,41 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Stata
+
+Stata code can also be used in Rmd files.
+
+If stata doesn't exist in the PATH variable, set the path via `knitr::opts_chunk$set`.
+
+```{r}
+knitr::opts_chunk$set(engine.path = list(stata = "C:/Program Files/Stata17/StataBE-64.exe"))
+```
+
+The `Statamarkdown` package adds extra capabilities (like collecting code as each chunk is ran in a fresh Stata session).
+```{r}
+# remotes::install_github("Hemken/Statamarkdown")
+library(Statamarkdown)
+
+```
+
+Then, rather than using `{r}`, use `{stata}` as the header of the chunk. 
+
+```{stata}
+sysuse auto
+summ *
+```
+
+Use the `collectcode=TRUE` chunk option to use code from previous chunks (e.g. loading data).
+
+```{stata, collectcode = TRUE}
+sysuse auto
+summ *
+```
+
+```{stata}
+regress mpg weight
+```
+
+
+
