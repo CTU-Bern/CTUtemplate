@@ -15,6 +15,8 @@ use_report_template <- function(save_as, open = TRUE, ...){
   use_template(template = "report.Rmd",
                save_as = save_as,
                package = "CTUtemplate",
+               data = list(dir = dirname(save_as)),
+               open = open,
                ...)
 
 }
@@ -34,6 +36,8 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
   use_template(template = "ssreport.Rmd",
                save_as = save_as,
                package = "CTUtemplate",
+               data = list(dir = dirname(save_as)),
+               open = open,
                ...)
 
 }
