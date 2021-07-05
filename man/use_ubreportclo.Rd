@@ -5,7 +5,6 @@
 \title{Generate the CLO file for use with the UNIBE tex template}
 \usage{
 use_ubreportclo(
-  dir,
   projnum = "xxx",
   projname = "Project YYY",
   reporttype = "Type of report",
@@ -18,9 +17,6 @@ use_ubreportclo(
 )
 }
 \arguments{
-\item{dir}{Directory in which to create the clo file (should be the same as
-the Rmd to be knit)}
-
 \item{projnum}{Project number to appear in report}
 
 \item{projname}{Project name to appear in report}
@@ -48,8 +44,7 @@ institution (although we do not modify that). It is used by the UNIBE CLS
 file to create the parts of the template.
 }
 \examples{
-# use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
-#                 # Personal info
+# use_ubreportclo(# Personal info
 #                 sign = "Alan",
 #                 email = "alan.haynes@ctu.unibe.ch",
 #                 job = "Senior Statistician",
