@@ -1,3 +1,7 @@
+CTUtemplate 0.1.3
+---------------------
+Easier handling of CLO files - no longer any need to create it prior to each run
+
 CTUtemplate 0.1.2
 ---------------------
 More details added to the template report use_report_template
