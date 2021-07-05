@@ -8,8 +8,7 @@
 for(i in c("foo", "bar")){
 
   # create the CLO file
-  use_ubreportclo("{{dir}}",
-                  # Personal info
+  use_ubreportclo(# Personal info
                   sign = "My name",
                   email = "me@ctu.unibe.ch",
                   job = "Statistician",
@@ -17,7 +16,7 @@ for(i in c("foo", "bar")){
                   projnum = "9999",
                   projname = "Example project",
                   # Report info
-                  version = sys.Date(),
+                  version = Sys.Date(),
                   reporttype = paste("Strata:", i)
                   )
   # you will be asked to approve the overwriting of the CLO on each iteration

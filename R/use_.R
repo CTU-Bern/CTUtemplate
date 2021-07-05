@@ -43,15 +43,12 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
 }
 
 
-
 #' Generate the CLO file for use with the UNIBE tex template
 #'
 #' The CLO file contains the information identifying the author, project and
 #' institution (although we do not modify that). It is used by the UNIBE CLS
 #' file to create the parts of the template.
 #'
-#' @param dir Directory in which to create the clo file (should be the same as
-#' the Rmd to be knit)
 #' @param projnum Project number to appear in report
 #' @param projname Project name to appear in report
 #' @param reporttype The main title of the report
@@ -64,10 +61,11 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
 #'
 #' @return
 #' @export
+#' @importFrom whisker whisker.render
+#' @importFrom fs path_package
 #'
 #' @examples
-#' # use_ubreportclo(dir = "temp", # THE SAME DIR AS THE Rmd FILE
-#' #                 # Personal info
+#' # use_ubreportclo(# Personal info
 #' #                 sign = "Alan",
 #' #                 email = "alan.haynes@ctu.unibe.ch",
 #' #                 job = "Senior Statistician",
@@ -78,7 +76,7 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
 #' #                 version = Sys.Date(),
 #' #                 reporttype = "Recruitment report"
 #' #                 )
-use_ubreportclo <- function(dir,
+use_ubreportclo <- function(
                             projnum = "xxx",
                             projname = "Project YYY",
                             reporttype = "Type of report",
@@ -89,29 +87,21 @@ use_ubreportclo <- function(dir,
                             open = FALSE,
                             ...){
 
-  file <- file.path(dir, "ubreport.clo")
+  file <- file.path("ubreport.clo")
 
-  use_template(template = "ubreport.clo",
-               save_as = file,
-               data = list(projnum = paste0("{", projnum, "}"),
-                           projname = paste0("{", projname, "}"),
-                           reporttype = paste0("{", reporttype, "}"),
-                           version = paste0("{", version, "}"),
-                           sign = paste0("{", sign, "}"),
-                           email = paste0("{", email, "}"),
-                           job = paste0("{", job, "}")),
-               package = "CTUtemplate",
-               open = open,
-               ...
-               )
+  template <- path_package(package = "CTUtemplate", "templates", "ubreport.clo")
 
-  # use_template(template = "ubreport.cls",
-  #              save_as = file.path(dir, "ubreport.cls"),
-  #              data = list(col_logo = paste0("{", find_resource("report", "ub_16pt-cmyk.pdf"), "}}"),
-  #                          bw_logo = paste0("{", find_resource("report", "ub_16pt-bl.pdf"), "}}")),
-  #              package = "CTUtemplate",
-  #              open = open,
-  #              ...)
+  template <- readLines(template)
+
+  data <- list(projnum = paste0("{", projnum, "}"),
+               projname = paste0("{", projname, "}"),
+               reporttype = paste0("{", reporttype, "}"),
+               version = paste0("{", version, "}"),
+               sign = paste0("{", sign, "}"),
+               email = paste0("{", email, "}"),
+               job = paste0("{", job, "}"))
+
+  writeLines(whisker.render(template, data), file)
 
 }
 

@@ -1,0 +1,99 @@
+---
+knit: 
+  bookdown::render_book:
+    output_dir: ""
+output: CTUtemplate::report_pdf
+toc: false
+lot: false
+lof: false
+params:
+  author: "FirstName LastName"
+  email: "FirstName.LastName@ctu.unibe.ch"
+  job: "Senior Statistician"
+  projnum: 1234
+  projname: "Project X"
+  version: "xx"
+  reportname: "Recruitment Report"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# create CLO file required by the Latex template
+CTUtemplate::use_ubreportclo(
+  # Personal info
+  sign = params$author,
+  email = params$email,
+  job = params$job,
+  # Project info
+  projnum = params$projnum,
+  projname = params$projname,
+  # Report info
+  version = params$version,
+  reporttype = params$reportname
+)
+```
+
+```{r packages, include = FALSE}
+# remotes::install_github("CTU-Bern/accrualPlot")
+library(accrualPlot)
+library(secuTrialR) # for secutrial databases
+library(httr)       # for redcap
+library(tidyverse)  # for data wrangling, plotting
+```
+
+```{r sT, include = FALSE}
+# secuTrial
+zip <- here::here(glue::glue("01_Original_data_{params$projnum}"), "file_name.zip")
+raw.data <- read_secuTrial(zip)
+dat <- raw.data$cn %>% # might also be called casenodes
+  mutate(rando_date = rando_date_var
+         , ctr = center_variable
+         # , other modifications?
+         )
+
+```
+
+
+
+```{r RC, include = FALSE}
+rc.url <- "https://redcap.ctu.unibe.ch/api/"
+token <- readLines(file.path(or, "tokens","file-containing-token.txt"))
+post.body.list <- list(token = token,
+                       content = "record",
+                       format = "csv",
+                       type = "flat",
+                       rawOrLabel = "raw",
+                       rawOrLabelHeaders = "raw",
+                       eventName = "label",
+                       returnFormat = "csv",
+                       exportSurveyFields = FALSE,
+                       exportDataAccessGroups = FALSE,
+                       exportCheckboxLabel = FALSE)
+raw.data <- POST(url = rc.url,
+                 body = post.body.list)
+if(raw.data$status_code == "200"){
+  cat(paste0("\n", "Export of records worked!", "\n\n\n"))
+  raw.data <- as.character(raw.data)
+  con <- textConnection(raw.data)               
+  raw.data <- read.csv(con,
+                       head = TRUE,
+                       na.strings = "",
+                       stringsAsFactors = FALSE)
+  close(con)
+}
+
+dat <- raw.data %>% 
+  filter(redcap_event_name == "event-with-rando") %>% 
+  mutate(rando_date = as.Date(rando_date_var)
+         , ctr = center_variable
+         # , other modifications?
+         )
+
+```
+
+```{r, echo = FALSE}
+# generate demo data
+dat <- data.frame(rando_date = )
+```
+

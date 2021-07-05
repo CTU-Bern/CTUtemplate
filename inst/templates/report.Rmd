@@ -14,24 +14,13 @@ params:
   projname: "Project X"
   version: "xx"
   reportname: "Examples"
-  dir: "{{dir}}"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-```
 
-```{r clo_chunk, eval = FALSE, echo = FALSE}
-# The Latex template requires a CLO file. This chunk (clo_chunk), together with 
-#   the params above, can create it.
-#   click the 'run all chunks above' button on the right hand side of clo_chunk 
-#   (this loads the params from the YAML header), then run clo_chunk with the 
-#   arrow pointing to the right.
-# You need to do this before compiling for the first time and any time that one 
-#   of the params mentioned below changes
+# create CLO file required by the Latex template
 CTUtemplate::use_ubreportclo(
-  # THE SAME DIR AS THE Rmd FILE
-  dir = params$dir, 
   # Personal info
   sign = params$author,
   email = params$email,
@@ -43,9 +32,6 @@ CTUtemplate::use_ubreportclo(
   version = params$version,
   reporttype = params$reportname
 )
-# 'ordinary' Rmd files would have this specified in the yaml header, but that 
-#   doesnt work with the LaTeX template... hence, an additional file needs to be 
-#   defined.
 ```
 
 \chapter{Latex syntax can be used}
