@@ -5,7 +5,10 @@
 #' @param ... options passed to bookdown
 #' @importFrom bookdown pdf_document2
 #' @export
-report_pdf <- function(...) {
+report_pdf <- function(report_template = find_resource("report", "report.tex"),
+                       ...) {
+
+  if(report_template == "default") report_template <- find_resource("report", "report.tex")
   template_name <- "report.tex"
 
   # copy cls and clo to new dir
@@ -17,7 +20,6 @@ report_pdf <- function(...) {
             file.path(getwd(), "ub_16pt-cmyk.pdf"))
 
 
-  report_template <- find_resource("report", template_name)
   base <- bookdown::pdf_document2(template = report_template,
                                   latex_engine = "pdflatex",
                                   citation_package = "biblatex",
