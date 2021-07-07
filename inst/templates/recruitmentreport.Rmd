@@ -2,7 +2,9 @@
 knit: 
   bookdown::render_book:
     output_dir: ""
-output: CTUtemplate::report_pdf
+output: 
+  CTUtemplate::report_pdf:
+    report_template: "default"
 toc: false
 lot: false
 lof: false
@@ -37,13 +39,12 @@ CTUtemplate::use_ubreportclo(
 ```{r packages, include = FALSE}
 # remotes::install_github("CTU-Bern/accrualPlot")
 library(accrualPlot)
-library(secuTrialR) # for secutrial databases
-library(httr)       # for redcap
 library(tidyverse)  # for data wrangling, plotting
 ```
 
-```{r sT, include = FALSE}
+```{r sT, eval = FALSE, echo = FALSE}
 # secuTrial
+library(secuTrialR) # for secutrial databases
 zip <- here::here(glue::glue("01_Original_data_{params$projnum}"), "file_name.zip")
 raw.data <- read_secuTrial(zip)
 dat <- raw.data$cn %>% # might also be called casenodes
@@ -56,7 +57,8 @@ dat <- raw.data$cn %>% # might also be called casenodes
 
 
 
-```{r RC, include = FALSE}
+```{r RC, eval = FALSE, echo = FALSE}
+library(httr)       # for redcap
 rc.url <- "https://redcap.ctu.unibe.ch/api/"
 token <- readLines(file.path(or, "tokens","file-containing-token.txt"))
 post.body.list <- list(token = token,
@@ -94,6 +96,64 @@ dat <- raw.data %>%
 
 ```{r, echo = FALSE}
 # generate demo data
-dat <- data.frame(rando_date = )
+dat <- data.frame(rando_date = Sys.Date() + sample(-100:0, 300, TRUE),
+                  center = sample(c("A", "B", "C"), 300, TRUE, prob = c(.5, .4, .1)))
 ```
+
+# Overall recruitment {-}
+
+```{r, echo = FALSE, warning=FALSE, fig.cap = "Overall recruitment to date.", fig.height = 3}
+
+acc <- accrual_create_df(dat$rando_date, by = dat$center)
+
+p1 <- plot(acc$Overall, engine = "gg") +
+  theme_classic() +
+  scale_x_date(labels = function(x) format(x, format = "%d %b %Y")) +
+  scale_discrete_manual(values = CTUtemplate::unibeRed(), aesthetics = "colour")
+
+p2 <- plot(acc$Overall, which = "abs", unit = "month", engine = "gg") +
+  theme_classic() +
+  scale_x_date(labels = function(x) format(x, format = "%b %Y"))
+
+library(patchwork)
+p1 + p2
+
+```
+
+
+
+# Recruitment by site {-}
+
+```{r, echo = FALSE, warning=FALSE, fig.cap = "Overall recruitment to date.", fig.height = 1}
+p1 <- plot(acc, engine = "gg") +
+  theme_classic() +
+  scale_x_date(labels = function(x) format(x, format = "%d %b %Y")) +
+  scale_color_manual(values = CTUtemplate::unibeRed(seq(.2, 1, length.out = 4))) +
+  theme(legend.position = "bottom")
+
+p2 <- plot(acc, which = "abs", unit = "month", engine = "gg") +
+  theme_classic() +
+  scale_x_date(labels = function(x) format(x, format = "%b %Y")) +
+  scale_fill_manual(values = CTUtemplate::unibeRed(seq(.2, 1, length.out = 3))) +
+  theme(legend.position = "bottom")
+
+p1 + p2
+
+```
+
+
+# Predicted end {-}
+
+```{r, echo = FALSE, fig.height = 3}
+plot(acc, engine = "gg", which = "pred", target = 400) +
+  theme_classic() +
+  scale_x_date(labels = function(x) format(x, format = "%d %b %Y")) +
+  scale_color_manual(values = CTUtemplate::unibeRed(seq(.2, 1, length.out = 4))) +
+  theme(plot.title.position = "plot")
+```
+
+
+
+
+
 
