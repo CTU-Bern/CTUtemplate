@@ -1,3 +1,8 @@
+CTUtemplate 0.1.4
+---------------------
+Addition of use_ub_tex_template for allowing modifications to the tex file
+Addition of use_recreport_template for recruitment reports (template in dev.)
+
 CTUtemplate 0.1.3
 ---------------------
 Easier handling of CLO files - no longer any need to create it prior to each run
