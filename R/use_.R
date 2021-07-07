@@ -43,6 +43,50 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
 }
 
 
+#' Open a new recruitment report
+#'
+#' @param save_as filename to save the Rmd as
+#' @param open logical indicating whether to open the file
+#' @param ... other arguments passed to \code{use_template}
+#'
+#' @return
+#' @export
+#' @examples
+#' # use_recreport_template("rr.Rmd")
+use_recreport_template <- function(save_as, open = TRUE, ...){
+
+  use_template(template = "recruitmentreport.Rmd",
+               save_as = save_as,
+               package = "CTUtemplate",
+               data = list(dir = dirname(save_as)),
+               open = open,
+               ...)
+
+}
+
+
+#' Open a new tex template allowing customization
+#'
+#' @param save_as filename to save the tex file as (should be the same as in the Rmd header)
+#' @param open logical indicating whether to open the file
+#' @param ... other arguments passed to \code{use_template}
+#'
+#' @return
+#' @export
+#' @examples
+#' # use_ub_tex_template("report.tex")
+use_ub_tex_template <- function(save_as, open = TRUE, ...){
+
+  use_template(template = "report.tex",
+               save_as = save_as,
+               package = "CTUtemplate",
+               data = list(dir = dirname(save_as)),
+               open = open,
+               ...)
+
+}
+
+
 #' Generate the CLO file for use with the UNIBE tex template
 #'
 #' The CLO file contains the information identifying the author, project and
@@ -149,3 +193,6 @@ use_param_report_template <- function(save_as, open = TRUE, ...){
 
 
 }
+
+
+
