@@ -20,5 +20,5 @@ use_ub_tex_template(save_as, open = TRUE, ...)
 Open a new tex template allowing customization
 }
 \examples{
-# use_recreport_template("rr.Rmd")
+# use_ub_tex_template("report.tex")
 }
