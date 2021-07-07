@@ -2,6 +2,7 @@
 #'
 #' This is not intended to be run manually... rather via knitting a document
 #'
+#' @param report_template tex template to use
 #' @param ... options passed to bookdown
 #' @importFrom bookdown pdf_document2
 #' @export
@@ -9,11 +10,8 @@ report_pdf <- function(report_template = find_resource("report", "report.tex"),
                        ...) {
 
   if(report_template == "default") report_template <- find_resource("report", "report.tex")
-  template_name <- "report.tex"
 
-  # copy cls and clo to new dir
-  # file.copy(find_resource("report", "ubreport.clo"),
-  #           file.path(getwd(), "ubreport.clo"))
+  # copy cls and logo to new dir
   file.copy(find_resource("report", "ubreport.cls"),
             file.path(getwd(), "ubreport.cls"))
   file.copy(find_resource("report", "ub_16pt-cmyk.pdf"),
