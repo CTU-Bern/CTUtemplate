@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-`CTUtemplate`
-=============
+`CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
+============================================================================
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
