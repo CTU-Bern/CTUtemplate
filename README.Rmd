@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `CTUtemplate`
+# `CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
 
 `CTUtemplate` is a package to create a template directory structure (and files) and also includes the CTUs annual safety report function.
 
