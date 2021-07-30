@@ -1,3 +1,7 @@
+CTUtemplate 0.1.5
+---------------------
+Removal of restricted figure height/width
+
 CTUtemplate 0.1.4
 ---------------------
 Addition of use_ub_tex_template for allowing modifications to the tex file
