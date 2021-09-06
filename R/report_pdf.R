@@ -7,6 +7,7 @@
 #' @importFrom bookdown pdf_document2
 #' @export
 report_pdf <- function(report_template = find_resource("report", "report.tex"),
+                       latex_engine = "pdflatex",
                        ...) {
 
   if(report_template == "default") report_template <- find_resource("report", "report.tex")
@@ -19,7 +20,7 @@ report_pdf <- function(report_template = find_resource("report", "report.tex"),
 
 
   base <- bookdown::pdf_document2(template = report_template,
-                                  latex_engine = "pdflatex",
+                                  latex_engine = latex_engine,
                                   citation_package = "biblatex",
                                   keep_tex = TRUE, ...)
 
