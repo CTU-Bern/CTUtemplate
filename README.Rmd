@@ -41,7 +41,7 @@ Once installed, in RStudio, open a "new project in a new directory" and select "
 
 ### Annual safety report
 
-THIS FUNCTION WILL BE REMOVED FROM THIS PACKAGE IN THE NEAR FUTURE
+THIS FUNCTION WILL BE REMOVED FROM THIS PACKAGE IN THE NEAR FUTURE. PLEASE USE THE [SwissASR](https://github.com/CTU-Bern/SwissASR) PACKAGE INSTEAD.
 
 The `asr` function is used to fill out the Swiss Ethics Annual Safety Report template. It is intended that by passing a dataframe with the relevant information, plus a few other values, filling the template can be automated.
 
