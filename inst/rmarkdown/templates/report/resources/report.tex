@@ -448,10 +448,6 @@ $endif$
 
 \begin{document}
 
-\maketitle
-\addtocounter{page}{1}
-\clearpage
-
 $if(has-frontmatter)$
 \frontmatter
 $endif$
@@ -460,6 +456,8 @@ $if(beamer)$
 \frame{\titlepage}
 $else$
 \maketitle
+\addtocounter{page}{1}
+\clearpage
 $endif$
 $if(abstract)$
 \begin{abstract}
