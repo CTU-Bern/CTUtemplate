@@ -84,7 +84,9 @@ check_log <- function(x){
   if(!any(c("logical") %in% class(x))) stop("'", var, "' should be logical")
 }
 
-#' Title
+#' Annual safety reports
+#'
+#' This function is moving home to the SwissASR package. See there for details.
 #'
 #' @param data dataframe containing safety data
 #' @param target filename to save the report to
@@ -234,6 +236,7 @@ asr <- function(data,
                 , var_devint = "devint"
                 , var_safetymeasure = "safetymeasure"
 ){
+  warning("asr is moving to the SwissASR package. Use that package instead.\nThis version will cease to function in the near future.")
 
   # general housekeeping ----
   trial_type <- match.arg(trial_type, c("imp", "medical device", "other"))

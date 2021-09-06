@@ -2,7 +2,7 @@
 % Please edit documentation in R/asr.R
 \name{asr}
 \alias{asr}
-\title{Title}
+\title{Annual safety reports}
 \usage{
 asr(
   data,
@@ -148,7 +148,7 @@ asr(
 
 }
 \description{
-Title
+This function is moving home to the SwissASR package. See there for details.
 }
 \examples{
 
