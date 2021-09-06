@@ -5,6 +5,7 @@ knit:
 output: 
   CTUtemplate::report_pdf:
     report_template: "default"
+title: true
 toc: false
 lot: false
 lof: false
