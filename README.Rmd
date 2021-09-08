@@ -14,16 +14,25 @@ knitr::opts_chunk$set(
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
 
+`r badger::badge_custom("dev version", as.character(packageVersion("CTUtemplate")), "blue", "https://github.com/CTU-Bern/CTUtemplate")`
+
 `CTUtemplate` is a package to create a template directory structure (and files) and also includes the CTUs annual safety report function.
 
 
 
 ## Installation
 
+`CTUtemplate` is easiest to install via 
+
+```{r, eval = FALSE}
+install.packages('CTUtemplate', repos = 'https://ctu-bern.r-universe.dev')
+```
+
+Linux users might have to install from source:
+
 ```{r, eval = FALSE}
 remotes::install_github("CTU-Bern/CTUtemplate")
 ```
-
 
 This may require `Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")` if packages were built under a different R version to the one you are using.
 
