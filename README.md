@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-`CTUtemplate`
-=============
+`CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
+============================================================================
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -27,6 +27,8 @@ select “CTU project template”. Options in the following window are used
 to create the folders and headers of R (and eventually STATA) files.
 
 ### Annual safety report
+
+THIS FUNCTION WILL BE REMOVED FROM THIS PACKAGE IN THE NEAR FUTURE
 
 The `asr` function is used to fill out the Swiss Ethics Annual Safety
 Report template. It is intended that by passing a dataframe with the
@@ -72,3 +74,69 @@ There is also a function for the UNIBEs shade of red:
       yaxt = "n")
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+### Report templates
+
+`CTUtemplate` has an Rmd template for sample size reports and a more
+generic template with some examples of how to do things.
+
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>use_report_template</code></td>
+<td style="text-align: left;">Opens a generic file with various examples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>use_ssreport_template</code></td>
+<td style="text-align: left;">Opens a template for a sample size report</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>use_recreport_template</code></td>
+<td style="text-align: left;">Opens a template for a recruitment report</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>use_param_report_template</code></td>
+<td style="text-align: left;">Opens template files for using parameterized reports</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>use_ub_tex_template</code></td>
+<td style="text-align: left;">Opens the UNIBE tex template allowing modifications for additional features of latex</td>
+</tr>
+</tbody>
+</table>
+
+The functions are used to open a new template in the location designated
+(the recommended location would probably be `08_Reports_projnum`).
+
+    # for a sample size report
+    use_ssreport_template("folder/ssreport.Rmd")
+    # for the examples
+    use_report_template("folder/report.Rmd")
+    # for a template recruitment report
+    use_recreport_template("folder/recreport.Rmd")
+    # for an example of a parameterized report (note the lack of file extension here)
+    use_param_report_template("folder/param_report")
+
+If modifications to the latex template are desired, it can be copied to
+the folder via
+
+    use_ub_tex_template("folder/report.tex")
+
+The YAML header in the Rmd file then needs to be changed to include
+
+    output: 
+      CTUtemplate::report_pdf:
+        report_template: "report.tex"
+
+Using this approach, other latex packages can be used to extend the
+capabilities of latex.
