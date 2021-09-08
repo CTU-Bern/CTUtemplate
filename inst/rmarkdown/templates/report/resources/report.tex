@@ -310,6 +310,17 @@ $else$
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
+
+\usepackage{setspace}
+\usepackage{placeins}
+
+\usepackage{array}
+%to make multicolumns: \multicolumn{4}{L{12cm}}{}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+%vertical centering with size M{10cm}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%horizontal centering with size P{10cm}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 $endif$
 $endif$
 $if(graphics)$
