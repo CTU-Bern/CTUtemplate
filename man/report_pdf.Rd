@@ -13,6 +13,8 @@ report_pdf(
 \arguments{
 \item{report_template}{tex template to use}
 
+\item{latex_engine}{tex engine to use (pdflatex, lualatex, xelatex)}
+
 \item{...}{options passed to bookdown}
 }
 \description{
