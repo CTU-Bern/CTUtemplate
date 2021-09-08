@@ -271,11 +271,29 @@ $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
+
+%no double spacing between sentences
+\frenchspacing
+
+$if(texloops)$
+%loops
+\usepackage{pgffor}
+\usepackage{forloop}
+\usepackage{pgfplots}
+
+%to read from file and get rid of the blanks at the end of the line
+\newcommand\noblankfileline{\expandafter\noblankaux\fileline\relax}
+\def\noblankaux#1 \relax{#1}
+$endif$
+
 $if(tables)$
 \usepackage{longtable,booktabs,array}
-$if(multirow)$
+
 \usepackage{multirow}
-$endif$
+\usepackage{multicol}
+
+
+
 \usepackage{calc} % for calculating minipage widths
 $if(beamer)$
 \usepackage{caption}
