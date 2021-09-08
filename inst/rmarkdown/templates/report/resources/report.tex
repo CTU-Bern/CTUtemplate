@@ -423,6 +423,12 @@ $if(csquotes)$
 \usepackage{csquotes}
 $endif$
 
+$if(landscape)$
+% landscape
+\usepackage{lscape}
+\usepackage{pdflscape}
+$endif$
+
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
