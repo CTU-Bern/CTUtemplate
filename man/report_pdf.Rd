@@ -4,10 +4,16 @@
 \alias{report_pdf}
 \title{Generate PDF report}
 \usage{
-report_pdf(report_template = find_resource("report", "report.tex"), ...)
+report_pdf(
+  report_template = find_resource("report", "report.tex"),
+  latex_engine = "pdflatex",
+  ...
+)
 }
 \arguments{
 \item{report_template}{tex template to use}
+
+\item{latex_engine}{tex engine to use (pdflatex, lualatex, xelatex)}
 
 \item{...}{options passed to bookdown}
 }

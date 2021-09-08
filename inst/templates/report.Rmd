@@ -5,9 +5,11 @@ knit:
 output: 
   CTUtemplate::report_pdf:
     report_template: "default"
+title: true
 toc: true
 lot: false
 lof: false
+texloops: false
 params:
   author: "FirstName LastName"
   email: "FirstName.LastName@ctu.unibe.ch"
@@ -108,18 +110,30 @@ btable(df, nhead = 1, nfoot = 0, caption = "Table1")
 
 other popular options are `xtable` and `knitr::kable`.
 
-Flextable should also be possible to use (there seems to be some issue with the latex template - undefined control sequence...). Captions are/can be defined in the chunk header (see the [flextable site for more info](https://davidgohel.github.io/flextable/reference/knit_print.flextable.html)). Cell colours are, however, not supported.
+Flextable should also be possible to use (there seems to be some issue with the latex template - undefined control sequence...). Captions are/can be defined in the chunk header (see the [flextable site for more info](https://davidgohel.github.io/flextable/reference/knit_print.flextable.html)). 
 
 ```{r, tab.cap = "some caption text", eval=FALSE}
 library(flextable)
 flextable(head(mtcars))
 ```
 
+It is possible to do lots of formatting with Flextable...
+
+```{r}
+library(magrittr)
+set_flextable_defaults(font.size = 8)
+dat <- head(ggplot2::diamonds, n = 10)
+qflextable(dat) %>% 
+  color(~ price < 330, color = "orange", ~ price + x + y + z ) %>% 
+  bold(j = c("price", "x"), bold = TRUE) %>% 
+  bg(bg = "#e05297", part = "header")
+```
+
 # Referring to other locations
 
 When compiled, Rmd files assume that any paths mentioned are relative to the location of the Rmd. In contrast, when running individual chunks, it paths relative to the current working directory. What that means is that if your working directory is `.` and your Rmd is stored in `./report` with data in `./data` and you use `data/file.csv` in your Rmd, it'll work fine when you run in interactive mode (one chunk at a time), but it will not compile when knit - then it'll be looking for `.report/data/file.csv`, which doesnt exist.
 
-The solution is the `here` package. `here` contains the function `here` which is a drop in replacement for `file.path` with the difference that it always looks for a `.Rproj` file and uses that location as the reference point. `here::here('data', 'file.csv')` will always point to the same location.
+The solution is the `here` package. `here` contains the function `here` which is a drop in replacement for `file.path` with the difference that it always looks for a `.Rproj` file and uses that location as the reference point. `here::here('data', 'file.csv')` will always point to the same location. It is recommended to put the `.Rproj` file on level above the script folders (i.e. in the 06_Analysis_XX_YY folder). This avoids going up and down the folder structure.
 
 
 # One file or many files?
@@ -136,7 +150,7 @@ start `foo.Rmd`:
 
 # foo
 
-whatver prose you want
+whatever prose you want
 
 ```{r}
 # do stuff
