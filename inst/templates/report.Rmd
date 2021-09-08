@@ -9,6 +9,7 @@ title: true
 toc: true
 lot: false
 lof: false
+texloops: false
 params:
   author: "FirstName LastName"
   email: "FirstName.LastName@ctu.unibe.ch"
