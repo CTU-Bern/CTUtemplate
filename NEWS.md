@@ -1,3 +1,7 @@
+CTUtemplate 0.1.6
+---------------------
+The tex template is now based on pandoc template (more features). UNIBE document class still used to retain UNIBE formatting.
+
 CTUtemplate 0.1.5
 ---------------------
 Removal of restricted figure height/width
