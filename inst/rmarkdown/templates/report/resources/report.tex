@@ -192,12 +192,20 @@ $endif$
   \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+
+%TOC
+\usepackage{tocloft}
+\setlength{\cftbeforetoctitleskip}{-2cm}   %modify space before toc title
+\setlength{\cftaftertoctitleskip}{1cm}   %modify space after toc title
+\setlength{\cftparskip}{1.5ex}   %modify space between entries
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{tocheadings}}}
+
 $if(indent)$
 $else$
 \makeatletter
 \@ifundefined{KOMAClassName}{% if non-KOMA class
   \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
+    % \usepackage{parskip}
   }{% else
     \setlength{\parindent}{0pt}
     \setlength{\parskip}{6pt plus 2pt minus 1pt}}
@@ -485,7 +493,11 @@ $if(colorlinks)$
 \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
 $endif$
 \setcounter{tocdepth}{$toc-depth$}
+\pagestyle{tocheadings}
 \tableofcontents
+\clearpage
+\pagestyle{headings}
+
 }
 $endif$
 $endif$
