@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.1.6-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.1.7-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -38,44 +38,6 @@ Once installed, in RStudio, open a “new project in a new directory” and
 select “CTU project template”. Options in the following window are used
 to create the folders and headers of R (and eventually STATA) files.
 
-### Annual safety report
-
-THIS FUNCTION WILL BE REMOVED FROM THIS PACKAGE IN THE NEAR FUTURE.
-PLEASE USE THE [SwissASR](https://github.com/CTU-Bern/SwissASR) PACKAGE
-INSTEAD.
-
-The `asr` function is used to fill out the Swiss Ethics Annual Safety
-Report template. It is intended that by passing a dataframe with the
-relevant information, plus a few other values, filling the template can
-be automated.
-
-Assuming that all data variables are consistent with the defaults, the
-following might be used to fill out the report.
-
-``` r
-asr(dataframe,
-    trial_title = "Trial Name",
-    protocol_number = "1",
-    basec_number = "2153153",
-    snctp_number = "3516135468",
-    swissmedic_number = "kuis16153613",
-    ec_name = "KEK Bern",
-    product_name = "Drug name",
-    sponsor_contact = "Mr Foo, University of Foo, Bar", 
-    inst_name_address = "Mr Bar, University of Foo, Bar",
-    n_centers_t = length(unique(alldata$site)),      # total number of sites
-    n_centers_p = 15,                                # number of planned sites
-    n_centers_c = length(unique(closedsites$site)),  # number of closed sites
-    n_centers_o = length(unique(alldata$site)),      # number of open sites
-    n_pat_t = 1000,                                  # total number of participants
-    n_pat_e = length(unique(alldata$record_id)),     # enrolled participants
-    n_pat_c = sum(all_data$eos_complete),            # complete participants
-    n_pat_p = sum(all_data$eos_terminated),          # prematurely terminated participants
-    period_from = min(dataframe$ic_date),            # assuming that the variable exists!
-    period_to = Sys.Date()
-    )
-```
-
 ### UNIBE Red
 
 There is also a function for the UNIBEs shade of red:
@@ -91,7 +53,7 @@ plot(
   yaxt = "n")
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
 ### Report templates
 
