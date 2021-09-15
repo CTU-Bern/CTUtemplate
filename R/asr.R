@@ -135,7 +135,6 @@ check_log <- function(x){
 #' @param var_safetymeasure variable containing whether the SAE required safety related measures
 #'
 #' @return
-#' @export
 #' @import officer
 #' @import flextable
 #' @importFrom magrittr %>%
