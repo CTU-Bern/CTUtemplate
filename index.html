@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CTUtemplate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -89,40 +89,11 @@
 <a href="#template-director-structure" class="anchor"></a>Template director structure</h3>
 <p>Once installed, in RStudio, open a “new project in a new directory” and select “CTU project template”. Options in the following window are used to create the folders and headers of R (and eventually STATA) files.</p>
 </div>
-<div id="annual-safety-report" class="section level3">
-<h3 class="hasAnchor">
-<a href="#annual-safety-report" class="anchor"></a>Annual safety report</h3>
-<p>THIS FUNCTION WILL BE REMOVED FROM THIS PACKAGE IN THE NEAR FUTURE. PLEASE USE THE <a href="https://github.com/CTU-Bern/SwissASR">SwissASR</a> PACKAGE INSTEAD.</p>
-<p>The <code>asr</code> function is used to fill out the Swiss Ethics Annual Safety Report template. It is intended that by passing a dataframe with the relevant information, plus a few other values, filling the template can be automated.</p>
-<p>Assuming that all data variables are consistent with the defaults, the following might be used to fill out the report.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/asr.html">asr</a></span><span class="op">(</span><span class="va">dataframe</span>,
-    trial_title <span class="op">=</span> <span class="st">"Trial Name"</span>,
-    protocol_number <span class="op">=</span> <span class="st">"1"</span>,
-    basec_number <span class="op">=</span> <span class="st">"2153153"</span>,
-    snctp_number <span class="op">=</span> <span class="st">"3516135468"</span>,
-    swissmedic_number <span class="op">=</span> <span class="st">"kuis16153613"</span>,
-    ec_name <span class="op">=</span> <span class="st">"KEK Bern"</span>,
-    product_name <span class="op">=</span> <span class="st">"Drug name"</span>,
-    sponsor_contact <span class="op">=</span> <span class="st">"Mr Foo, University of Foo, Bar"</span>, 
-    inst_name_address <span class="op">=</span> <span class="st">"Mr Bar, University of Foo, Bar"</span>,
-    n_centers_t <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">alldata</span><span class="op">$</span><span class="va">site</span><span class="op">)</span><span class="op">)</span>,      <span class="co"># total number of sites</span>
-    n_centers_p <span class="op">=</span> <span class="fl">15</span>,                                <span class="co"># number of planned sites</span>
-    n_centers_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">closedsites</span><span class="op">$</span><span class="va">site</span><span class="op">)</span><span class="op">)</span>,  <span class="co"># number of closed sites</span>
-    n_centers_o <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">alldata</span><span class="op">$</span><span class="va">site</span><span class="op">)</span><span class="op">)</span>,      <span class="co"># number of open sites</span>
-    n_pat_t <span class="op">=</span> <span class="fl">1000</span>,                                  <span class="co"># total number of participants</span>
-    n_pat_e <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">alldata</span><span class="op">$</span><span class="va">record_id</span><span class="op">)</span><span class="op">)</span>,     <span class="co"># enrolled participants</span>
-    n_pat_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">eos_complete</span><span class="op">)</span>,            <span class="co"># complete participants</span>
-    n_pat_p <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">$</span><span class="va">eos_terminated</span><span class="op">)</span>,          <span class="co"># prematurely terminated participants</span>
-    period_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dataframe</span><span class="op">$</span><span class="va">ic_date</span><span class="op">)</span>,            <span class="co"># assuming that the variable exists!</span>
-    period_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>
-    <span class="op">)</span></code></pre></div>
-</div>
 <div id="unibe-red" class="section level3">
 <h3 class="hasAnchor">
 <a href="#unibe-red" class="anchor"></a>UNIBE Red</h3>
 <p>There is also a function for the UNIBEs shade of red:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.1</span>, <span class="fl">.1</span>, <span class="fl">.1</span><span class="op">)</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">.01</span>, mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">.2</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>
   <span class="co"># main point:</span>
@@ -131,7 +102,7 @@
   x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">.2</span>, <span class="fl">1</span>, <span class="fl">.2</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span>, 
   pch <span class="op">=</span> <span class="fl">15</span>, cex <span class="op">=</span> <span class="fl">5</span>, xlab <span class="op">=</span> <span class="st">"alpha"</span>, ylab <span class="op">=</span> <span class="st">""</span>, 
   yaxt <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;"></p>
 </div>
 <div id="report-templates" class="section level3">
 <h3 class="hasAnchor">
@@ -170,7 +141,7 @@
 </tbody>
 </table>
 <p>The functions are used to open a new template in the location designated (the recommended location would probably be <code>08_Reports_projnum</code>).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># for a sample size report</span>
 <span class="fu"><a href="reference/use_ssreport_template.html">use_ssreport_template</a></span><span class="op">(</span><span class="st">"folder/ssreport.Rmd"</span><span class="op">)</span>
 <span class="co"># for the examples</span>
@@ -180,12 +151,12 @@
 <span class="co"># for an example of a parameterized report (note the lack of file extension here)</span>
 <span class="fu"><a href="reference/use_param_report_template.html">use_param_report_template</a></span><span class="op">(</span><span class="st">"folder/param_report"</span><span class="op">)</span></code></pre></div>
 <p>If modifications to the latex template are desired, it can be copied to the folder via</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/use_ub_tex_template.html">use_ub_tex_template</a></span><span class="op">(</span><span class="st">"folder/report.tex"</span><span class="op">)</span></code></pre></div>
 <p>The YAML header in the Rmd file then needs to be changed to include</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>output<span class="op">:</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span>CTUtemplate<span class="op">::</span>report_pdf<span class="op">:</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>report_template<span class="op">:</span><span class="st"> "report.tex"</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>output<span class="op">:</span><span class="st"> </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>CTUtemplate<span class="op">::</span>report_pdf<span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">    </span>report_template<span class="op">:</span><span class="st"> "report.tex"</span></span></code></pre></div>
 <p>Using this approach, other latex packages can be used to extend the capabilities of latex.</p>
 </div>
 <div id="acknowledgements" class="section level3">
@@ -214,7 +185,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/CTU-Bern/CTUtemplate"><img src="https://img.shields.io/badge/dev%20version-0.1.6-blue.svg"></a></li>
+<li><a href="https://github.com/CTU-Bern/CTUtemplate"><img src="https://img.shields.io/badge/dev%20version-0.2.0-blue.svg"></a></li>
 </ul>
 </div>
 </div>
