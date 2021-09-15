@@ -13,7 +13,7 @@
   \def\projectname{{{projname}}}
   \def\reporttype{{{reporttype}}}
   \def\version{{{version}}}
-  \def\versiondate{\version---\today}
+  \def\versiondate{\version \today}
 }
 
 
