@@ -1,3 +1,7 @@
+CTUtemplate 0.1.7
+---------------------
+modification to tex template to make the second page have a header when there is no TOC.
+
 CTUtemplate 0.1.6
 ---------------------
 The tex template is now based on pandoc template (more features). UNIBE document class still used to retain UNIBE formatting.
