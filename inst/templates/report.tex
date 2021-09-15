@@ -107,8 +107,9 @@
 \setlength{\cftbeforetoctitleskip}{-2cm}   %modify space before toc title
 \setlength{\cftaftertoctitleskip}{1cm}   %modify space after toc title
 \setlength{\cftparskip}{1.5ex}   %modify space between entries
+$if(toc)$
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{tocheadings}}}
-
+$endif$
 
 
 %%%%%%%%%%%%%%%%

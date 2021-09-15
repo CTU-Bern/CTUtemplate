@@ -1,3 +1,10 @@
+CTUtemplate 0.2.0
+---------------------
+BREAKING CHANGE - `asr` no longer exported. Use the SwissASR package instead!
+
+Other changes:
+modification to tex template to make the second page have a header when there is no TOC.
+
 CTUtemplate 0.1.6
 ---------------------
 The tex template is now based on pandoc template (more features). UNIBE document class still used to retain UNIBE formatting.

@@ -193,15 +193,18 @@ $endif$
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 
+$if(toc)$
 %TOC
 \usepackage{tocloft}
 \setlength{\cftbeforetoctitleskip}{-2cm}   %modify space before toc title
 \setlength{\cftaftertoctitleskip}{1cm}   %modify space after toc title
 \setlength{\cftparskip}{1.5ex}   %modify space between entries
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{tocheadings}}}
-
+$endif$
 $if(indent)$
+% indent
 $else$
+% indent
 \makeatletter
 \@ifundefined{KOMAClassName}{% if non-KOMA class
   \IfFileExists{parskip.sty}{%
@@ -213,6 +216,7 @@ $else$
   \KOMAoptions{parskip=half}}
 \makeatother
 $endif$
+% verbatim-in-note
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
@@ -497,8 +501,8 @@ $if(beamer)$
 \frame{\titlepage}
 $else$
 \maketitle
+\thispagestyle{headings}
 \addtocounter{page}{1}
-\clearpage
 $endif$
 $if(abstract)$
 \begin{abstract}
@@ -531,8 +535,6 @@ $endif$
 \pagestyle{tocheadings}
 \tableofcontents
 \clearpage
-\pagestyle{headings}
-
 }
 $endif$
 $endif$

@@ -87,7 +87,7 @@ check_log <- function(x){
 #' Annual safety reports
 #'
 #' This function is moving home to the SwissASR package. See there for details.
-#'
+#' @noRd
 #' @param data dataframe containing safety data
 #' @param target filename to save the report to
 #' @param trial_title name of the trial
@@ -135,7 +135,6 @@ check_log <- function(x){
 #' @param var_safetymeasure variable containing whether the SAE required safety related measures
 #'
 #' @return
-#' @export
 #' @import officer
 #' @import flextable
 #' @importFrom magrittr %>%
