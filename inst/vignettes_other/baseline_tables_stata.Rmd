@@ -1,6 +1,6 @@
 
 <- precompile this document with  ->
-<- knitr::knit("vignettes/baseline_tables_stata.Rmd.orig", output = "vignettes/baseline_tables_stata.Rmd") ->
+<- knitr::knit("inst/vignettes_other/baseline_tables_stata.Rmd.orig", output = "inst/vignettes_other/baseline_tables_stata.Rmd") ->
 
 
 
