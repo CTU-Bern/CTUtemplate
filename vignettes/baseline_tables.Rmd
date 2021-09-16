@@ -276,7 +276,7 @@ More on that to come...
 Not technically using R, it should be noted that possibly the most versatile approach is the Stata [`btable`](www.github.com/CTU-Bern/btable) package.
 
 <- uses precompiled chunk due to stata requirement ->
-```{r, child = here::here('inst/vignettes_other/baseline_tables_stata.Rmd')}
+```{r, child = system.file("vignettes_other/baseline_tables_stata.Rmd", package = "CTUtemplate")}
 
 ```
 
