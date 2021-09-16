@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
   engine.path = list(stata = "C:/Program Files/Stata17/StataBE-64.exe")
 )
 # precompile vignette
-# knitr::knit("vignettes/baseline_tables.Rmd.orig", output = "vignettes/baseline_tables.Rmd")
+# knitr::knit("vignettes/to_precompile/baseline_tables.Rmd", output = "vignettes/baseline_tables.Rmd")
 ```
 
 
@@ -273,7 +273,14 @@ More on that to come...
 
 ## Farm it out to Stata...
 
-Not technically using R, it should be noted that possibly the most versatile approach is the Stata [`btable`](www.github.com/CTU-Bern/btable) package
+Not technically using R, it should be noted that possibly the most versatile approach is the Stata [`btable`](www.github.com/CTU-Bern/btable) package.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      engine.path = list(stata = "C:/Program Files/Stata17/StataBE-64.exe"))
+# precompile vignette
+# knitr::knit("vignettes/baseline_tables_stata.Rmd.orig", output = "vignettes/baseline_tables_stata.Rmd")
+```
 
 ```{stata}
 sysuse auto2
@@ -284,13 +291,12 @@ export delimited "formatted_btab.csv", replace novarnames
 
 Then the table can be read back into R and printed with e.g. flextable.
 
-```{r}
+```{r, message = FALSE}
 dat <- readr::read_csv("formatted_btab.csv")
-dat[is.na(dat)] <- ""
-names(dat)[1] <- " "
+dat[is.na(dat)] <- "" # replace NAs
+names(dat)[1] <- " "  # set missing var name
 dat %>%
   flextable::flextable()
 ```
-
 
 

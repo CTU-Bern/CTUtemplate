@@ -2,4 +2,4 @@
 ^\.Rproj\.user$
 ^README
 ^.github
-baseline_tables_stata.Rmd*
+vignettes/to_procompile/*
