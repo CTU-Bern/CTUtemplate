@@ -2,7 +2,7 @@ Package: CTUtemplate
 Title: Example RStudio Project Templates
 Author: Alan G. Haynes
 Maintainer: Alan G. Haynes <alan.haynes@ctu.unibe.ch>
-Version: 0.2.0
+Version: 0.2.1
 Description: Templates and functions for use in CTU Bern.
 Depends: 
   R (>= 3.3.2),
@@ -24,3 +24,12 @@ Imports:
   magrittr,
   usethis,
   whisker
+Suggests: 
+    dplyr,
+    gtsummary,
+    labelled,
+    readr,
+    rmarkdown,
+    knitr,
+    survival
+VignetteBuilder: knitr

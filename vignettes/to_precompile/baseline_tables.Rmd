@@ -1,0 +1,302 @@
+---
+title: "Baseline Tables in R"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Baseline Tables in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  engine.path = list(stata = "C:/Program Files/Stata17/StataBE-64.exe")
+)
+# precompile vignette
+# knitr::knit("vignettes/to_precompile/baseline_tables.Rmd", output = "vignettes/baseline_tables.Rmd")
+```
+
+
+There are many approaches to baseline tables for R. The ease of customisation and utility varies among them though of course. This vignette gives some examples of some methods to create baseline tables. It does not cover all methods...
+
+## Example dataset - `mtcars`
+
+As an example dataset, we will use `mtcars`, after performing some minor data preparation.
+
+```{r}
+require(labelled)
+data(mtcars)
+```
+
+We will make some factors...
+
+```{r}
+mtcars$am <- factor(mtcars$am, 0:1, c("automatic", "manual"))
+mtcars$vs <- factor(mtcars$vs, 0:1, c("V-shaped", "Straight"))
+```
+
+... and add some labels. `labelled` is one of many packages providing a way to label variables. We will leave some variable intentionally unlabelled for demonstration purposes.
+
+```{r}
+var_label(mtcars$am) <- "Automatic/manual"
+var_label(mtcars$mpg) <- "Miles per gallon"
+var_label(mtcars$cyl) <- "Cylinders"
+var_label(mtcars$disp) <- "Displacement"
+var_label(mtcars$hp) <- "Horse power (HP)"
+var_label(mtcars$drat) <- "Rear axle ratio"
+```
+
+To will also add some missing data to the `disp` and `cyl` variables.
+
+```{r}
+mtcars$disp[1:5] <- NA
+mtcars$cyl[3:4] <- NA
+```
+
+## `gtsummary`
+
+`gtsummary` is a great choice for baseline tables, but also for results from regression analyses. For baseline tables, the `tbl_summary` is what you need. By default, it takes all variables in your dataset and summarizes them according to some rules. For instance, strings, factors and continuous variables with fewer than 10 unique values are presented as N (%), while continuous variables are presented as median (IQR). It also uses the labels defined, where available.
+
+```{r}
+require(gtsummary)
+require(magrittr) # gtsummary is easiest to use with pipes
+
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, vs, gear) %>%
+  tbl_summary()
+```
+
+Using different summary statistics is done through the statistic argument. Variables can be indicated by either their name or type.
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, vs, gear) %>%
+  tbl_summary(statistic = list(gear ~ "{n}",
+                               all_continuous() ~ "{mean} ({sd})"))
+
+```
+
+When modifying the statistics, `n` (frequency), `N` (cohort size) and `p` (percentage) are available for categorical variables. `median`, `mean`, `sd`, `var`, `min`, `max`, `p##` (percentile, `##` is an integer between 0 and 100) and `foo` (any function of the form `foo(x)`) are accepted for continuous variables. Note that via `foo`, almost any summary statistic you can think of is available. Numbers of missing and non-missing are also available via `N_obs`, `N_miss`, `N_nonmiss`, `p_miss` and `p_nonmiss`, where the latter two are percentages.
+
+Where data is missing, `gtsummary` also tells us how much...
+
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl) %>%
+  tbl_summary()
+```
+
+### Groups
+
+Adding in grouping variables is also simple - use the `by` argument...
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am)
+```
+
+... to which effects can be added (at least for continuous and binary variables)...
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_difference()
+```
+
+...or just p-values.
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_p()
+```
+
+The most common tests are already implemented directly in `gtsummary` (see the `tests` helpfile), and can be used analogous to the summary statistics...
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_p(test = disp ~ "t.test")
+```
+
+Other tests can also be used by defining a function and passing that to the test argument...
+
+```{r}
+ttest_common_variance <- function(data, variable, by, ...) {
+  data <- data[c(variable, by)] %>% dplyr::filter(complete.cases(.))
+  t.test(data[[variable]] ~ factor(data[[by]]), var.equal = TRUE) %>%
+  broom::tidy()
+}
+
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_p(test = disp ~ "ttest_common_variance")
+```
+
+### Overall
+
+It's also possible to add an 'overall' column...
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_p() %>%
+  add_overall()
+```
+
+... or just a column of Ns
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_p() %>%
+  add_n()
+```
+
+### Survival
+
+`gtsummary` also supplies functions for working with survival data. The following examples come directly from the helpfile for `tbl_survfit`.
+
+It is possible to pass a `survfit` object...
+```{r}
+require(survival)
+tbl_survfit(
+  survfit(Surv(ttdeath, death) ~ trt, trial),
+  times = c(12, 24),
+  label_header = "**{time} Month**"
+)
+```
+
+... or a dataframe (tbl_survfit will then create the `survfit` object itself)...
+```{r}
+tbl_survfit(
+  trial,
+  y = Surv(ttdeath, death),
+  include = c(trt, grade),
+  probs = 0.5,
+  label_header = "**Median Survival**"
+)
+```
+... or a list of `survfit` objects.
+```{r}
+list(
+    survfit(Surv(ttdeath, death) ~ 1, trial),
+    survfit(Surv(ttdeath, death) ~ trt, trial)
+  ) %>%
+  tbl_survfit(times = c(12, 24))
+```
+
+It can also handle competing risks
+```{r}
+set.seed(1123)
+library(dplyr, warn.conflicts = FALSE, quietly = TRUE)
+trial2 <- trial %>%
+  mutate(
+    death_cr = case_when(
+      death == 0 ~ "censor",
+      runif(n()) < 0.5 ~ "death from cancer",
+      TRUE ~ "death other causes"
+    ) %>% factor()
+  )
+
+survfit(Surv(ttdeath, death_cr) ~ grade, data = trial2) %>%
+  tbl_survfit(times = c(12, 24), label = "Tumor Grade")
+```
+
+### Regression tables
+
+One advantage to `gtsummary` is that it can also be used with regression output.
+
+```{r}
+# convert cyl to factor
+mtcars$cyl_factor <- factor(mtcars$cyl)
+var_label(mtcars$cyl_factor) <- "Number of cylinders"
+(lm_tab <- lm(mpg ~ am + cyl_factor + disp, data = mtcars) %>%
+  tbl_regression())
+```
+
+Regression output tables can also be merged with `tbl_summary` output.
+
+```{r}
+summ_tab <- mtcars %>%
+  select(am, cyl_factor, disp) %>%
+  tbl_summary()
+
+tbl_merge(list(summ_tab, lm_tab),
+          tab_spanner = c("Summary", "LM"))
+```
+
+See the [`gtsummary` site](http://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html) for more info.
+
+### Once you have a `gtsummary` table...
+
+`gtsummary` is based on the `gt` table system from RStudio, which is great for HTML reports, but doesn't work so well for PDFs. One option is to convert the table to a `flextable`, which allows a wide variety of further processing options.
+
+
+```{r}
+mtcars %>%
+  # use just a few variables to keep the table small
+  select(mpg, disp, cyl, am) %>%
+  tbl_summary(by = am) %>%
+  add_p() %>%
+  add_n() %>%
+  as_flex_table()
+```
+
+
+## `atable`
+
+`atable` is another good option, although it makes you work a little more than `gtsummary`, but it can output directly in LaTeX language.
+
+More on that to come...
+
+## Farm it out to Stata...
+
+Not technically using R, it should be noted that possibly the most versatile approach is the Stata [`btable`](www.github.com/CTU-Bern/btable) package.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      engine.path = list(stata = "C:/Program Files/Stata17/StataBE-64.exe"))
+# precompile vignette
+# knitr::knit("vignettes/baseline_tables_stata.Rmd.orig", output = "vignettes/baseline_tables_stata.Rmd")
+```
+
+```{stata}
+sysuse auto2
+btable mpg weight displacement, by(foreign) saving("btab")
+btable_format using "btab", clear
+export delimited "formatted_btab.csv", replace novarnames
+```
+
+Then the table can be read back into R and printed with e.g. flextable.
+
+```{r, message = FALSE}
+dat <- readr::read_csv("formatted_btab.csv")
+dat[is.na(dat)] <- "" # replace NAs
+names(dat)[1] <- " "  # set missing var name
+dat %>%
+  flextable::flextable()
+```
+
+
