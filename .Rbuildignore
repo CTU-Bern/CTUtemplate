@@ -2,4 +2,4 @@
 ^\.Rproj\.user$
 ^README
 ^.github
-.Rmd.orig$
+baseline_tables_stata.Rmd*
