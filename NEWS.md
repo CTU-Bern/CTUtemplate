@@ -1,5 +1,9 @@
 CTUtemplate 0.2.0
 ---------------------
+Addition of vignette on baseline tables.
+
+CTUtemplate 0.2.0
+---------------------
 BREAKING CHANGE - `asr` no longer exported. Use the SwissASR package instead!
 
 Other changes:
