@@ -25,6 +25,11 @@ Imports:
   usethis,
   whisker
 Suggests: 
+    dplyr,
+    gtsummary,
+    labelled,
+    readr,
     rmarkdown,
-    knitr
+    knitr,
+    survival
 VignetteBuilder: knitr
