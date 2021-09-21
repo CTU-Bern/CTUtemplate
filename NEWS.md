@@ -1,4 +1,4 @@
-CTUtemplate 0.2.0
+CTUtemplate 0.2.1
 ---------------------
 Addition of vignette on baseline tables.
 
