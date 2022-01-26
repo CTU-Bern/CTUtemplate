@@ -1,3 +1,7 @@
+CTUtemplate 0.2.2
+---------------------
+Markdown templates write output to reports folder by default.
+
 CTUtemplate 0.2.1
 ---------------------
 Addition of vignette on baseline tables.
