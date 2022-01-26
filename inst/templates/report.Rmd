@@ -112,7 +112,7 @@ other popular options are `xtable` and `knitr::kable`.
 
 Flextable should also be possible to use (there seems to be some issue with the latex template - undefined control sequence...). Captions are/can be defined in the chunk header (see the [flextable site for more info](https://davidgohel.github.io/flextable/reference/knit_print.flextable.html)). 
 
-```{r, tab.cap = "some caption text", eval=FALSE}
+```{r, tab.cap = "some caption text"}
 library(flextable)
 flextable(head(mtcars))
 ```
