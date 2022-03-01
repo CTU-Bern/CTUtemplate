@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
+# `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
 `r badger::badge_custom("dev version", as.character(packageVersion("CTUtemplate")), "blue", "https://github.com/CTU-Bern/CTUtemplate")`
 
