@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `CTUtemplate` <img src='man/figures/sticker.png' align="right" height="200">
+# `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
 [![](https://img.shields.io/badge/dev%20version-0.2.2-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
