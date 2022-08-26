@@ -1,3 +1,7 @@
+CTUtemplate 0.3.1
+---------------------
+addition of add_ctu_header and RStudio addin
+
 CTUtemplate 0.3.0
 ---------------------
 Reference to `unibeCols` package for UNIBE corporate colours
