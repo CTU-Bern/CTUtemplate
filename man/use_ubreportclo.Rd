@@ -36,7 +36,7 @@ use_ubreportclo(
 \item{...}{other options passed to \code{use_template}}
 }
 \value{
-
+writes the UNIBE template clo file
 }
 \description{
 The CLO file contains the information identifying the author, project and

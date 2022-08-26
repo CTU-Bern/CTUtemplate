@@ -14,7 +14,7 @@ use_ssreport_template(save_as, open = TRUE, ...)
 \item{...}{other arguments passed to \code{use_template}}
 }
 \value{
-
+Creates an Rmd file in the \code{save_as} location
 }
 \description{
 Open a new sample size report

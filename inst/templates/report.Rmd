@@ -15,6 +15,7 @@ toc: true
 lot: false
 lof: false
 texloops: false
+include-before: ["\\input{preamble.tex}", "\\input{preamble2.tex}", "\\newpage"]
 params:
   author: "FirstName LastName"
   email: "FirstName.LastName@ctu.unibe.ch"
@@ -23,6 +24,7 @@ params:
   projname: "Project X"
   version: "xx"
   reportname: "Examples"
+  export_date: "enter_date_here"
 ---
 
 ```{r setup, include=FALSE}
@@ -41,6 +43,31 @@ CTUtemplate::use_ubreportclo(
   version = params$version,
   reporttype = params$reportname
 )
+```
+
+```{r}
+cat(file = 'preamble.tex', 
+    "\\section*{Administrative Information} \n \n", 
+    "\\begin{center}\n\\begin{tabular}{l|c}\n", 
+    "Project number & ", params$projnum, " \\\\ \n",
+    "SAP version & x.x, dated dd.mm.yyyy \\\\ \n",
+    "Protocol version & x.x, dated dd.mm.yyyy \\\\ \n",
+    "Other document &  \\\\ \n",
+    "Date of export & ", params$export_date, " \\\\ \n",
+    "\\end{tabular} \n \\end{center}"
+    )
+```
+
+```{cat, engine.opts=list(file = 'preamble2.tex')}
+\section*{Revision History}
+
+\begin{center}
+\begin{tabular}{p{3cm}|p{6cm}|p{6cm}}
+Release date & Summary of changes & Reason for change(s) \\
+\hline
+dd.mm.yyyy & Initial version & Not applicable \\
+\end{tabular}
+\end{center}
 ```
 
 \chapter{Latex syntax can be used}
@@ -236,4 +263,19 @@ regress mpg weight
 ```
 
 
+\chapter{Reproducibility}
+
+```{r}
+# install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
+library(svn)
+```
+
+CTU Bern uses the SVN version control system. This report is based on revision `r sub(paste("Folder", getwd(), "is at revision"), "", svn_details())`.
+
+R packages used in the analysis:
+
+```{r sessionInfo}
+options(width = 90)
+sessionInfo()
+```
 
