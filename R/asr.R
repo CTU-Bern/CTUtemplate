@@ -134,7 +134,7 @@ check_log <- function(x){
 #' @param var_devint variable containing whether the SAE is attributable to an intervention in the trial
 #' @param var_safetymeasure variable containing whether the SAE required safety related measures
 #'
-#' @return
+#' @return a docx file
 #' @import officer
 #' @import flextable
 #' @importFrom magrittr %>%

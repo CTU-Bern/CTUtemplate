@@ -14,7 +14,7 @@ use_param_report_template(save_as, open = TRUE, ...)
 \item{...}{other arguments passed to \code{use_template}}
 }
 \value{
-
+saves two files, an Rmd and an R file
 }
 \description{
 Parameterized reports allow to create reports in a loop. Examples might be

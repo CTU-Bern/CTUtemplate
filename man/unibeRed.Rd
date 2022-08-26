@@ -3,7 +3,7 @@
 \name{unibeRed}
 \alias{unibeRed}
 \title{UNIBE red
-Get the official UNIBE red colour}
+Get the official UNIBE red colour. Note that the \code{unibeCols} package has all of the UNIBE colours.}
 \usage{
 unibeRed(alpha = 1)
 }
@@ -11,12 +11,15 @@ unibeRed(alpha = 1)
 \item{alpha}{alpha for transparency (0 to 1)}
 }
 \value{
-colour code
+hexidecimal colour code
 }
 \description{
 UNIBE red
-Get the official UNIBE red colour
+Get the official UNIBE red colour. Note that the \code{unibeCols} package has all of the UNIBE colours.
 }
 \examples{
 plot(1:5, col = unibeRed())
+}
+\seealso{
+[unibeCols::unibeRed()]
 }

@@ -14,7 +14,7 @@ use_ub_tex_template(save_as, open = TRUE, ...)
 \item{...}{other arguments passed to \code{use_template}}
 }
 \value{
-
+Creates an tex file in the \code{save_as} location
 }
 \description{
 Open a new tex template allowing customization

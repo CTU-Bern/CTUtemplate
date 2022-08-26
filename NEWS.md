@@ -1,3 +1,13 @@
+CTUtemplate 0.3.0
+---------------------
+Reference to `unibeCols` package for UNIBE corporate colours
+
+Addition of administrative info, change log and reproducibility section to report template.
+
+CTUtemplate 0.2.2
+---------------------
+Markdown templates write output to reports folder by default.
+
 CTUtemplate 0.2.1
 ---------------------
 Addition of vignette on baseline tables.

@@ -1,7 +1,12 @@
 ---
-knit: 
-  bookdown::render_book:
-    output_dir: ""
+knit: (function(inputFile, encoding) { 
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), 
+                                              '../08_Reports_xx', 
+                                              paste0("ProjectName_Recruitment_",
+                                                     Sys.Date(),
+                                                     ".pdf"))) })
 output: 
   CTUtemplate::report_pdf:
     report_template: "default"

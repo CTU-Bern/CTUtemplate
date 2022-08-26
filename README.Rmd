@@ -91,6 +91,21 @@ use_recreport_template("folder/recreport.Rmd")
 use_param_report_template("folder/param_report")
 ```
 
+The top of the header defines the location that the PDF is saved, relative to the Rmd. The `xx` in `08_Reports_xx` should be changed to the project number. `ReportName` on the following line could be changed to something else.
+
+```
+knit: (function(inputFile, encoding) { 
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), 
+                                              '../08_Reports_xx', 
+                                              paste0("ReportName_",
+                                                     Sys.Date(),
+                                                     ".pdf"))) })
+```
+
+The templates for sample size calculations and recruitment reports refer to `ProjectName`. This should also be changed to something more meaningful.
+
 If modifications to the latex template are desired, it can be copied to the folder via
 
 ```{r, eval = FALSE}

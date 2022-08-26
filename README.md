@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.2.1-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.2.2-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -81,6 +81,24 @@ use_recreport_template("folder/recreport.Rmd")
 # for an example of a parameterized report (note the lack of file extension here)
 use_param_report_template("folder/param_report")
 ```
+
+The top of the header defines the location that the PDF is saved,
+relative to the Rmd. The `xx` in `08_Reports_xx` should be changed to
+the project number. `ReportName` on the following line could be changed
+to something else.
+
+    knit: (function(inputFile, encoding) { 
+          rmarkdown::render(inputFile,
+                            encoding=encoding, 
+                            output_file=file.path(dirname(inputFile), 
+                                                  '../08_Reports_xx', 
+                                                  paste0("ReportName_",
+                                                         Sys.Date(),
+                                                         ".pdf"))) })
+
+The templates for sample size calculations and recruitment reports refer
+to `ProjectName`. This should also be changed to something more
+meaningful.
 
 If modifications to the latex template are desired, it can be copied to
 the folder via

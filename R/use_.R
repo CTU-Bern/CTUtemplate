@@ -4,7 +4,7 @@
 #' @param open logical indicating whether to open the file
 #' @param ... other arguments passed to \code{use_template}
 #'
-#' @return
+#' @return Creates an Rmd file in the \code{save_as} location
 #' @export
 #' @importFrom usethis use_template
 #'
@@ -27,7 +27,7 @@ use_report_template <- function(save_as, open = TRUE, ...){
 #' @param open logical indicating whether to open the file
 #' @param ... other arguments passed to \code{use_template}
 #'
-#' @return
+#' @return Creates an Rmd file in the \code{save_as} location
 #' @export
 #' @examples
 #' # use_ssreport_template("ss.Rmd")
@@ -49,7 +49,7 @@ use_ssreport_template <- function(save_as, open = TRUE, ...){
 #' @param open logical indicating whether to open the file
 #' @param ... other arguments passed to \code{use_template}
 #'
-#' @return
+#' @return Creates an Rmd file in the \code{save_as} location
 #' @export
 #' @examples
 #' # use_recreport_template("rr.Rmd")
@@ -71,7 +71,7 @@ use_recreport_template <- function(save_as, open = TRUE, ...){
 #' @param open logical indicating whether to open the file
 #' @param ... other arguments passed to \code{use_template}
 #'
-#' @return
+#' @return Creates an tex file in the \code{save_as} location
 #' @export
 #' @examples
 #' # use_ub_tex_template("report.tex")
@@ -103,7 +103,7 @@ use_ub_tex_template <- function(save_as, open = TRUE, ...){
 #' @param open open the file or not
 #' @param ... other options passed to \code{use_template}
 #'
-#' @return
+#' @return writes the UNIBE template clo file
 #' @export
 #' @importFrom whisker whisker.render
 #' @importFrom fs path_package
@@ -165,7 +165,7 @@ use_ubreportclo <- function(
 #' @param open logical indicating whether to open the file
 #' @param ... other arguments passed to \code{use_template}
 #'
-#' @return
+#' @return saves two files, an Rmd and an R file
 #' @export
 #'
 #' @examples
