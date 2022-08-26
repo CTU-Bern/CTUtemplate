@@ -20,6 +20,7 @@ jobs:
       - name: Install rmarkdown, remotes, and the local package
         run: |
           install.packages(c("devtools", "badger"))
+          install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
           devtools::install_local(".", dependencies = TRUE)
           devtools::install_cran("rmarkdown")
         shell: Rscript {0}
