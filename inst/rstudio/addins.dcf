@@ -1,0 +1,4 @@
+Name: Add CTU header
+Description: Adds the standard CTU header to the currently active document
+Binding: add_ctu_header
+Interactive: false
