@@ -1,22 +1,35 @@
 
-
+# install missing packages (leave commented out) ----
 # install.packages("presize")
-# remotes::install_github("CTU-bern/presize")
-# remotes::install_github("CTU-bern/accrualPlot")
-# remotes::install_github("CTU-bern/kpitools")
-# remotes::install_github("CTU-bern/btabler")
+# install.packages("presize", repos = "https://ctu-bern.r-universe.dev") # dev version
+# install.packages("accrualPlot", repos = "https://ctu-bern.r-universe.dev")
+# install.packages("kpitools", repos = "https://ctu-bern.r-universe.dev")
+# install.packages("btabler", repos = "https://ctu-bern.r-universe.dev")
+# install.packages("SwissASR", repos = "https://ctu-bern.r-universe.dev")
+# install.packages("unibeCols", repos = "https://ctu-bern.r-universe.dev")
+# install.packages("redcaptools", repos = "https://ctu-bern.r-universe.dev")
+# install.packages("secuTrialR")
 
+## Load packages ----
+# library(atable)
+# atable_options(format_to = "console", add_margins = TRUE)
+# library(renv)
+# library(tidyverse)
+# library(Hmisc)
+# library(broom)
+# library(quarto)
 
-
-# Load packages
-library(atable)
-atable_options(format_to = "console", add_margins = TRUE)
-library(tidyverse)
-library(here)
-library(renv)
-library(Hmisc)
-library(broom)
-
+## CTU Bern/SCTO packages ----
+# library(secuTrialR)
+# library(redcaptools)
+# library(accrualPlot)
+# library(SwissASR)
+# library(presize)
+# library(unibeCols)
+# library(svn)
+# library(kpitools)
+# library(btabler)
+# library(sse)
 
 
 # custom functions ----
@@ -24,6 +37,6 @@ library(broom)
 mykeep <- function(...){
   lss <- ls(.GlobalEnv)
   lss_fun <- sapply(lss, function(x) is.function(eval(parse(text = x))))
-   gdata::keep(paths, pp, mykeep, ..., list = unlist(lss)[unlist(lss_fun)],
+   gdata::keep(paths, mykeep, ..., list = unlist(lss)[unlist(lss_fun)],
       sure = TRUE)
 }

@@ -1,3 +1,9 @@
+CTUtemplate 0.3.2
+---------------------
+use `here` instead of `setwd` and `file.path`
+
+addition of `use_qmd_html` and `use_qmd_pres` functions to download and save CTUs html quarto templates
+
 CTUtemplate 0.3.1
 ---------------------
 addition of add_ctu_header and RStudio addin
