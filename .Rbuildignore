@@ -3,3 +3,4 @@
 ^README
 ^.github
 vignettes/to_procompile/*
+vignettes/_*
