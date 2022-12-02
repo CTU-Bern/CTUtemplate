@@ -201,9 +201,11 @@ use_param_report_template <- function(save_as, open = TRUE, ...){
 #' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
 #' @export
 #' @examples
+#' \dontrun {
 #' dir <- tempdir()
 #' file <- file.path(dir, "filename.qmd")
 #' use_qmd_html(file, FALSE)
+#' }
 #' # in practice at CTU:
 #' # use_qmd_html("08_Reports_xx/ReportName.qmd", TRUE)
 use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
@@ -245,9 +247,11 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
 #' @export
 #' @importFrom usethis edit_file
 #' @examples
+#' \dontrun {
 #' dir <- tempdir()
 #' file <- file.path(dir, "filename.qmd")
 #' use_qmd_pres(file, FALSE)
+#' }
 #' # in practice at CTU:
 #' # use_qmd_pres("08_Reports_xx/ReportName.qmd", TRUE)
 use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){

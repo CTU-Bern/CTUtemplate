@@ -17,9 +17,11 @@ This function will download and optionally open the quarto markdown (qmd) file
 and the other necessary files from github.
 }
 \examples{
+\dontrun {
 dir <- tempdir()
 file <- file.path(dir, "filename.qmd")
 use_qmd_pres(file, FALSE)
+}
 # in practice at CTU:
 # use_qmd_pres("08_Reports_xx/ReportName.qmd", TRUE)
 }
