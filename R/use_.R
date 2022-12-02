@@ -210,6 +210,10 @@ use_param_report_template <- function(save_as, open = TRUE, ...){
 use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
 
   if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
+  if(!grepl("qmd$", save_as)){
+    warning("file extension missing... adding '.qmd'")
+    save_as <- paste0(save_as, ".qmd")
+  }
 
   d <- dirname(save_as)
   if(d == "."){
@@ -255,6 +259,10 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
 use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
 
   if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
+  if(!grepl("qmd$", save_as)){
+    warning("file extension missing... adding '.qmd'")
+    save_as <- paste0(save_as, ".qmd")
+  }
 
   d <- dirname(save_as)
   if(d == "."){
