@@ -1,9 +1,10 @@
 
 mykeep()
 # Load data
-raw <- read.csv(paths$od("data.csv"))
-dat <- secuTrialR::read_secuTrial(paths$od("zipname.zip"))
-
+# raw <- read.csv(paths$od("data.csv"))
+# dat <- read_secuTrial(paths$od("zipname.zip"))
+# dat < redcap_export_byform(readLines("O:/tokens/projNum.txt"),
+#                            "https://redcap.ctu.unibe.ch/api/")
 
 # example using mtcars
 data(mtcars)
