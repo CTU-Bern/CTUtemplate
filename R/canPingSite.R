@@ -1,4 +1,4 @@
+#importFrom pingr ping
 canPingSite <- function(test.site) {
-  !as.logical(system(paste("ping", test.site, "/n 1"), show.output.on.console = FALSE))
+  !is.na(pingr::ping(test.site, count = 1))
 }
-# from: https://stackoverflow.com/questions/5076593/how-to-determine-if-you-have-an-internet-connection-in-r
