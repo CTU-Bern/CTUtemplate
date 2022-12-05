@@ -97,7 +97,7 @@ info.
 generic template with some examples of how to do things.
 
 | Function                    | Description                                                                          |
-| :-------------------------- | :----------------------------------------------------------------------------------- |
+|:----------------------------|:-------------------------------------------------------------------------------------|
 | `use_report_template`       | Opens a generic file with various examples                                           |
 | `use_ssreport_template`     | Opens a template for a sample size report                                            |
 | `use_recreport_template`    | Opens a template for a recruitment report                                            |
