@@ -36,7 +36,12 @@ library(CTUtemplate)
 
 Once installed, in RStudio, open a “new project in a new directory” and
 select “CTU project template”. Options in the following window are used
-to create the folders and headers of R (and eventually STATA) files.
+to create the folders and headers of R (and STATA) files.
+
+*Note:* `Directory name` would typically be e.g. `06_Analysis_xx_yy`,
+and `Create project as a subdirectory of` would be the
+`21_Statistics_yy` folder of the appropriate project (`yy` should be the
+same in both cases).
 
 ### UNIBE Red
 
@@ -55,7 +60,35 @@ plot(
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
-### Report templates
+See also the [`unibeCols`](https://github.com/CTU-Bern/unibeCols)
+package for more UNIBE corporate colours.
+
+### Quarto report templates
+
+We now also have some quarto report templates (more still to come,
+perhaps). At least RStudio v2022.01.1+554 is required for working with
+them.
+
+Functions in `CTUtemplate` allow accessing the templates directly from
+R:
+
+``` r
+# for a generic report
+use_qmd_html("folder/report.qmd")
+# for a revealjs presentation
+use_qmd_pres("folder/presentation.qmd")
+```
+
+The above functions will download the templates and other necessary
+files and (optionally) open the `qmd` file for you.
+
+See also the [quarto template repo](https://github.com/CTU-Bern/quarto)
+for more info on our quarto templates.
+
+See the [quarto guide](https://quarto.org/docs/guide/) for loads of
+info.
+
+### LaTeX Report templates
 
 `CTUtemplate` has an Rmd template for sample size reports and a more
 generic template with some examples of how to do things.
