@@ -63,7 +63,27 @@ plot(
 ```
 
 
-### Report templates
+### Quarto report templates
+
+We now also have some quarto report templates (more still to come, perhaps). At least RStudio v2022.01.1+554 is required for working with them. 
+
+Functions in `CTUtemplate` allow accessing the templates directly from R:
+
+```{r, eval = FALSE}
+# for a generic report
+use_qmd_html("folder/report.qmd")
+# for a revealjs presentation
+use_qmd_pres("folder/presentation.qmd")
+```
+
+The above functions will download the templates and other necessary files and (optionally) open the `qmd` file for you. 
+
+See also the [quarto template repo](https://github.com/CTU-Bern/quarto) for more info on our quarto templates. 
+
+See the [quarto guide](https://quarto.org/docs/guide/) for loads of info.
+
+
+### LaTeX Report templates
 
 `CTUtemplate` has an Rmd template for sample size reports and a more generic template
 with some examples of how to do things. 
@@ -121,6 +141,7 @@ output:
 ```
 
 Using this approach, other latex packages can be used to extend the capabilities of latex.
+
 
 ### Acknowledgements
 
