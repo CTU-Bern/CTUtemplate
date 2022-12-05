@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.3.1-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.3.2-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -55,7 +55,32 @@ plot(
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
 
-### Report templates
+### Quarto report templates
+
+We now also have some quarto report templates (more still to come,
+perhaps). At least RStudio v2022.01.1+554 is required for working with
+them.
+
+Functions in `CTUtemplate` allow accessing the templates directly from
+R:
+
+``` r
+# for a generic report
+use_qmd_html("folder/report.qmd")
+# for a revealjs presentation
+use_qmd_pres("folder/presentation.qmd")
+```
+
+The above functions will download the templates and other necessary
+files and (optionally) open the `qmd` file for you.
+
+See also the [quarto template repo](https://github.com/CTU-Bern/quarto)
+for more info on our quarto templates.
+
+See the [quarto guide](https://quarto.org/docs/guide/) for loads of
+info.
+
+### LaTeX Report templates
 
 `CTUtemplate` has an Rmd template for sample size reports and a more
 generic template with some examples of how to do things.
