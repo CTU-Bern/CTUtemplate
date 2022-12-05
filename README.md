@@ -43,6 +43,9 @@ and `Create project as a subdirectory of` would be the
 `21_Statistics_yy` folder of the appropriate project (`yy` should be the
 same in both cases).
 
+*IMPORTANT:* `Directory name` should not already exist as a subdirectory
+of `21_Statistics_yy`. Please delete (or rename) the existing folder.
+
 ### UNIBE Red
 
 There is also a function for the UNIBEs shade of red:
