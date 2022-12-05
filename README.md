@@ -36,7 +36,15 @@ library(CTUtemplate)
 
 Once installed, in RStudio, open a “new project in a new directory” and
 select “CTU project template”. Options in the following window are used
-to create the folders and headers of R (and eventually STATA) files.
+to create the folders and headers of R (and STATA) files.
+
+*Note:* `Directory name` would typically be e.g. `06_Analysis_xx_yy`,
+and `Create project as a subdirectory of` would be the
+`21_Statistics_yy` folder of the appropriate project (`yy` should be the
+same in both cases).
+
+*IMPORTANT:* `Directory name` should not already exist as a subdirectory
+of `21_Statistics_yy`. Please delete (or rename) the existing folder.
 
 ### UNIBE Red
 
@@ -54,6 +62,9 @@ plot(
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+See also the [`unibeCols`](https://github.com/CTU-Bern/unibeCols)
+package for more UNIBE corporate colours.
 
 ### Quarto report templates
 
@@ -86,7 +97,7 @@ info.
 generic template with some examples of how to do things.
 
 | Function                    | Description                                                                          |
-| :-------------------------- | :----------------------------------------------------------------------------------- |
+|:----------------------------|:-------------------------------------------------------------------------------------|
 | `use_report_template`       | Opens a generic file with various examples                                           |
 | `use_ssreport_template`     | Opens a template for a sample size report                                            |
 | `use_recreport_template`    | Opens a template for a recruitment report                                            |
