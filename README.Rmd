@@ -64,6 +64,8 @@ plot(
   yaxt = "n")
 ```
 
+See also the [`unibeCols`](https://github.com/CTU-Bern/unibeCols) package for more UNIBE corporate colours.
+
 
 ### Quarto report templates
 
