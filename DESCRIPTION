@@ -18,8 +18,9 @@ Imports:
   rstudioapi,
   stringr,
   svDialogs,
-  usethis,
   whisker
 suggests:
   knitr
-
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
