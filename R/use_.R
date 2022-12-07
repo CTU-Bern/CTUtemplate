@@ -250,6 +250,7 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
 #' @param open logical indicating whether to open the file
 #' @export
 #' @importFrom usethis edit_file
+#' @importFrom utils download.file
 #' @examples
 #' # dir <- tempdir()
 #' # file <- file.path(dir, "filename.qmd")
