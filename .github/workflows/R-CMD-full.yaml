@@ -72,6 +72,7 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
+          install.packages('testthat')
         shell: Rscript {0}
 
       - name: Session info
