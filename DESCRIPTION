@@ -2,7 +2,7 @@ Package: CTUtemplate
 Title: Example RStudio Project Templates
 Author: Alan G. Haynes
 Maintainer: Alan G. Haynes <alan.haynes@ctu.unibe.ch>
-Version: 0.3.2
+Version: 0.4.0
 Description: Templates and functions for use in CTU Bern.
 Depends: 
   R (>= 3.3.2)
@@ -12,29 +12,15 @@ LazyData: true
 RoxygenNote: 7.2.2
 Imports: 
   bookdown,
-  flextable,
-  forcats,
   fs,
   glue,
-  ggplot2,
-  grDevices,
-  here, 
-  magrittr,
-  officer,
   pingr,
   rstudioapi,
   stringr,
   svDialogs,
-  tibble,
-  usethis,
   whisker
+suggests:
+  knitr
 Suggests: 
-    dplyr,
-    gtsummary,
-    labelled,
-    readr,
-    rmarkdown,
-    knitr,
-    survival,
-    svn
-VignetteBuilder: knitr
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

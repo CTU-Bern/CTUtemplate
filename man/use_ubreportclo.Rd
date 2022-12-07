@@ -13,6 +13,7 @@ use_ubreportclo(
   email = "author.name@ctu.unibe.ch",
   job = "Senior Statistician",
   open = FALSE,
+  dir = ".",
   ...
 )
 }
@@ -32,6 +33,8 @@ use_ubreportclo(
 \item{job}{your job title}
 
 \item{open}{open the file or not}
+
+\item{dir}{directory in which to create the file}
 
 \item{...}{other options passed to \code{use_template}}
 }

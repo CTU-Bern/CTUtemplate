@@ -1,3 +1,8 @@
+CTUtemplate 0.4.0
+---------------------
+`asr` no issues an error pointing the user to SwissASR
+streamline dependencies
+
 CTUtemplate 0.3.2
 ---------------------
 use `here` instead of `setwd` and `file.path`

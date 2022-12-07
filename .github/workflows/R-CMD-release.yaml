@@ -11,7 +11,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
+          install.packages(c("remotes", "rcmdcheck", "testthat"))
           remotes::install_deps(dependencies = TRUE)
           install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
         shell: Rscript {0}

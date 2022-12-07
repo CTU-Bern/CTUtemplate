@@ -6,7 +6,6 @@
 #'
 #' @return Creates an Rmd file in the \code{save_as} location
 #' @export
-#' @importFrom usethis use_template
 #'
 #' @examples
 #' # use_report_template("foo.Rmd")
@@ -101,6 +100,7 @@ use_ub_tex_template <- function(save_as, open = TRUE, ...){
 #' @param email your email address
 #' @param job your job title
 #' @param open open the file or not
+#' @param dir directory in which to create the file
 #' @param ... other options passed to \code{use_template}
 #'
 #' @return writes the UNIBE template clo file
@@ -129,9 +129,10 @@ use_ubreportclo <- function(
                             email = "author.name@ctu.unibe.ch",
                             job = "Senior Statistician",
                             open = FALSE,
+                            dir = ".",
                             ...){
 
-  file <- file.path("ubreport.clo")
+  file <- file.path(dir, "ubreport.clo")
 
   template <- path_package(package = "CTUtemplate", "templates", "ubreport.clo")
 
@@ -239,7 +240,7 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
                          file.path(d, "_extensions", "CTU_Bern", "qmd-ctuhtml", x))
          })
 
-  if(open) usethis::edit_file(save_as)
+  if(open) utils::file.edit(save_as)
 
 }
 
@@ -249,7 +250,7 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
 #' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
 #' @param open logical indicating whether to open the file
 #' @export
-#' @importFrom usethis edit_file
+#' @importFrom utils download.file
 #' @examples
 #' # dir <- tempdir()
 #' # file <- file.path(dir, "filename.qmd")
@@ -287,7 +288,7 @@ use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
                          file.path(d, "_extensions", "CTU_Bern", fmt, x))
          })
 
-  if(open) usethis::edit_file(save_as)
+  if(open) utils::file.edit(save_as)
 
 }
 
