@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.3.2-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.4.0-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
