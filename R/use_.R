@@ -281,8 +281,7 @@ use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
   dir.create(file.path(d, "_extensions"))
   dir.create(file.path(d, "_extensions", "CTU_Bern"))
   dir.create(file.path(d, "_extensions", "CTU_Bern", fmt))
-  lapply(c("_extension.yaml", "styles.css",
-           "ub_Logo_english_2019_RGB_wb.png","unibe.scss"),
+  lapply(c("_extension.yaml", "ub_Logo_english_2019_RGB_wb.png","unibe.scss"),
          function(x){
            download.file(file.path(url, "_extensions", fmt, x),
                          file.path(d, "_extensions", "CTU_Bern", fmt, x))
