@@ -240,7 +240,13 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
                          file.path(d, "_extensions", "CTU_Bern", "qmd-ctuhtml", x))
          })
 
-  if(open) utils::file.edit(save_as)
+  if (open) {
+    if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+      rstudioapi::navigateToFile(save_as)
+    } else {
+      utils::file.edit(save_as)
+    }
+  }
 
 }
 
@@ -287,7 +293,13 @@ use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
                          file.path(d, "_extensions", "CTU_Bern", fmt, x))
          })
 
-  if(open) utils::file.edit(save_as)
+  if (open) {
+    if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
+      rstudioapi::navigateToFile(save_as)
+    } else {
+      utils::file.edit(save_as)
+    }
+  }
 
 }
 
