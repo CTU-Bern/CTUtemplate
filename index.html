@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CTUtemplate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.2</span>
       </span>
     </div>
 
@@ -88,29 +88,20 @@
 <p><em>IMPORTANT:</em> <code>Directory name</code> should not already exist as a subdirectory of <code>21_Statistics_yy</code>. Please delete (or rename) the existing folder.</p>
 </div>
 <div class="section level3">
-<h3 id="unibe-red">UNIBE Red<a class="anchor" aria-label="anchor" href="#unibe-red"></a>
-</h3>
-<p>There is also a function for the UNIBEs shade of red:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="fl">.1</span>, <span class="fl">.1</span>, <span class="fl">.1</span><span class="op">)</span>, tck <span class="op">=</span> <span class="op">-</span><span class="fl">.01</span>, mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">.2</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
-<span>  <span class="co"># main point:</span></span>
-<span>  col <span class="op">=</span> <span class="fu"><a href="reference/unibeRed.html">unibeRed</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">.2</span>, <span class="fl">1</span>, <span class="fl">.2</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>  <span class="co"># other stuff for the figure</span></span>
-<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">.2</span>, <span class="fl">1</span>, <span class="fl">.2</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span><span class="op">)</span>, </span>
-<span>  pch <span class="op">=</span> <span class="fl">15</span>, cex <span class="op">=</span> <span class="fl">5</span>, xlab <span class="op">=</span> <span class="st">"alpha"</span>, ylab <span class="op">=</span> <span class="st">""</span>, </span>
-<span>  yaxt <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;"></p>
-<p>See also the <a href="https://github.com/CTU-Bern/unibeCols" class="external-link"><code>unibeCols</code></a> package for more UNIBE corporate colours.</p>
-</div>
-<div class="section level3">
 <h3 id="quarto-report-templates">Quarto report templates<a class="anchor" aria-label="anchor" href="#quarto-report-templates"></a>
 </h3>
 <p>We now also have some quarto report templates (more still to come, perhaps). At least RStudio v2022.01.1+554 is required for working with them.</p>
 <p>Functions in <code>CTUtemplate</code> allow accessing the templates directly from R:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for a generic report</span></span>
 <span><span class="fu"><a href="reference/use_qmd_html.html">use_qmd_html</a></span><span class="op">(</span><span class="st">"folder/report.qmd"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># for a template recruitment report</span></span>
+<span><span class="fu">use_qmd_use_qmd_htmlrecruitment</span><span class="op">(</span><span class="st">"folder/recreport.qmd"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># for a template sample size report</span></span>
+<span><span class="fu"><a href="reference/use_qmd_htmlsampsi.html">use_qmd_htmlsampsi</a></span><span class="op">(</span><span class="st">"folder/samplesize.qmd"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># for a revealjs presentation</span></span>
 <span><span class="fu"><a href="reference/use_qmd_pres.html">use_qmd_pres</a></span><span class="op">(</span><span class="st">"folder/presentation.qmd"</span><span class="op">)</span></span></code></pre></div>
 <p>The above functions will download the templates and other necessary files and (optionally) open the <code>qmd</code> file for you.</p>
@@ -154,7 +145,7 @@
 </tbody>
 </table>
 <p>The functions are used to open a new template in the location designated (the recommended location would probably be <code>08_Reports_projnum</code>).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for a sample size report</span></span>
 <span><span class="fu"><a href="reference/use_ssreport_template.html">use_ssreport_template</a></span><span class="op">(</span><span class="st">"folder/ssreport.Rmd"</span><span class="op">)</span></span>
 <span><span class="co"># for the examples</span></span>
@@ -164,22 +155,22 @@
 <span><span class="co"># for an example of a parameterized report (note the lack of file extension here)</span></span>
 <span><span class="fu"><a href="reference/use_param_report_template.html">use_param_report_template</a></span><span class="op">(</span><span class="st">"folder/param_report"</span><span class="op">)</span></span></code></pre></div>
 <p>The top of the header defines the location that the PDF is saved, relative to the Rmd. The <code>xx</code> in <code>08_Reports_xx</code> should be changed to the project number. <code>ReportName</code> on the following line could be changed to something else.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>knit<span class="op">:</span><span class="st"> </span>(<span class="cf">function</span>(inputFile, encoding) { </span>
-<span id="cb7-2"><a href="#cb7-2"></a>      rmarkdown<span class="op">::</span><span class="kw">render</span>(inputFile,</span>
-<span id="cb7-3"><a href="#cb7-3"></a>                        <span class="dt">encoding=</span>encoding, </span>
-<span id="cb7-4"><a href="#cb7-4"></a>                        <span class="dt">output_file=</span><span class="kw">file.path</span>(<span class="kw">dirname</span>(inputFile), </span>
-<span id="cb7-5"><a href="#cb7-5"></a>                                              <span class="st">'../08_Reports_xx'</span>, </span>
-<span id="cb7-6"><a href="#cb7-6"></a>                                              <span class="kw">paste0</span>(<span class="st">"ReportName_"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>                                                     <span class="kw">Sys.Date</span>(),</span>
-<span id="cb7-8"><a href="#cb7-8"></a>                                                     <span class="st">".pdf"</span>))) })</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>knit<span class="op">:</span><span class="st"> </span>(<span class="cf">function</span>(inputFile, encoding) { </span>
+<span id="cb6-2"><a href="#cb6-2"></a>      rmarkdown<span class="op">::</span><span class="kw">render</span>(inputFile,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>                        <span class="dt">encoding=</span>encoding, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>                        <span class="dt">output_file=</span><span class="kw">file.path</span>(<span class="kw">dirname</span>(inputFile), </span>
+<span id="cb6-5"><a href="#cb6-5"></a>                                              <span class="st">'../08_Reports_xx'</span>, </span>
+<span id="cb6-6"><a href="#cb6-6"></a>                                              <span class="kw">paste0</span>(<span class="st">"ReportName_"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>                                                     <span class="kw">Sys.Date</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8"></a>                                                     <span class="st">".pdf"</span>))) })</span></code></pre></div>
 <p>The templates for sample size calculations and recruitment reports refer to <code>ProjectName</code>. This should also be changed to something more meaningful.</p>
 <p>If modifications to the latex template are desired, it can be copied to the folder via</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/use_ub_tex_template.html">use_ub_tex_template</a></span><span class="op">(</span><span class="st">"folder/report.tex"</span><span class="op">)</span></span></code></pre></div>
 <p>The YAML header in the Rmd file then needs to be changed to include</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>output<span class="op">:</span><span class="st"> </span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span>CTUtemplate<span class="op">::</span>report_pdf<span class="op">:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="st">    </span>report_template<span class="op">:</span><span class="st"> "report.tex"</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>output<span class="op">:</span><span class="st"> </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span>CTUtemplate<span class="op">::</span>report_pdf<span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>report_template<span class="op">:</span><span class="st"> "report.tex"</span></span></code></pre></div>
 <p>Using this approach, other latex packages can be used to extend the capabilities of latex.</p>
 </div>
 <div class="section level3">
@@ -217,7 +208,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/CTU-Bern/CTUtemplate" class="external-link"><img src="https://img.shields.io/badge/dev%20version-0.4.1-blue.svg"></a></li>
+<li><a href="https://github.com/CTU-Bern/CTUtemplate" class="external-link"><img src="https://img.shields.io/badge/dev%20version-0.4.2-blue.svg"></a></li>
 </ul>
 </div>
 
