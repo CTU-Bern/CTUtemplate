@@ -1,3 +1,7 @@
+CTUtemplate 0.4.1
+---------------------
+fix typo in `use_qmd_pres`
+
 CTUtemplate 0.4.0
 ---------------------
 `asr` no issues an error pointing the user to SwissASR
