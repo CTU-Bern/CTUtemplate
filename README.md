@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.4.1-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.4.2-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -46,26 +46,6 @@ same in both cases).
 *IMPORTANT:* `Directory name` should not already exist as a subdirectory
 of `21_Statistics_yy`. Please delete (or rename) the existing folder.
 
-### UNIBE Red
-
-There is also a function for the UNIBEs shade of red:
-
-``` r
-par(mai = c(.5, .1, .1, .1), tck = -.01, mgp = c(1,.2,0))
-plot(
-  # main point:
-  col = unibeRed(alpha = seq(.2, 1, .2)), 
-  # other stuff for the figure
-  x = seq(.2, 1, .2), y = rep(1,5), 
-  pch = 15, cex = 5, xlab = "alpha", ylab = "", 
-  yaxt = "n")
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
-
-See also the [`unibeCols`](https://github.com/CTU-Bern/unibeCols)
-package for more UNIBE corporate colours.
-
 ### Quarto report templates
 
 We now also have some quarto report templates (more still to come,
@@ -78,6 +58,13 @@ R:
 ``` r
 # for a generic report
 use_qmd_html("folder/report.qmd")
+
+# for a template recruitment report
+use_qmd_use_qmd_htmlrecruitment("folder/recreport.qmd")
+
+# for a template sample size report
+use_qmd_htmlsampsi("folder/samplesize.qmd")
+
 # for a revealjs presentation
 use_qmd_pres("folder/presentation.qmd")
 ```
