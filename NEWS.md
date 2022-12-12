@@ -1,3 +1,7 @@
+CTUtemplate 0.4.2
+---------------------
+addition of `use_qmd_htmlrecruitment` and `use_qmd_htmlsampsi`
+
 CTUtemplate 0.4.1
 ---------------------
 fix typo in `use_qmd_pres`
