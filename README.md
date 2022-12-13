@@ -60,7 +60,7 @@ R:
 use_qmd_html("folder/report.qmd")
 
 # for a template recruitment report
-use_qmd_use_qmd_htmlrecruitment("folder/recreport.qmd")
+use_qmd_htmlrecruitment("folder/recreport.qmd")
 
 # for a template sample size report
 use_qmd_htmlsampsi("folder/samplesize.qmd")
