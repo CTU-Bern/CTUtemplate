@@ -1,3 +1,7 @@
+CTUtemplate 0.4.3
+---------------------
+fix buf with html presentation (figure not loading correctly due to incorrect path)
+
 CTUtemplate 0.4.2
 ---------------------
 addition of `use_qmd_htmlrecruitment` and `use_qmd_htmlsampsi`
