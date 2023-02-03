@@ -1,6 +1,10 @@
 CTUtemplate 0.4.3
 ---------------------
-fix buf with html presentation (figure not loading correctly due to incorrect path)
+fix bug with other quarto templates (figure not loading correctly due to incorrect path)
+
+CTUtemplate 0.4.3
+---------------------
+fix bug with html presentation (figure not loading correctly due to incorrect path)
 
 CTUtemplate 0.4.2
 ---------------------
