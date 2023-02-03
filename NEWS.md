@@ -1,4 +1,4 @@
-CTUtemplate 0.4.3
+CTUtemplate 0.4.4
 ---------------------
 fix bug with other quarto templates (figure not loading correctly due to incorrect path)
 
