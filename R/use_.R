@@ -334,7 +334,7 @@ use_qmd_htmlrecruitment <- function(save_as = "file.qmd", open = TRUE){
   url <- "https://raw.githubusercontent.com/CTU-Bern/quarto/html-rec"
 
   # template itself
-  download.file(file.path(url, "CTU_html_template.qmd"), save_as)
+  download.file(file.path(url, "template.qmd"), save_as)
   # references
   download.file(file.path(url, "references.bib"), file.path(d, "references.bib"))
   # qmd extension
