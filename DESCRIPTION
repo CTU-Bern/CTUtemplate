@@ -19,8 +19,7 @@ Imports:
   stringr,
   svDialogs,
   whisker
-suggests:
-  knitr
-Suggests: 
-    testthat (>= 3.0.0)
+Suggests:
+  knitr,
+  testthat (>= 3.0.0)
 Config/testthat/edition: 3
