@@ -1,6 +1,18 @@
-CTUtemplate 0.4.3
+CTUtemplate 0.4.6
 ---------------------
 `use_qmd_*` functions now call quarto under the hood, rather than copying files from github. this fixes a bug with the previous version where the UNIBE logo was not shown.
+
+CTUtemplate 0.4.4
+---------------------
+fix bug with html-rec quarto template
+
+CTUtemplate 0.4.4
+---------------------
+fix bug with other quarto templates (figure not loading correctly due to incorrect path)
+
+CTUtemplate 0.4.3
+---------------------
+fix bug with html presentation (figure not loading correctly due to incorrect path)
 
 CTUtemplate 0.4.2
 ---------------------
