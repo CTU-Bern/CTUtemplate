@@ -200,7 +200,7 @@ use_param_report_template <- function(save_as, open = TRUE, ...){
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
 #' @rdname use_qmd
-#' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
+#' @param save_in directory to save the main qmd in
 #' @param open logical indicating whether to open the file
 #' @export
 #' @examples
@@ -221,7 +221,7 @@ use_qmd_html <- function(save_in = ".", open = TRUE){
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
 #' @describeIn use_qmd revealjs Presentation Template
-#' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
+#' @param save_in directory to save the main qmd in
 #' @param open logical indicating whether to open the file
 #' @export
 #' @importFrom utils download.file
@@ -244,7 +244,7 @@ use_qmd_pres <- function(save_in = ".", open = TRUE){
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
 #' @describeIn use_qmd Recruitment Report Template
-#' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
+#' @param save_in directory to save the main qmd in
 #' @param open logical indicating whether to open the file
 #' @export
 #' @examples
