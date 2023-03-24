@@ -21,8 +21,6 @@ use_qmd_htmlsampsi(save_in = ".", open = TRUE)
 \item{save_in}{directory to save the main qmd in}
 
 \item{open}{logical indicating whether to open the file}
-
-\item{save_as}{filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)}
 }
 \description{
 Use the CTU quarto html template
