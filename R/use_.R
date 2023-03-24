@@ -199,6 +199,7 @@ use_param_report_template <- function(save_as, open = TRUE, ...){
 #' Use the CTU quarto html template
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
+#' @rdname use_qmd
 #' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
 #' @param open logical indicating whether to open the file
 #' @export
@@ -208,51 +209,18 @@ use_param_report_template <- function(save_as, open = TRUE, ...){
 #' # use_qmd_html(file, FALSE)
 #' # in practice at CTU:
 #' # use_qmd_html("08_Reports_xx/ReportName.qmd", TRUE)
-use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
+use_qmd_html <- function(save_in = ".", open = TRUE){
 
-  if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
-  if(!grepl("qmd$", save_as)){
-    warning("file extension missing... adding '.qmd'")
-    save_as <- paste0(save_as, ".qmd")
-  }
+  if_no_ping_stop()
 
-  d <- dirname(save_as)
-  if(d == "."){
-
-  } else {
-    if(!dir.exists(d)) dir.create(d)
-  }
-
-  url <- "https://raw.githubusercontent.com/CTU-Bern/quarto/html"
-
-  # template itself
-  download.file(file.path(url, "CTU_html_template.qmd"), save_as)
-  # references
-  download.file(file.path(url, "references.bib"), file.path(d, "references.bib"))
-  # qmd extension
-  dir.create(file.path(d, "_extensions"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern", "qmd-ctuhtml"))
-  lapply(c("_extension.yml", "plos-one.csl", "styles.css",
-           "ub_Logo_english_2019_RGB_wb.png","unibe.scss"),
-         function(x){
-           download.file(file.path(url, "_extensions", "qmd-ctuhtml", x),
-                         file.path(d, "_extensions", "CTU-Bern", "qmd-ctuhtml", x))
-         })
-
-  if (open) {
-    if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
-      rstudioapi::navigateToFile(save_as)
-    } else {
-      utils::file.edit(save_as)
-    }
-  }
+  use_quarto("html", save_in, open = open)
 
 }
 
 #' Use the CTU quarto revealjs presentation template
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
+#' @describeIn use_qmd revealjs Presentation Template
 #' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
 #' @param open logical indicating whether to open the file
 #' @export
@@ -263,43 +231,11 @@ use_qmd_html <- function(save_as = "file.qmd", open = TRUE){
 #' # use_qmd_pres(file, FALSE)
 #' # in practice at CTU:
 #' # use_qmd_pres("08_Reports_xx/ReportName.qmd", TRUE)
-use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
+use_qmd_pres <- function(save_in = ".", open = TRUE){
 
-  if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
-  if(!grepl("qmd$", save_as)){
-    warning("file extension missing... adding '.qmd'")
-    save_as <- paste0(save_as, ".qmd")
-  }
+  if_no_ping_stop()
 
-  d <- dirname(save_as)
-  if(d == "."){
-
-  } else {
-    if(!dir.exists(d)) dir.create(d)
-  }
-
-  url <- "https://raw.githubusercontent.com/CTU-Bern/quarto/pres"
-  fmt <- "ctupres"
-
-  # template itself
-  download.file(file.path(url, "template.qmd"), save_as)
-  # qmd extension
-  dir.create(file.path(d, "_extensions"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern", fmt))
-  lapply(c("_extension.yaml", "ub_Logo_english_2019_RGB_wb.png","unibe.scss"),
-         function(x){
-           download.file(file.path(url, "_extensions", fmt, x),
-                         file.path(d, "_extensions", "CTU-Bern", fmt, x))
-         })
-
-  if (open) {
-    if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
-      rstudioapi::navigateToFile(save_as)
-    } else {
-      utils::file.edit(save_as)
-    }
-  }
+  use_quarto("pres", save_in, open = open)
 
 }
 
@@ -307,6 +243,7 @@ use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
 #' Use the CTU quarto html recruitment report template
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
+#' @describeIn use_qmd Recruitment Report Template
 #' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
 #' @param open logical indicating whether to open the file
 #' @export
@@ -316,52 +253,19 @@ use_qmd_pres <- function(save_as = "file.qmd", open = TRUE){
 #' # use_qmd_html(file, FALSE)
 #' # in practice at CTU:
 #' # use_qmd_htmlrecruitment("08_Reports_xx/ReportName.qmd", TRUE)
-use_qmd_htmlrecruitment <- function(save_as = "file.qmd", open = TRUE){
+use_qmd_htmlrecruitment <- function(save_in = ".", open = TRUE){
 
-  if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
-  if(!grepl("qmd$", save_as)){
-    warning("file extension missing... adding '.qmd'")
-    save_as <- paste0(save_as, ".qmd")
-  }
+  if_no_ping_stop()
 
-  d <- dirname(save_as)
-  if(d == "."){
-
-  } else {
-    if(!dir.exists(d)) dir.create(d)
-  }
-
-  url <- "https://raw.githubusercontent.com/CTU-Bern/quarto/html-rec"
-
-  # template itself
-  download.file(file.path(url, "template.qmd"), save_as)
-  # references
-  download.file(file.path(url, "references.bib"), file.path(d, "references.bib"))
-  # qmd extension
-  dir.create(file.path(d, "_extensions"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern", "qmd-ctuhtml"))
-  lapply(c("_extension.yml", "plos-one.csl", "styles.css",
-           "ub_Logo_english_2019_RGB_wb.png","unibe.scss"),
-         function(x){
-           download.file(file.path(url, "_extensions", "qmd-ctuhtml", x),
-                         file.path(d, "_extensions", "CTU-Bern", "qmd-ctuhtml", x))
-         })
-
-  if (open) {
-    if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
-      rstudioapi::navigateToFile(save_as)
-    } else {
-      utils::file.edit(save_as)
-    }
-  }
+  use_quarto("html-ss", save_in, open = open)
 
 }
 
 #' Use the CTU quarto html sample size report template
 #' This function will download and optionally open the quarto markdown (qmd) file
 #' and the other necessary files from github.
-#' @param save_as filename to save the main qmd as (other filenames are fixed to be compatible with the qmd)
+#' @describeIn use_qmd Sample Size Report Template
+#' @param save_in directory to save the main qmd in
 #' @param open logical indicating whether to open the file
 #' @export
 #' @examples
@@ -370,44 +274,54 @@ use_qmd_htmlrecruitment <- function(save_as = "file.qmd", open = TRUE){
 #' # use_qmd_html(file, FALSE)
 #' # in practice at CTU:
 #' # use_qmd_htmlrecruitment("08_Reports_xx/ReportName.qmd", TRUE)
-use_qmd_htmlsampsi <- function(save_as = "file.qmd", open = TRUE){
+use_qmd_htmlsampsi <- function(save_in = ".", open = TRUE){
 
-  if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
-  if(!grepl("qmd$", save_as)){
-    warning("file extension missing... adding '.qmd'")
-    save_as <- paste0(save_as, ".qmd")
+  if_no_ping_stop()
+
+  use_quarto("html-ss", save_in, open = open)
+
+}
+
+
+
+#' Get a quarto template from the CTU-Bern quarto repository
+#'
+#' @param x branch name of the template in question
+#' @param dir folder in which to save the template
+#' @param open logical, whether to open the file
+#'
+#' @return a qmd file (and extension file)
+#' @export
+#'
+#' @examples
+#' #use_quarto("html", ".")
+use_quarto <- function(x, dir, open = TRUE){
+
+  if(!x %in% c("html", "html-ss", "html-rec", "pres")){
+    stop("unknown branch of CTU-Bern/quarto")
   }
 
-  d <- dirname(save_as)
-  if(d == "."){
+  wd <- getwd()
+  on.exit(setwd(wd))
 
-  } else {
-    if(!dir.exists(d)) dir.create(d)
-  }
+  setwd(dir)
 
-  url <- "https://raw.githubusercontent.com/CTU-Bern/quarto/html-ss"
+  system(glue("quarto use template CTU-Bern/quarto@{x} --no-prompt"))
 
-  # template itself
-  download.file(file.path(url, "template.qmd"), save_as)
-  # references
-  download.file(file.path(url, "references.bib"), file.path(d, "references.bib"))
-  # qmd extension
-  dir.create(file.path(d, "_extensions"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern"))
-  dir.create(file.path(d, "_extensions", "CTU-Bern", "qmd-ctuhtml"))
-  lapply(c("_extension.yml", "plos-one.csl", "styles.css",
-           "ub_Logo_english_2019_RGB_wb.png","unibe.scss"),
-         function(x){
-           download.file(file.path(url, "_extensions", "qmd-ctuhtml", x),
-                         file.path(d, "_extensions", "CTU-Bern", "qmd-ctuhtml", x))
-         })
+  message("You probably want to rename the .qmd file in dir")
 
-  if (open) {
+  if(open){
+
+    qmd <- list.files(pattern = "\\.qmd$")
+
     if (rstudioapi::isAvailable() && rstudioapi::hasFun("navigateToFile")) {
-      rstudioapi::navigateToFile(save_as)
+      rstudioapi::navigateToFile(qmd)
     } else {
-      utils::file.edit(save_as)
+      utils::file.edit(qmd)
     }
   }
+}
 
+if_no_ping_stop <- function(){
+  if(!canPingSite("raw.githubusercontent.com")) stop("check internet connection")
 }
