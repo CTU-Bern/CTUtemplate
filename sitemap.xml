@@ -34,16 +34,10 @@
     <loc>/reference/use_param_report_template.html</loc>
   </url>
   <url>
-    <loc>/reference/use_qmd_html.html</loc>
+    <loc>/reference/use_qmd.html</loc>
   </url>
   <url>
-    <loc>/reference/use_qmd_htmlrecruitment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_qmd_htmlsampsi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_qmd_pres.html</loc>
+    <loc>/reference/use_quarto.html</loc>
   </url>
   <url>
     <loc>/reference/use_recreport_template.html</loc>
