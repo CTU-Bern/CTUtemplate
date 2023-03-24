@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.4.4-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.4.6-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -57,20 +57,21 @@ R:
 
 ``` r
 # for a generic report
-use_qmd_html("folder/report.qmd")
+use_qmd_html("folder")
 
 # for a template recruitment report
-use_qmd_htmlrecruitment("folder/recreport.qmd")
+use_qmd_htmlrecruitment("folder")
 
 # for a template sample size report
-use_qmd_htmlsampsi("folder/samplesize.qmd")
+use_qmd_htmlsampsi("folder")
 
 # for a revealjs presentation
-use_qmd_pres("folder/presentation.qmd")
+use_qmd_pres("folder")
 ```
 
 The above functions will download the templates and other necessary
-files and (optionally) open the `qmd` file for you.
+files and (optionally) open the `qmd` file for you. You should specify
+the location to save the files
 
 See also the [quarto template repo](https://github.com/CTU-Bern/quarto)
 for more info on our quarto templates.
