@@ -1,3 +1,7 @@
+CTUtemplate 0.4.7
+---------------------
+addition of `coloured_text` for using in quarto/RMarkdown documents to more easily colour particular pieces of text
+
 CTUtemplate 0.4.6
 ---------------------
 `use_qmd_*` functions now call quarto under the hood, rather than copying files from github. this fixes a bug with the previous version where the UNIBE logo was not shown.
