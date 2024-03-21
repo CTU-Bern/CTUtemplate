@@ -5,6 +5,28 @@ mykeep()
 # dat <- read_secuTrial(paths$od("zipname.zip"))
 # dat < redcap_export_byform(readLines("O:/tokens/projNum.txt"),
 #                            "https://redcap.ctu.unibe.ch/api/")
+# alternative REDCap export code. also saves data as CSV
+# if(export_date == Sys.Date()){
+#   dat <- redcap_export_byform(readLines("O:/tokens/projNum.txt"),
+#                               "https://redcap.ctu.unibe.ch/api/")
+#   meta <- redcap_export_meta(readLines("O:/tokens/projNum.txt"),
+#                              "https://redcap.ctu.unibe.ch/api/")
+#   lapply(names(dat), function(x){
+#     write.csv(dat[[x]], paths$od(paste0(x, "-", export_date, ".csv")),
+#               na = "", row.names = FALSE)
+#     return(NULL)
+#   })
+#   lapply(names(meta), function(x){
+#     write.csv(meta[[x]], paths$od(paste0(x, "-", export_date, ".csv")),
+#               na = "", row.names = FALSE)
+#     return(NULL)
+#   })
+#   saveRDS(dat, paths$od(paste0("raw-", export_date, ".RDS")))
+#   saveRDS(meta, paths$od(paste0("meta-", export_date, ".RDS")))
+# }
+#
+# dat <- readRDS(paths$od(paste0("raw-", export_date, ".RDS")))
+# meta <- readRDS(paths$od(paste0("meta-", export_date, ".RDS")))
 
 # example using mtcars
 data(mtcars)
