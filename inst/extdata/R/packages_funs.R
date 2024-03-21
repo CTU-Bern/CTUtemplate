@@ -10,6 +10,9 @@
 # install.packages("redcaptools", repos = "https://ctu-bern.r-universe.dev")
 # install.packages("secuTrialR")
 
+# install.packages("groundhog")
+# library.groundhog(" #UNCOMMENT TO USE GROUNDHOG
+
 ## Load packages ----
 # library(atable)
 # atable_options(format_to = "console", add_margins = TRUE)
@@ -31,6 +34,7 @@
 # library(btabler)
 # library(sse)
 
+# ", date = "2024-02-01") #UNCOMMENT TO USE GROUNDHOG
 
 # custom functions ----
 # function to retain only named objects (+ 'paths', pp and functions)
