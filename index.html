@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CTUtemplate</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.0</span>
       </span>
     </div>
 
@@ -62,7 +62,7 @@
 <div class="page-header"><h1 id="ctutemplate-">
 <code>CTUtemplate</code> <img src="reference/figures/sticker.png" align="right" width="200"><a class="anchor" aria-label="anchor" href="#ctutemplate-"></a>
 </h1></div>
-<p><a href="https://github.com/CTU-Bern/CTUtemplate" class="external-link"><img src="https://img.shields.io/badge/dev%20version-0.4.7-blue.svg"></a></p>
+<p><a href="https://github.com/CTU-Bern/CTUtemplate" class="external-link"><img src="https://img.shields.io/badge/dev%20version-0.5.0-blue.svg"></a></p>
 <p><code>CTUtemplate</code> is a package to create a template directory structure (and files) and also includes the CTUs annual safety report function.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -114,8 +114,8 @@
 <p><code>CTUtemplate</code> has an Rmd template for sample size reports and a more generic template with some examples of how to do things.</p>
 <table class="table">
 <colgroup>
-<col width="24%">
-<col width="75%">
+<col width="25%">
+<col width="74%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Function</th>
@@ -155,22 +155,22 @@
 <span><span class="co"># for an example of a parameterized report (note the lack of file extension here)</span></span>
 <span><span class="fu"><a href="reference/use_param_report_template.html">use_param_report_template</a></span><span class="op">(</span><span class="st">"folder/param_report"</span><span class="op">)</span></span></code></pre></div>
 <p>The top of the header defines the location that the PDF is saved, relative to the Rmd. The <code>xx</code> in <code>08_Reports_xx</code> should be changed to the project number. <code>ReportName</code> on the following line could be changed to something else.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>knit<span class="op">:</span><span class="st"> </span>(<span class="cf">function</span>(inputFile, encoding) { </span>
-<span id="cb6-2"><a href="#cb6-2"></a>      rmarkdown<span class="op">::</span><span class="kw">render</span>(inputFile,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>                        <span class="dt">encoding=</span>encoding, </span>
-<span id="cb6-4"><a href="#cb6-4"></a>                        <span class="dt">output_file=</span><span class="kw">file.path</span>(<span class="kw">dirname</span>(inputFile), </span>
-<span id="cb6-5"><a href="#cb6-5"></a>                                              <span class="st">'../08_Reports_xx'</span>, </span>
-<span id="cb6-6"><a href="#cb6-6"></a>                                              <span class="kw">paste0</span>(<span class="st">"ReportName_"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7"></a>                                                     <span class="kw">Sys.Date</span>(),</span>
-<span id="cb6-8"><a href="#cb6-8"></a>                                                     <span class="st">".pdf"</span>))) })</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>knit<span class="sc">:</span> (<span class="cf">function</span>(inputFile, encoding) { </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>      rmarkdown<span class="sc">::</span><span class="fu">render</span>(inputFile,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                        <span class="at">encoding=</span>encoding, </span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                        <span class="at">output_file=</span><span class="fu">file.path</span>(<span class="fu">dirname</span>(inputFile), </span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>                                              <span class="st">'../08_Reports_xx'</span>, </span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>                                              <span class="fu">paste0</span>(<span class="st">"ReportName_"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                                                     <span class="fu">Sys.Date</span>(),</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                                                     <span class="st">".pdf"</span>))) })</span></code></pre></div>
 <p>The templates for sample size calculations and recruitment reports refer to <code>ProjectName</code>. This should also be changed to something more meaningful.</p>
 <p>If modifications to the latex template are desired, it can be copied to the folder via</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/use_ub_tex_template.html">use_ub_tex_template</a></span><span class="op">(</span><span class="st">"folder/report.tex"</span><span class="op">)</span></span></code></pre></div>
 <p>The YAML header in the Rmd file then needs to be changed to include</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>output<span class="op">:</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span>CTUtemplate<span class="op">::</span>report_pdf<span class="op">:</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    </span>report_template<span class="op">:</span><span class="st"> "report.tex"</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>output<span class="sc">:</span> </span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  CTUtemplate<span class="sc">::</span>report_pdf<span class="sc">:</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    report_template<span class="sc">:</span> <span class="st">"report.tex"</span></span></code></pre></div>
 <p>Using this approach, other latex packages can be used to extend the capabilities of latex.</p>
 </div>
 <div class="section level3">
