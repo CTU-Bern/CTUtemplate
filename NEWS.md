@@ -1,3 +1,7 @@
+CTUtemplate 0.5.1
+---------------------
+correct use_qmd_htmlrecruitment (it had previously downloaded the sample size report template)
+
 CTUtemplate 0.5.0
 ---------------------
 addition of template R code for saving data as CSV

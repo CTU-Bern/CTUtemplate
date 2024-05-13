@@ -257,7 +257,7 @@ use_qmd_htmlrecruitment <- function(save_in = ".", open = TRUE){
 
   if_no_ping_stop()
 
-  use_quarto("html-ss", save_in, open = open)
+  use_quarto("html-rec", save_in, open = open)
 
 }
 
