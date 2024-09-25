@@ -1,57 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/OneStageSS.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_ctu_header.html</loc>
-  </url>
-  <url>
-    <loc>/reference/coloured_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/report_pdf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unibeRed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_param_report_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_qmd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_quarto.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_recreport_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_report_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_ssreport_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_ub_tex_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_ubreportclo.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/OneStageSS.html</loc></url>
+<url><loc>/reference/add_ctu_header.html</loc></url>
+<url><loc>/reference/coloured_text.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/report_pdf.html</loc></url>
+<url><loc>/reference/unibeRed.html</loc></url>
+<url><loc>/reference/use_param_report_template.html</loc></url>
+<url><loc>/reference/use_qmd.html</loc></url>
+<url><loc>/reference/use_quarto.html</loc></url>
+<url><loc>/reference/use_recreport_template.html</loc></url>
+<url><loc>/reference/use_report_template.html</loc></url>
+<url><loc>/reference/use_ssreport_template.html</loc></url>
+<url><loc>/reference/use_ub_tex_template.html</loc></url>
+<url><loc>/reference/use_ubreportclo.html</loc></url>
 </urlset>
+
