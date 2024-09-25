@@ -71,7 +71,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_cran("rcmdcheck")
+          install.packages("rcmdcheck")
           install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
           install.packages('testthat')
         shell: Rscript {0}
