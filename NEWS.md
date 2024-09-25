@@ -1,3 +1,7 @@
+CTUtemplate 0.6.0
+---------------------
+update templates to use DCR-like branding
+
 CTUtemplate 0.5.0
 ---------------------
 addition of template R code for saving data as CSV

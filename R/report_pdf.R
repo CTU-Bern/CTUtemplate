@@ -13,11 +13,13 @@ report_pdf <- function(report_template = find_resource("report", "report.tex"),
 
   if(report_template == "default") report_template <- find_resource("report", "report.tex")
 
-  # copy cls and logo to new dir
+  # copy cls and logos to new dir
   file.copy(find_resource("report", "ubreport.cls"),
             file.path(getwd(), "ubreport.cls"))
   file.copy(find_resource("report", "ub_16pt-cmyk.pdf"),
             file.path(getwd(), "ub_16pt-cmyk.pdf"))
+  file.copy(find_resource("report", "dcr_cmyk.pdf"),
+            file.path(getwd(), "dcr_cmyk.pdf"))
 
 
   base <- bookdown::pdf_document2(template = report_template,
@@ -66,6 +68,8 @@ report_pdf2 <- function(report_template = find_resource("report", "report.tex"),
             file.path(getwd(), "ubreport.cls"))
   file.copy(find_resource("report", "ub_16pt-cmyk.pdf"),
             file.path(getwd(), "ub_16pt-cmyk.pdf"))
+  file.copy(find_resource("report", "dcr_cmyk.pdf"),
+            file.path(getwd(), "dcr_cmyk.pdf"))
 
 
   base <- bookdown::pdf_document2(template = report_template,

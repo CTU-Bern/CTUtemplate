@@ -27,7 +27,7 @@
   \def\telnum{+41 31 631 35 10}
   \def\faxnum{}
   \def\email{{{email}}}
-  \def\web{www.ctu.unibe.ch}
+  \def\web{www.dcr.unibe.ch}
   \def\job{{{job}}}
 }
 
@@ -40,9 +40,9 @@
    \selectlanguage{USenglish}
    \def\uni{University of Bern}
    \def\faculty{Faculty of Medicine}
-   \def\dept{}
-   \def\institute{CTU Bern}
-   \def\addressline{CTU Bern, Mittelstrasse 43, CH-3012 Bern}
+   \def\dept{Department of Clinical Research}
+   \def\institute{}
+   \def\addressline{DCR, Mittelstrasse 43, CH-3012 Bern}
    \def\zip{CH-3012}
    \def\location{Bern}
    \def\phone{Phone~}

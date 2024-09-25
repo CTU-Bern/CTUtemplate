@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%
 %Project
 %%%%%%%%%%%%%
-   
+
 \newcommand{\project}{
   \def\projectnumber{xxx}
   \def\projectname{Project name}
@@ -21,14 +21,14 @@
 %Author
 %%%%%%%%%%%%%%%%%%
 
-\newcommand{\personalreport}{			
+\newcommand{\personalreport}{
   \def\sign{Dr. Lukas B{\"u}tikofer}
-  \def\mystreet{Mittelstrasse 43}					
-  \def\telnum{+41 31 631 35 10}                                   
-  \def\faxnum{}			            
-  \def\email{lukas.buetikofer@ctu.unibe.ch}				
-  \def\web{www.ctu.unibe.ch}						
-  \def\job{Senior statistician}	
+  \def\mystreet{Mittelstrasse 43}
+  \def\telnum{+41 31 631 35 10}
+  \def\faxnum{}
+  \def\email{lukas.buetikofer@unibe.ch}
+  \def\web{www.dcr.unibe.ch}
+  \def\job{Senior statistician}
 }
 
 
@@ -38,16 +38,16 @@
 
 \newcommand{\reportenglish}{
    \selectlanguage{USenglish}
-   \def\uni{University of Bern}						
-   \def\faculty{Faculty of Medicine}					
-   \def\dept{}				
-   \def\institute{CTU Bern}					
-   \def\addressline{CTU Bern, Mittelstrasse 43, CH-3012 Bern} 	
-   \def\zip{CH-3012}							
-   \def\location{Bern}						
-   \def\phone{Phone~}							
-   \def\fax{Fax~}							
+   \def\uni{University of Bern}
+   \def\faculty{Faculty of Medicine}
+   \def\dept{Department of Clinical Research}
+   \def\institute{}
+   \def\addressline{DCR, Mittelstrasse 43, CH-3012 Bern}
+   \def\zip{CH-3012}
+   \def\location{Bern}
+   \def\phone{Phone~}
+   \def\fax{Fax~}
    \def\subjectname{\textsl{}}
 }
-   
-   
+
+
