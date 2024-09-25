@@ -66,10 +66,11 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
-
+      
+      - uses: r-lib/actions/setup-r-dependencies@v2
+      
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
           install.packages('testthat')
