@@ -139,41 +139,75 @@
 			\projectname: \reporttype \\
 		}
 	}
+
 	%footer on title page
 	\begin{picture}(-2,0)
 		\put(0,-200){
-		%\hspace{-3mm}
-		\parbox[t][24mm][t]{\fullwidthopen}{%
-			\raggedleft
-			\parbox[t][24mm][t]{\rightfield}{%
-			\fontfamily{phv}\fontsize{7.7}{9.43}\selectfont
-			\sign\\
-			\ifx\job\@empty \else \job\\ \fi
-			\institute\\
-			\mystreet\\
-			\zip\ \location\\
-			\ifx\telnum\@empty \else \telnum\\ \fi
-			\ifx\email\@empty \else \email\\ \fi
-			\ifx\web\@empty \else \web \fi
+			%\hspace{-3mm}
+			\parbox[t][24mm][t]{\fullwidthopen}{%
+				\raggedleft
+				\parbox[t][24mm][t]{\rightfield}{%
+				\fontfamily{phv}\fontsize{7.7}{9.43}\selectfont
+				\sign\\
+				\ifx\job\@empty \else \job\\ \fi
+				\dept\\
+				\mystreet\\
+				\zip\ \location\\
+				\ifx\telnum\@empty \else \telnum\\ \fi
+				\ifx\email\@empty \else \email\\ \fi
+				\ifx\web\@empty \else \web \fi
+				}
 			}
 		}
-    }
+		%unibe in footer
+		\put(-2,-240){
+			\parbox[b][44mm][t]{\fullwidthopen}{%
+				\ifthenelse{\boolean{@color}}
+				{\includegraphics[width=35mm]{ub_16pt-cmyk.pdf}}
+				{\includegraphics[width=35mm]{ub_16pt-bl.pdf}}
+			}
+		}
 	\end{picture}
+
 	%logo
+	%only DCR in header
 	\hspace{123mm}
 	\parbox[b][44mm][t]{\fullwidthopen}{%
-		\parbox[t][39mm][t]{\rightfield}{%
+		\parbox[t][20mm][t]{\rightfield}{%
 			\ifthenelse{\boolean{@color}}
-			{\includegraphics[width=45mm]{ub_16pt-cmyk.pdf}}
-			{\includegraphics[width=45mm]{ub_16pt-bl.pdf}}
+			{\includegraphics[width=50mm]{dcr_cmyk.pdf}}
+			{\includegraphics[width=50mm]{dcr_bw.pdf}}
 		}
 		\par
-		\fontfamily{phv}\fontsize{8.0}{10.0}\selectfont
-		\faculty\par\vspace{+6pt}
-		\ifx\dept\@empty \else \dept\par\vspace{+5pt} \fi
-		\raggedright\bfseries\institute\par
+		\fontfamily{phv}\fontsize{8.0}{11.0}\selectfont
+		\textbf{\faculty}\par\vspace{+1pt}
+		\ifx\dept\@empty \else \dept\par\vspace{+1pt} \fi
+		%\raggedright\bfseries\institute\par
 	}
+
+
+
+	%DCR and unibe in header
+	%\parbox[b][44mm][t]{\fullwidthopen}{%
+	%	\parbox{0.3\fullwidthopen}{%
+	%		\hspace{0.3\fullwidthopen}
+	%	}
+	%	\parbox{0.4\fullwidthopen}{%
+	%		\centering
+	%		\ifthenelse{\boolean{@color}}
+	%		{\includegraphics[width=45mm]{logo/dcr_cmyk.pdf}}
+	%		{\includegraphics[width=45mm]{logo/dcr_bw.pdf}}
+	%
+	%	}
+	%	\parbox{0.3\fullwidthopen}{%
+	%		\raggedleft
+	%		\ifthenelse{\boolean{@color}}
+	%		{\includegraphics[width=40mm]{logo/ub_16pt-cmyk.pdf}}
+	%		{\includegraphics[width=40mm]{logo/ub_16pt-bl.pdf}}
+	%	}
+	%}
 }
+
 
 \def\mainfoot{}
 
@@ -189,13 +223,48 @@
 			\projectname: \reporttype  \\
 		}
 	}
+
+	%only DCR
+	\hspace{10mm}
 	\parbox[b][32mm][t]{\fullwidthcont}{
 		\raggedleft{%
 			\ifthenelse{\boolean{@color}}
-			{\includegraphics[width=27.4mm]{ub_16pt-cmyk.pdf}}
-			{\includegraphics[width=27.4mm]{ub_16pt-bl.pdf}}
+			{\includegraphics[width=45mm]{dcr_cmyk.pdf}}
+			{\includegraphics[width=45mm]{dcr_bw.pdf}}
 		}
 	}
+
+	%DCR and unibe
+	%\parbox[b][32mm][t]{\fullwidthopen}{
+	%	\parbox{0.3\fullwidthopen}{%
+	%		\hspace{0.3\fullwidthopen}
+	%	}
+	%	\parbox{0.4\fullwidthopen}{%
+	%		\centering
+	%		\ifthenelse{\boolean{@color}}
+	%		{\includegraphics[width=34.25mm]{logo/dcr_cmyk.pdf}}
+	%		{\includegraphics[width=34.25mm]{logo/dcr_bw.pdf}}
+	%
+	%	}
+	%	\parbox{0.3\fullwidthopen}{%
+	%		\raggedleft
+	%		\ifthenelse{\boolean{@color}}
+	%		{\includegraphics[width=27.4mm]{logo/ub_16pt-cmyk.pdf}}
+	%		{\includegraphics[width=27.4mm]{logo/ub_16pt-bl.pdf}}
+	%	}
+	%}
+
+	%footer
+	\begin{picture}(-2,0)
+		%unibe in footer
+		\put(-490,-745){
+			\parbox[b][44mm][t]{\fullwidthopen}{%
+				\ifthenelse{\boolean{@color}}
+				{\includegraphics[width=25mm]{ub_16pt-cmyk.pdf}}
+				{\includegraphics[width=25mm]{ub_16pt-bl.pdf}}
+			}
+		}
+	\end{picture}
 }
 
 %right aligned page number

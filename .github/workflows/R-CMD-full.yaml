@@ -60,18 +60,15 @@ jobs:
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
-      
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
+
       - uses: r-lib/actions/setup-r-dependencies@v2
-      
+
       - name: Install dependencies
         run: |
-          remotes::install_cran("rcmdcheck")
+          install.packages("rcmdcheck")
           install.packages('svn', repos = 'https://ctu-bern.r-universe.dev')
           install.packages('testthat')
         shell: Rscript {0}

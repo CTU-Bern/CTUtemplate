@@ -1,3 +1,7 @@
+CTUtemplate 0.6.0
+---------------------
+update templates to use DCR-like branding
+
 CTUtemplate 0.5.1
 ---------------------
 correct use_qmd_htmlrecruitment (it had previously downloaded the sample size report template)
@@ -104,4 +108,3 @@ CTUtemplate 0.0.4
 ---------------------
 Addition of OneStageSS for sample size for an exact binomial test
 Addition of redcap code for stata
-
