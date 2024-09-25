@@ -13,7 +13,7 @@ files) and also includes the CTUs annual safety report function.
 `CTUtemplate` is easiest to install via
 
 ``` r
-install.packages('CTUtemplate', repos = 'https://ctu-bern.r-universe.dev')
+install.packages('CTUtemplate', repos = c('https://ctu-bern.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 Linux users might have to install from source:
