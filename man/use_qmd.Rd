@@ -5,6 +5,7 @@
 \alias{use_qmd_pres}
 \alias{use_qmd_htmlrecruitment}
 \alias{use_qmd_htmlsampsi}
+\alias{use_qmd_typst}
 \title{Use the CTU quarto html template
 This function will download and optionally open the quarto markdown (qmd) file
 and the other necessary files from github.}
@@ -16,6 +17,8 @@ use_qmd_pres(save_in = ".", open = TRUE)
 use_qmd_htmlrecruitment(save_in = ".", open = TRUE)
 
 use_qmd_htmlsampsi(save_in = ".", open = TRUE)
+
+use_qmd_typst(save_in = ".", open = TRUE)
 }
 \arguments{
 \item{save_in}{directory to save the main qmd in}
@@ -38,6 +41,10 @@ and the other necessary files from github.
 Use the CTU quarto html sample size report template
 This function will download and optionally open the quarto markdown (qmd) file
 and the other necessary files from github.
+
+Use the CTU quarto typst template
+This function will download and optionally open the quarto markdown (qmd) file
+and the other necessary files from github.
 }
 \section{Functions}{
 \itemize{
@@ -46,6 +53,8 @@ and the other necessary files from github.
 \item \code{use_qmd_htmlrecruitment()}: Recruitment Report Template
 
 \item \code{use_qmd_htmlsampsi()}: Sample Size Report Template
+
+\item \code{use_qmd_typst()}: Sample Size Report Template
 
 }}
 \examples{
@@ -69,4 +78,9 @@ and the other necessary files from github.
 # use_qmd_html(file, FALSE)
 # in practice at CTU:
 # use_qmd_htmlrecruitment("08_Reports_xx/ReportName.qmd", TRUE)
+# dir <- tempdir()
+# file <- file.path(dir, "filename.qmd")
+# use_qmd_html(file, FALSE)
+# in practice at CTU:
+# use_qmd_typst("08_Reports_xx/ReportName.qmd", TRUE)
 }

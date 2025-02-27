@@ -282,6 +282,27 @@ use_qmd_htmlsampsi <- function(save_in = ".", open = TRUE){
 
 }
 
+#' Use the CTU quarto typst template
+#' This function will download and optionally open the quarto markdown (qmd) file
+#' and the other necessary files from github.
+#' @describeIn use_qmd Sample Size Report Template
+#' @param save_in directory to save the main qmd in
+#' @param open logical indicating whether to open the file
+#' @export
+#' @examples
+#' # dir <- tempdir()
+#' # file <- file.path(dir, "filename.qmd")
+#' # use_qmd_html(file, FALSE)
+#' # in practice at CTU:
+#' # use_qmd_typst("08_Reports_xx/ReportName.qmd", TRUE)
+use_qmd_typst <- function(save_in = ".", open = TRUE){
+
+  if_no_ping_stop()
+
+  use_quarto("typst", save_in, open = open)
+
+}
+
 
 
 #' Get a quarto template from the CTU-Bern quarto repository
@@ -297,7 +318,7 @@ use_qmd_htmlsampsi <- function(save_in = ".", open = TRUE){
 #' #use_quarto("html", ".")
 use_quarto <- function(x, dir, open = TRUE){
 
-  if(!x %in% c("html", "html-ss", "html-rec", "pres")){
+  if(!x %in% c("html", "html-ss", "html-rec", "pres", "typst")){
     stop("unknown branch of CTU-Bern/quarto")
   }
 
@@ -305,6 +326,7 @@ use_quarto <- function(x, dir, open = TRUE){
   on.exit(setwd(wd))
 
   setwd(dir)
+  if(length(list.files()) > 0) stop("'dir' is not empty - an empty 'dir' is necessary")
 
   system(glue("quarto use template CTU-Bern/quarto@{x} --no-prompt"))
 
