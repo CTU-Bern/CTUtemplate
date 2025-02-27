@@ -1,3 +1,7 @@
+CTUtemplate 0.6.1
+---------------------
+addition of use_qmd_typst
+
 CTUtemplate 0.6.0
 ---------------------
 update templates to use DCR-like branding
