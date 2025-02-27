@@ -67,6 +67,9 @@ use_qmd_htmlsampsi("folder")
 
 # for a revealjs presentation
 use_qmd_pres("folder")
+
+# for typst report, which renders to PDF
+use_qmd_typst("folder")
 ```
 
 The above functions will download the templates and other necessary
