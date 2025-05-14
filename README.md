@@ -3,7 +3,7 @@
 
 # `CTUtemplate` <img src='man/figures/sticker.png' align="right" width="200">
 
-[![](https://img.shields.io/badge/dev%20version-0.6.1-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
+[![](https://img.shields.io/badge/dev%20version-0.6.2-blue.svg)](https://github.com/CTU-Bern/CTUtemplate)
 
 `CTUtemplate` is a package to create a template directory structure (and
 files) and also includes the CTUs annual safety report function.
@@ -45,6 +45,18 @@ same in both cases).
 
 *IMPORTANT:* `Directory name` should not already exist as a subdirectory
 of `21_Statistics_yy`. Please delete (or rename) the existing folder.
+
+### Template randomisation list code
+
+When using RStudio it’s possible to open template code for generating
+and reporting on randomisation lists. Click the Addins menu at the top
+of the RStudio menu and select “Template rando code” (Addins are sorted
+by package).
+
+![](man/figures/addins.png)
+
+There is also an addin to insert a header at the top of an open script
+(“Add CTU header”).
 
 ### Quarto report templates
 

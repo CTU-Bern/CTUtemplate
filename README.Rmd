@@ -51,6 +51,14 @@ Once installed, in RStudio, open a "new project in a new directory" and select "
 
 *IMPORTANT:* `Directory name` should not already exist as a subdirectory of `21_Statistics_yy`. Please delete (or rename) the existing folder. 
 
+### Template randomisation list code
+
+When using RStudio it's possible to open template code for generating and reporting on randomisation lists. Click the Addins menu at the top of the RStudio menu and select "Template rando code" (Addins are sorted by package). 
+
+![](man/figures/addins.png)
+
+There is also an addin to insert a header at the top of an open script ("Add CTU header").
+
 ### Quarto report templates
 
 We now also have some quarto report templates (more still to come, perhaps). At least RStudio v2022.01.1+554 is required for working with them. 

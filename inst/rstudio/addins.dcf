@@ -2,3 +2,8 @@ Name: Add CTU header
 Description: Adds the standard CTU header to the currently active document
 Binding: add_ctu_header
 Interactive: false
+
+Name: Template rando code
+Description: Open template randomisation list code
+Binding: template_rando_code
+Interactive: false
