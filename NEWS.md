@@ -1,3 +1,7 @@
+CTUtemplate 0.6.2
+---------------------
+addition of RStudio add-in "Template rando code" which opens a new script with randotools code
+
 CTUtemplate 0.6.1
 ---------------------
 addition of use_qmd_typst
