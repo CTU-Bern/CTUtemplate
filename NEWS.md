@@ -1,3 +1,7 @@
+CTUtemplate 0.6.3
+---------------------
+fix typo in the randolist template code (data.frame instead of dataframe)
+
 CTUtemplate 0.6.2
 ---------------------
 addition of RStudio add-in "Template rando code" which opens a new script with randotools code

@@ -48,8 +48,8 @@ rlist <- randolist_to_db(r, target_db = "REDCap",
                 rando_enc = data.frame(arm = unique(armlabels),
                                        RANDORESVAR = 1:2),
                 strata_enc = list(
-                  STRATAVAR = dataframe(STRATAVAR = stratalabels1,
-                                        code = 1:2)
+                  STRATAVAR = data.frame(STRATAVAR = stratalabels1,
+                                         code = 1:2)
                                   )
                          )
 
