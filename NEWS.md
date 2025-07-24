@@ -1,3 +1,7 @@
+CTUtemplate 0.6.4
+---------------------
+Add code for rendering of qmd report to masterfile
+
 CTUtemplate 0.6.3
 ---------------------
 fix typo in the randolist template code (data.frame instead of dataframe)
