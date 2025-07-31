@@ -1,6 +1,7 @@
 CTUtemplate 0.6.5
 ---------------------
-optimise randolist template code (thanks to suggestions from MR)
+* optimise randolist template code (thanks to suggestions from MR)
+* export `template_rando_code()` so it can be used via code/terminal as well
 
 CTUtemplate 0.6.4
 ---------------------
