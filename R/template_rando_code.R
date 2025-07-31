@@ -36,22 +36,30 @@ library(randotools)
 
 
 n_per_stratum <- N # number of randos per strata
-armlabels <- c("TREATLABEL1", "TREATLABEL2")
-stratalabels1 <- c("STRATALABEL1", "STRATALABEL2")
-# add extra stratalabels objects as necessary
+
+# arms and their equivalent values/variable name in the database
+rando_enc <- data.frame(
+  arm = c("TREATLABEL1", "TREATLABEL2"),
+  RANDORES = 1:2
+  )
+
+strata_enc <- list(
+  STRATAVAR = data.frame(
+    STRATAVAR = c("STRATALABEL1", "STRATALABEL2"),
+    code = 1:2
+  )
+  # add additional STRATAVAR dataframes as necessary
+)
+
+strata_labs <- lapply(strata_enc, `[[`, 1)
 
 r <- randolist(n_per_stratum, blocksizes = 1:3,
-               arms = armlabels,
-               strata = list(STRATAVAR = stratalabels1))
+               arms = rando_enc$arm,
+               strata = strata_labs)
 
 rlist <- randolist_to_db(r, target_db = "REDCap",
-                rando_enc = data.frame(arm = unique(armlabels),
-                                       RANDORESVAR = 1:2),
-                strata_enc = list(
-                  STRATAVAR = data.frame(STRATAVAR = stratalabels1,
-                                         code = 1:2)
-                                  )
-                         )
+                         rando_enc = rando_enc,
+                         strata_enc = strata_enc)
 
 # save the list
 write.csv(r,
