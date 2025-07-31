@@ -1,3 +1,7 @@
+CTUtemplate 0.6.5
+---------------------
+optimise randolist template code (thanks to suggestions from MR)
+
 CTUtemplate 0.6.4
 ---------------------
 Add code for rendering of qmd report to masterfile
