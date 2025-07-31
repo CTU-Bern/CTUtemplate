@@ -1,3 +1,15 @@
+#' Template randomisation list code
+#'
+#' Open a file with template code to generate a randomisation list (and report).
+#'
+#' This must be used within RStudio.
+#'
+#' @returns an R script
+#' @export
+#'
+#' @examples
+#'
+#' # template_rando_code()
 template_rando_code <- function(){
 
   rstudioapi::documentNew(

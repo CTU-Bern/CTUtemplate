@@ -55,6 +55,9 @@ by package).
 
 ![](man/figures/addins.png)
 
+You can also open the template code via
+`CTUtemplate::template_rando_code()`.
+
 There is also an addin to insert a header at the top of an open script
 (“Add CTU header”).
 
